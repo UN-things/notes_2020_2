@@ -1,3 +1,5 @@
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 # Introducción a los Sistemas Inteligentes - ISI
 
 * **Periodo:** 2020-2
@@ -6,6 +8,18 @@
 * **Correo:** jgomezpe@unal.edu.co
 * **Libro guía:** [Inteligencia Artificial Un Enfoque Moderno 2a Edición](https://luismejias21.files.wordpress.com/2017/09/inteligencia-artificial-un-enfoque-moderno-stuart-j-russell.pdf)
 * **Apuntes tomados por:** Guiselle Tatiana Zambrano Penagos
+
+## Calificación
+
+* 30% Participación
+* 45% - 3 módulos (proyectos)
+* 25% - Ejercicios pequeños (requieren tiempo)
+
+## Grupo de Trabajo: PTL
+
+* Liseth Yurany Arevalo Yaruro
+* Valeria Huepa Ducuara
+* Guiselle Tatiana Zambrano Penagos
 
 ## Temas del curso
 
@@ -313,28 +327,34 @@ objeto.
 cuantitativa o cualitativa.
 * **Información:** Colección de datos. Atributos relacionados a través del
 objeto que tiene ese atributo.
-* **Conocimiento:** Información relacionada. La mineria de datos busca encontrar
-conocimiento de los datos. Combinación del conocimiento de la especie y del
-adquirido por el individuo.
+* **Conocimiento:** Información relacionada, no es solamente tener información
+sino relacionarla. Información de la información. Combinación del conocimiento de
+la especie y del adquirido por el individuo. La mineria de datos busca encontrar
+conocimiento de los datos.
 * **Sistema nervioso:** Estructura donde se almacena el conocimiento.
 * **Conciencia:** Conocimiento que se tiene de si mismo. Saber qué es lo que se
 sabe.
-* **Sabiduría:** Conjunto de conocimientos.
+* **Sabiduría:** Conjunto de conocimientos que se vuelven parte del ser.
+Interiorizan el conocimiento.
 * **Inteligencia:** Es la capacidad de resolver un problema. Es independiente de
 los seres vivos. La capacidad de aprender $\neq$ ser inteligente.
+* **Artificial:** Cuya existencia fue mediada por la inteligencia.
 * **Aprendizaje:** Requiere estructuras elavoradas.
 * **Problema:** Conjunto de acciones para pasar del estado A al estado B.
-* **Racionalidad:** Hacer lo correcto (lo que uno espera) con base a lo que se
-conoce.
+* **Racionalidad:** Hacer lo correcto (lo que uno espera) de acuerdo a lo que
+conocemos, lo correcto puede ir cambiando a medida que avanzamos en el conocimiento
+que tenemos.
 * **Razón:** Establecer relaciones entre ideas o conceptos y obtener
 conclusiones.
-* **Razonar:** Pensar en secuencia, con una estructura.
+* **Razonar:** Pensar en secuencia, con una estructura. Es una forma de ser
+racional.
 * **Ética:** Define qué es lo correcto e incorrecto.
 * **Ethos:** Es el ser, lo que lo define a uno.
 * **Equivocación:** 1ra vez que no obtiene el resultado esperado.
 * **Error:** Realiza una acción sabiendo que **no** da lo que debe dar.
 * **Agentes:** Pueden ser autónomas o no, que hagan lo correcto respecto a lo
-que **ellos** conocen.
+que **ellos** conocen. Tiene un objetivo, resolver un problema, lo cuál define la
+inteligencia del agente.
 
 ## Tareas
 
