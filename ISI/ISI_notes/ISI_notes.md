@@ -360,28 +360,94 @@ inteligencia del agente.
 
 1. Definir qué es "artificial"
 
-[Ensayo de lo natural y lo artificial](https://www.oei.es/historico/salactsi/teorema04b.htm)
+	**Fecha de asignación:** 24 de agosto de 2020
 
-_... Platón defendía que todos los artefactos (incluyendo las obras de arte) son
-imitaciones de algo natural, de algo genuino u original. Para Platón, decir que
-algo es "artificial" es decir que esa cosa parece ser, pero no es realmente,
-aquello que imita. Lo artificial es meramente aparente; lo único que hace es
-mostrar cómo es alguna otra cosa..._
+	[Ensayo de lo natural y lo artificial](https://www.oei.es/historico/salactsi/teorema04b.htm)
 
-_... Aristóteles planteaba la cuestión de un modo diferente. Creía que la
-naturaleza y el arte (lo natural y lo artificial) no tienen nada en común;
-constituyen dos esferas diferentes de la realidad. En consecuencia, las leyes que
-gobiernan estos dos tipos de entidades difieren de forma esencial y, por esta
-razón, el conocimiento de ambas también es distinto. La ciencia natural no incluye
-el saber-cómo de los instrumentos, las herramientas y las máquinas, y éstas
-últimas no ofrecen ninguna ayuda para el conocimiento de las entidades naturales.
-Se trata de dos tipos distintos de conocimiento. Los entes naturales tienen una
-forma primaria, mientras que los artificiales tienen una forma secundaria que los
-agentes humanos les imponen. Según Aristóteles (Charlton, 1970), lo natural "tiene
-en sí mismo la fuente de su propia formación", mientras que en el caso de lo
-artificial, "la fuente es distinta y externa". Los casos paradigmáticos de lo
-artificial ya no son (como lo eran para Platón) flores o pájaros artificiales,
-muñecas y estatuas, sino, e.g., la rueda, que no es algo dado en la naturaleza
-como medio de transporte. Los artefactos no son imitaciones de algo dado
-previamente, sino auténticas invenciones; representan algo nuevo, no una simple e
-imperfecta copia de un prototipo..._
+	_... Platón defendía que todos los artefactos (incluyendo las obras de arte)
+	son imitaciones de algo natural, de algo genuino u original. Para Platón,
+	decir que algo es "artificial" es decir que esa cosa parece ser, pero no es
+	realmente, aquello que imita. Lo artificial es meramente aparente; lo único
+	que hace es mostrar cómo es alguna otra cosa..._
+
+	_... Aristóteles planteaba la cuestión de un modo diferente. Creía que la
+	naturaleza y el arte (lo natural y lo artificial) no tienen nada en común;
+	constituyen dos esferas diferentes de la realidad. En consecuencia, las leyes
+	que gobiernan estos dos tipos de entidades difieren de forma esencial y, por
+	esta razón, el conocimiento de ambas también es distinto. La ciencia natural
+	no incluye el saber-cómo de los instrumentos, las herramientas y las máquinas,
+	y éstas últimas no ofrecen ninguna ayuda para el conocimiento de las entidades
+	naturales. Se trata de dos tipos distintos de conocimiento. Los entes
+	naturales tienen una forma primaria, mientras que los artificiales tienen una
+	forma secundaria que los agentes humanos les imponen. Según Aristóteles
+	(Charlton, 1970), lo natural  "tiene en sí mismo la fuente de su propia
+	formación", mientras que en el caso de lo artificial, "la fuente es distinta y
+	externa". Los casos paradigmáticos de lo artificial ya no son (como lo eran
+	para Platón) flores o pájaros artificiales, muñecas y estatuas, sino, e.g., la
+	rueda, que no es algo dado en la naturaleza como medio de transporte. Los
+	artefactos no son imitaciones de algo dado previamente, sino auténticas
+	invenciones; representan algo nuevo, no una simple e imperfecta copia de un
+	prototipo..._
+
+2. Ensayo grupal sobre el pasado, presente y futuro de la IA.
+
+	**Fecha de asignación:** 24 de agosto de 2020
+
+	La inteligencia artificial tuvo sus orígenes en el trabajo de Warren McCulloc y
+	Walter Pitts (1943), quienes propusieron un modelo construido por neuronas
+	artificiales, cuyo estado (activas o inactivas) era producto de la estimulación
+	producida por las neuronas vecinas. En 1949 Dorian Hebh propuso una regla para
+	modificar las intensidades de conexiones entre neuronas, denominada ahora regla
+	de aprendizaje Hebbiano o de Hebb. Posteriormente en 1950 Alan Turing, en su
+	artículo \textit{Computing Machinery and Intelligence}, introduce la prueba de
+	Turing, el aprendizaje automático, los algoritmos genéricos y el aprendizaje
+	por refuerzo. A partir de allí diferentes figuras aparecieron y complementaron
+	o reforzaron las ideas ya propuestas, llegando a posicionar la IA como una
+	rama de la informática que incorpora los conocimientos de diferentes campos
+	como lo son las matemáticas, la economía, neurociencia, estadística, entre
+	otros. En el año 1958 McCarthy definió el lenguaje de alto nivel Lisp, que se
+	convertiría en el lenguaje de programación dominante en la IA y Marvin Minsky
+	supervisó el trabajo de una serie de estudiantes, que se ocuparon de unos
+	problemas de dominios limitados, conocidos como micromundos, los cuales fueron
+	pioneros en la concepción de agentes específicos, creados para resolver
+	pequeñas tareas en un espacio de trabajo bien limitado. \\
+
+	Como podemos ver, en los primeros años se buscó expandir, descubrir y explorar
+	nuevos caminos de la IA, sin embargo, estos también iban ligados al desarrollo
+	de hardware, donde  el planteamiento de algoritmos y estructuras de software
+	que resolvían algunos problemas, se veían limitados por el poco alcance a
+	nivel de capacidad y rendimiento computacional de la época, esto ha cambiado
+	en el transcurso de los años.\\
+
+	La IA ha tenido grandes avances y esta ha sido aplicada en diferentes áreas,
+	particularmente en las áreas de procesamiento del lenguaje natural, visión por
+	computadora y robótica. Además en el área de la salud, como por ejemplo en la
+	detección de cáncer (cuyo éxito se debe principalmente al éxito del aprendizaje
+	automático) donde la IA se encarga  de recopilar y organizar grandes cantidades
+	de información para obtener conocimientos y conjeturas que están más allá de
+	las capacidades humanas (procesamiento manual), si bien esto suena a áreas muy
+	especificas, cabe resaltar que su uso también se ha desarrollado para ambientes
+	más cotidianos como lo son, el realizar cualquier búsqueda en internet, el uso
+	de un traductor o cuando recibimos recomendaciones de contenido.\\
+
+	Sin duda en un futuro el impacto de la IA en la vida de los seres humanos será
+	sin igual, pero ¿podemos asegurar que todo este poder será utilizado para fines
+	buenos o malos?. El alcance de este impacto determinará el éxito de la IA.
+	Si bien hoy en día el desarrollo de sistemas de reconocimiento de voz, sistemas
+	de vigilancia, robots, motores de búsqueda, etc, han sido  posibles a través de
+	la IA, estas tecnologías son más sectorizadas y propias de ciertos grupos de
+	personas. Se espera que con el paso de los años, estas tecnologías sean tan
+	familiarizadas con la sociedad, como lo es hoy en día el uso de redes de
+	comunicación computarizadas, como los celulares e internet, y que su presencia
+	en estos entornos tengan un impacto positivo en la vida de las personas.\\
+
+	Pero ¿qué sucederá cuando por fin se logre desarrollar inteligencia al nivel de
+	un humano y más allá?, ¿estaremos jugando a cambiar el concepto de inteligencia
+	y consciencia? ¿Afectará esto el futuro de la raza humana?.
+	Es difícil suponer si habrá un punto donde el haber desarrollado IA con tanta
+	autonomía afecte nuestra condición humana, y es por esta razón que creemos que
+	toda la investigación y futuros descubrimientos en esta área, sean aplicados
+	con responsabilidad ética, para garantizar que este instrumento nos permita
+	expandir nuestros conocimientos y romper barreras que antes nos limitaban.
+3. f
+
