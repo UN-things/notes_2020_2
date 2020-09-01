@@ -145,8 +145,8 @@ debe comportarse_.
 Depende de 4 factores:
 
 * La medida de rendimiento que define el criterio de éxito.
-* El conocimiento del medio en  el que habita, cumulado por el agente.
-* Las acciones que el agente piede llevar a cabo.
+* El conocimiento del medio en  el que habita, acumulado por el agente.
+* Las acciones que el agente puede llevar a cabo.
 * La secuencia de percepciones del agente hasta este momento.
 
 _En cada posible secuencia de percepciones, un agente racional deberá emprender
@@ -175,8 +175,8 @@ Son esencialmente los **problemas** para los que los agentes racionales son las
 
 **REAS** (**R**endimiento, **E**ntorno, **A**ctuadores, **S**ensores).
 
-![Ejemplo del entorno de trabajo](./images/II01.png){ width=45% }\
-![Ejemplo del entorno de trabajo](./images/II02.png){ width=45% }\
+![Ejemplo del entorno de trabajo](./images/II01.png)
+![Ejemplo del entorno de trabajo](./images/II02.png)
 
 #### Propiedades de los entornos de trabajo
 
@@ -245,7 +245,7 @@ Por otro lado, en el medio definido por el taxista circulando, el evitar
 colisiones maximiza la medida de rendimiento de todos los agentes, así pues es
 un entorno multiagente parcialmente **cooperativo**.
 
-![Ejemplos de entornos](./images/II03.png){ width=45% }\
+![Ejemplos de entornos](./images/II03.png)
 
 ## Estructuras de los agentes
 
@@ -451,3 +451,41 @@ inteligencia del agente.
 	expandir nuestros conocimientos y romper barreras que antes nos limitaban.
 3. f
 
+
+```
+perception = array
+f(perception){
+	if(perception.localisation == a){
+		if(perception. isDirty) {
+			return agent.clean
+		} else {
+			return move.right
+		}
+	} else { //posición b
+		if(perception. isDirty) {
+			return agent.clean
+		} else {
+			return move.right
+		}
+	}
+}
+```
+
+percibir: mayor, menor, igual o iniciar
+acción mostrar:
+```
+perception = start
+number = 0
+f(perception){
+	if(perception == start){
+		number =  random(0, 100)
+	}else if( perception == isLess){
+		number = random(0, number)
+	} else if (perception == isGreater){
+		number = random(number, 100)
+	}else {
+		return finish()
+	}
+	return number
+}
+```
