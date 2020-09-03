@@ -258,13 +258,12 @@ hacer y en las que hay que tomar una decisión.
 
 ## Agentes y su entorno
 
+![Partes del agente](./images/II00.png)
+
 * **Agente:** es cualquier cosa capaz de percibir su **Medioambiente** con la
 ayuda de **sensores** y actuar en ese medio utilizando **actuadores**.
 Cada agente puede percibir sus propias acciones (pero no siempre sus efectos).
 El comportamiento de un agente viene dado por la **función agente**.
-
-![Partes del agente](./images/II00.png){ width=45% }
-
 * **Percepción:** El agente puede recibir entradas en cualquier instante.
 * **Secuencia de percepciones:** refleja el historial completo de lo que el
 agente ha recibido. _Un agente tomará una desición en un momento dado
@@ -318,6 +317,23 @@ Se dice que un agente carece de **autonomía** cuando se apoya más en el
 conocimiento inicial que le proporciona su diseñador que en sus propias
 percepciones. Un agente racional debe ser autónomo, debe saber aprender a
 determinar cómo tiene que compensar el conocimiento incompleto o parcial inicial
+
+## Agente Racional
+
+Entidad que percibe algo y actúa. Un agente racional es aquel que hace lo correcto 
+a partir de lo que conocen y perciben.
+
+$$
+F: P^* \rightarrow A
+$$
+
+* $P:$ Percepción.
+* $P^*:$ Todo lo que ha percibido desde que ha existido.
+* $A:$ Acción que devuelve el agente, maximisa o minimisa una medida de
+  rendimiento.
+
+Dado que no se tiene infinita capacidad de cálculo, memoria ni tiempo, hacer un
+agente perfectamente racional, es imposible para todo problema (en general).
 
 ## La naturaleza del entorno
 
@@ -405,10 +421,13 @@ un entorno multiagente parcialmente **cooperativo**.
 El trabajo de la IA es diseñar el **programa del agente** que implemente la
 función del agente que proyecta las percepciones en las acciones. Se asume que
 este programa se ejecutará en algún tipo de computador con sensores físicos y
-actuadores, lo que se conoce como **arquitectura:**
+actuadores, lo que se conoce como **arquitectura**.
 
-_Agente = arquitectura + programa_
-
+$$
+Arquitectura = sensores + actuadores + \textup{\textit{máquina dónde se ejecuta el 
+programa agente}}\\
+Agente = arquitectura + programa
+$$
 La arquitectura y el programa deben ser compatibles. Si el programa tiene
 recomendaciones como _Caminar_, la arquitectura tiene que tener piernas.
 
@@ -455,6 +474,8 @@ Por ahora se asumirá que el costo del camino es la suma de los costos de las
 acciones individuales a lo largo del camino. El **costo individual** de una
 acción $a$ que va desde un punto $x$ al estado $y$ se denota por $c(x,ay)$.
 
+# Complementos de la clase
+
 # Ejercicios
 
 1. Crear el pseudocódigo para hayar un número entre 0 y 100
@@ -463,11 +484,33 @@ acción $a$ que va desde un punto $x$ al estado $y$ se denota por $c(x,ay)$.
 	number
 	f(perception){
 		if(perception == start){
-			number =  random(0, 100)
+			number =  random(0, 101)
 		}else if( perception == isLess){
 			number = random(0, number)
 		} else if (perception == isGreater){
-			number = random(number, 100)
+			number = random(number, 101)
+		}else {
+			returc finish()
+		}
+		return number
+	}
+	```
+2. Crear el pseudocódico para hayar un número entre 0 y 100
+
+	```
+	lower = 0
+	upper = 101
+	number
+
+	f(perception){
+		if(perception == start){
+			number =  random(lower, upper)
+		}else if( perception == isLess){
+			upper = number
+			number = random(lower, upper)
+		} else if (perception == isGreater){
+			lower = number
+			number = random(lower, upper)
 		}else {
 			returc finish()
 		}
@@ -475,7 +518,28 @@ acción $a$ que va desde un punto $x$ al estado $y$ se denota por $c(x,ay)$.
 	}
 	```
 
-2. Hacer el pseudocódigo de un árbol n-ario.
+	Pseudocódigo de un agente más inteligente:
+
+	```
+	lower = 0
+	upper = 100
+	number
+
+	f(perception) {
+		if ( peerception == isLess ) {
+			upper = number
+		} else if ( perception == isGreater ) {
+			lower = number
+		} else if ( perception == isEqual ) {
+			return finish()
+		}
+		number = floor( ( lower + upper ) / 2 )
+		return number
+	}
+
+	```
+
+3. Hacer el pseudocódigo de un árbol n-ario.
 
 	```
 	Tree T;
@@ -620,4 +684,4 @@ inteligencia del agente.
 	toda la investigación y futuros descubrimientos en esta área, sean aplicados
 	con responsabilidad ética, para garantizar que este instrumento nos permita
 	expandir nuestros conocimientos y romper barreras que antes nos limitaban.
-3. ¿?
+3. Ensayo
