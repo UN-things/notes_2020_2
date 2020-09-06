@@ -16,7 +16,24 @@
 
 ## Tareas
 
-1. Investigar acerca de la guerra de bóers
+1. Investigar acerca de la guerra de bóers.
+
+   Las guerras de los Bóeresn, fueron dos conflictos armados que tuvieron lugar en
+   Sudáfrica entre el Imperio británico y los colonos de origen neerlandés
+   llamados afrikáneres, bóeres o voortrekker.
+
+   La primera de estas guerras se desarrolló desde el 16 de diciembre de 1880
+   hasta el 23 de marzo de 1881; y la segunda, entre el 11 de octubre de 1899 y el
+   31 de mayo de 1902; su resultado fue la victoria del Imperio británico y la
+   extinción de las dos repúblicas independientes que los bóeres habían fundado a
+   mediados del siglo XIX: el Estado Libre de Orange y la República de Transvaal.
+
+   Fuetes:
+   - [Link wikipedia](https://es.wikipedia.org/wiki/Guerras_de_los_B%C3%B3eres)
+      Habla de las 2 guerras en general.
+   - [Link segunda guerra](https://es.qwe.wiki/wiki/Second_Boer_War)
+
+2. f
 
 
 ## Tareas Extra
