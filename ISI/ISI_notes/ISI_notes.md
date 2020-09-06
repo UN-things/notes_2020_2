@@ -540,7 +540,7 @@ aprendizaje está por fuera de la inteligencia, es una cualidad más compleja
   determina qué acción realizar)
 * **Crítica:** Indica al elemento de aprendizaje qué tal lo está haciendo el
   agente con respecto a un nivel de actuación fijo. Es necesaria porque las
-  percepciones por sí mismas una indicación del éxito del agente.
+  percepciones por sí mismas no prevén una indicación del éxito del agente.
 * **Generador de problemas:** Es responsable de sugerir acciones nuevas que lo
   guiarán hacia experiencias nuevas e informativas. Si el agente está dispuesto a
   explorar un poco, y llevar a cabo acciones que no sean totalmente óptimas a
