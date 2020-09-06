@@ -11,7 +11,6 @@
 
 ## Calificación
 
-* 30% Participación
 * 45% - 3 módulos (proyectos)
 * 25% - Ejercicios pequeños (requieren tiempo)
 
@@ -54,7 +53,6 @@
 		* Prolog.
 
 # Introducción
-
 La IA es una de las ciencias más recientes, el nombre se acuñó en 1956.
 
 ## ¿Qué es la IA?
@@ -320,7 +318,7 @@ determinar cómo tiene que compensar el conocimiento incompleto o parcial inicia
 
 ## Agente Racional
 
-Entidad que percibe algo y actúa. Un agente racional es aquel que hace lo correcto 
+Entidad que percibe algo y actúa. Un agente racional es aquel que hace lo correcto
 a partir de lo que conocen y perciben.
 
 $$
@@ -424,7 +422,7 @@ este programa se ejecutará en algún tipo de computador con sensores físicos y
 actuadores, lo que se conoce como **arquitectura**.
 
 $$
-Arquitectura = sensores + actuadores + \textup{\textit{máquina dónde se ejecuta el 
+Arquitectura = sensores + actuadores + \textup{\textit{máquina dónde se ejecuta el
 programa agente}}\\
 Agente = arquitectura + programa
 $$
@@ -437,16 +435,133 @@ Hay que tener en cuenta la diferencia entre los programas de los agentes, que
 toman la percepción actual como entrada, y la función agente, que recibe la
 percepción histórica completa.
 
-Completar adecuadamente
+![Programa Agente dirigido mediante tabla](images/II04.png)
 
-Los **agentes reactivos simples** responden directamente a las percepciones,
-mientras que los **agentes reactivos basados en modelos** mantienen un estado
-interno que les permite seguir el rastro de aspectos del mundo que no son
-evidentes según las percepciones actuales. Los **agentes basados en objetivos**
-actúan con la intención de alcanzar sus metas, y los **agentes basados en
-utilidad** intentan maximizar su _felicidad_ deseada.
+El programa de agente dirigido mediante tabla está condenado al fracaso, ya que
+este tendrá que tener una tabla de búsqueda muy grande para devolver una acción
+dadas las percepciones recibidas:
 
-### Resolver problemas mediante búsqueda
+* $P:$ Conjunto de posibles percepciones.
+* $T:$ Tiempo de vida del agente
+* Entradas de la tabla = $\sum_{t=1}^{T}{|P|}^t$
+
+#### **Agentes reactivos simples**
+
+Estos agentes seleccionan las acciones sobre la base de las percepciones actuales,
+ignorando el resto de las percepciones históricas.
+
+![Diagrama agente reactivo simple](images/II05.png)
+
+![Función agente reactivo simple](images/II06.png)
+
+
+El agente sólo funcionará si se puede tomar la decisión correcta sobre la base de
+la percepción actual, lo cual es posible sólo si el entorno es totalmente
+observable. Un agente reactivo simple con capacidad para elegir acciones de manera
+aleatoria puede mejorar los resultados que proporciona un agente reactivo simple
+determinista (está sujeto a caer en bucles infinitos).
+
+#### **Agentes reactivos basados en modelos**
+
+El agente debe mantener algún tipo de **estado interno** que dependa de la
+historia percibida y que de ese modo refleje por lo menos alguno de los aspectos
+no observables del estado actual.
+
+La actualización de la información de estado interno según pasa el tiempo requiere
+codificar dos tipos de conocimiento en el programa del agente:
+1. Se necesita alguna información acerca de cómo evoluciona el mundo
+   independientemente del agente.
+2. Se necesita más información sobre cómo afectan al mundo las acciones del agente
+
+Este conocimiento acerca de <<cómo funciona el mundo>>, se denomina modelo.
+
+![Diagrama agente reactivo basado en modelos](images/II07.png)
+
+![Programa agente basado en modelos](images/II08.png)
+
+
+#### **Agentes basados en objetivos**
+
+Además de la descripción del estado actual, el agente necesita algún tipo de
+información sobre su **meta** que describa las situaciones que son deseables.
+
+El programa del agente se puede combinar con información sobre los resultados
+de las acciones posibles, para elegir aquellas que le permitan alcanzar su
+objetivo.
+
+![Agente basado en objetivos](images/II09.png)
+
+La selección de acciones basadas en objetivos es directa, cuando alcanzar los
+objetivos es el resultado inmediato de una acción individual. En otras ocaciones
+puede ser más complicado, cuando debe conciderar secuencias complejas para alcanzar
+su objetivo. La **Búsqueda** y la **planificación** son los subcampos de la IA
+centrados en encontrar secuencias de acciones que permitan a los agentes alcanzar
+sus metas.
+
+Aunque el agente basado en objetivos pueda parecer menos eficiente, es más
+flexible ya que el conocimiento que soporta su decisión está representado
+explícitamente y puede modificarse. El comportamiento del agente basado en
+objetivos puede cambiarse fácilmente, un agente reactivo requeriría modificaciones
+mayores.
+
+#### **Agentes basados en utilidad**
+
+Las metas sólo proporcionan una cruda distinción binaria entre los estados de
+«felicidad» y «tristeza», mientras que una medida de eficiencia más general
+debería permitir una comparación entre estados del mundo diferentes de acuerdo al
+nivel exacto de felicidad que el agente alcance cuando se llegue a un estado u
+otro. Un estado del mundo tienen diferentes grados de **utilidad** para el agente.
+
+Una **función de utilidad** proyecta un estado (o secuencia de estados) en un
+número real, que representa el nivel de felicidad, esta permite tomar desiciones
+racionales en dos tipos de casos:
+
+1. Cuando haya **objetivos conflictivos** y sólo se pueda alcanzar alguno de ellos.
+2. Cuando haya **varios objetivos** por los que se pueda guiar el agente, y
+   **ninguno de ellos se pueda alcanzar con certeza**, la utilidad proporciona un
+   mecanismo para ponderar la probabilidad de éxito en función de la importancia
+   de los objetivos.
+
+![Agente basado en utilidad](images/II0A.png)
+
+#### **Agentes que aprenden**
+
+El aprendizaje permite que el agente opere en medios inicialmente desconocidos y
+que sea más competente que si sólo utilizase su conocimiento inicial. El
+aprendizaje está por fuera de la inteligencia, es una cualidad más compleja
+
+![Agentes que aprenden](images/II0B.png)
+
+* **Elemento de aprendizaje:** Es el responsable de hacer mejoras. Se
+  retroalimenta con las cŕiticas sobre la actuación del agente y determina cómo se
+  debe modificar el elemento de actuación para proporcionar mejores resultados.
+* **Elemento de actuación:** Es responsable de seleccionar acciones externas. Es
+  lo que anteriormente se concideraba como agente completo (recibe estímulos y
+  determina qué acción realizar)
+* **Crítica:** Indica al elemento de aprendizaje qué tal lo está haciendo el
+  agente con respecto a un nivel de actuación fijo. Es necesaria porque las
+  percepciones por sí mismas no prevén una indicación del éxito del agente.
+* **Generador de problemas:** Es responsable de sugerir acciones nuevas que lo
+  guiarán hacia experiencias nuevas e informativas. Si el agente está dispuesto a
+  explorar un poco, y llevar a cabo acciones que no sean totalmente óptimas a
+  corto plazo, puede descubrir acciones mejores a largo plazo.
+* _Nivel de actuación:_ Conceptualmente se debe tratar como si estuviese fuera del
+  agente, ya que este no debe modificarlo para su propio interés. Identifica parte
+  de las percepciones entrantes como **recompensas** o **penalizaciones**.
+
+Cuando se intenta diseñar un agente que tenga capacidad de aprender, la primera
+cuestión a solucionar no es ¿cómo se puede enseñar a aprender?, sino ¿qué tipo de
+elemento de actuación necesita el agente para llevar a cabo su objetivo, cuando
+haya aprendido cómo hacerlo? Dado un diseño para un agente, se pueden construir
+los mecanismos de aprendizaje necesarios para mejorar cada una de las partes del
+agente.
+
+El aprendizaje en el campo de los agentes inteligentes puede definirse como el
+proceso de modificación de cada componente del agente, lo cual permite a cada
+componente comportarse más en consonancia con la información que se recibe, lo que
+por tanto permite mejorar el nivel medio de actuación del agente.
+
+# Resolver problemas mediante búsqueda
 
 Los **agentes resoventes-problemas** deciden qué hacer para encontrar secuencias
 de acciones qe conduzcan a los estados deseables.
@@ -684,4 +799,32 @@ inteligencia del agente.
 	toda la investigación y futuros descubrimientos en esta área, sean aplicados
 	con responsabilidad ética, para garantizar que este instrumento nos permita
 	expandir nuestros conocimientos y romper barreras que antes nos limitaban.
-3. Ensayo
+
+3. Ensayo sobre agentes que aprenden
+   ![Agente que aprende](images/II0B.png)
+
+   Un agente que aprende es más eficiente y flexible que un agente simple, basado en objetivos o en utilidad, ya que este es capaz de modificarse a sí mismo de manera constante para que sus acciones máximisen su medida de rendimiento a corto, mediano y largo plazo, es capaz de plantear y experimentar nuevas situaciones que lo erriquezcan con información, que puede utilizar posteriormente para reforzar su conocimiento base. Este agente se adapta de una forma más facilmente a un medio cambiante, ya que constantemente se está modificando a sí mismo por medio de la retroalimentación.
+
+   Los elementos que conforman este agente interactúan de la siguiente forma:
+
+   El agente recibe percepciones del mundo con ayuda de los sensores, estos junto a los niveles de actuación, le permiten reconocer si las acciones que realiza lo acercan o alejan de su objetivo (este proceso se conoce como cŕitica), luego determina si debe evolucionar o mantener el equilibrio de su estado actual, utilizando esta retroalimentación para definir qué parte de sí mismo debe desarrollar o reforzar para obtener mejores resultados en un futuro y, finalmente, lleva a cabo las mejoras requeridas para actuar con una base de conocimiento más completa.
+
+   Si el agente no posee suficiente información del resultado de sus acciones en sircunstacias y periodos de tiempo específicos, sugerirá escenarios de exploración para poder alcanzar ciertos objetivos de aprendizaje, lo que desencadenará nuevas percepciones y esto enrriquecerá su base de conocimientos, llegando así a reconocer cuando sus acciones lograrán obtener recompenzas a corto o largo plazo y cuando debe llevarlas a cabo.
+
+4. Programa Picas y Fijas
+
+   ```
+   result[4]
+
+	for ( i = 0; i < 4; i++ )
+		result[i] = -1
+	
+	function( perception ) {
+		if ( perception == start() ) {
+			testNumber = 0123
+		} else if ( perception == 00 )
+	}
+
+   ```
+
+5. .
