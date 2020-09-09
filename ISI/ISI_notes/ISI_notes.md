@@ -13,6 +13,7 @@
 
 * 45% - 3 módulos (proyectos)
 * 25% - Ejercicios pequeños (requieren tiempo)
+* 30% - Participación
 
 ## Grupo de Trabajo: PTL
 
