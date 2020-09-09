@@ -38,6 +38,7 @@ f( perception ) {
             total_prev = history[ step - 1 ][ 4 ] + history[ step - 1 ][ 5 ]
             total_curr = perception[ 0 ] + perception[ 1 ]
 
+            // * total_curr = total_prev
             if( total_curr - total_prev = 0 ) {
                 // F ++
                 if( perception[ 1 ] > history[ step - 1 ][ 5 ] ) {
@@ -69,22 +70,30 @@ f( perception ) {
                     undefined.pop()
                 }
             // total_curr != total_prev
-            } else {
-                1   0   1
-
-                2   0   2
-                1   1   2
-
-                0   1   1 - base
-
-                0   0   0
-                1   0   1
-
-                2   1   3
-                
-                3   0   3
-                // F++
-                if( perception[ 1 ] > history[] )
+            } else {                // F++
+                if( perception[ 1 ] > history[ step - 1 ][5] ) {
+                    // ! Actual = F, Previous -> delete
+                    correct_number[ replace ] = number[ replace ]
+                    IN[ history[ step -1 ][ replace ] ] = -1
+                    undefined.pop()
+                } else {
+                    // ! Previous = F, Actual -> delete
+                    correct_number[ replace ] = history[ step - 1 ][ replace ]
+                    IN[ number[ replace ] ] = -1
+                    undefined.pop()
+                }
+                // P++
+                if( perception[ 0 ] > history[ step - 1 ][4] ) {
+                    // !Actual = P, Previous -> delete
+                    IN[ number[ replace ] ] = 1
+                    IN[ history[ step -1 ][ replace ] ] = -1
+                    undefined.pop()
+                }else {
+                    // ! Previous = P, Actual -> delete
+                    IN[ number[ replace ] ] = -1
+                    IN[ history[ step -1 ][ replace ] ] = 1
+                    undefined.pop()
+                }
             }
         }
         step ++
