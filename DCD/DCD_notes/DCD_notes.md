@@ -1,4 +1,4 @@
-# Diplomado en Ciencia de datos
+# Diplomado de análisis de datos
 
 ## Python Básico
 
@@ -13,7 +13,7 @@
 
 ### Anaconda
 
-Es la forma más sencilla de realizar ciencia de datos y aprendizaje automático de
+Es la forma más sencilla de realizar ciencia de datos y aprendizaje automático de 
 Python/R en una sola máquina.
 
 * [Página oficial](https://www.anaconda.com/products/individual)
@@ -21,7 +21,7 @@ Python/R en una sola máquina.
   [Documentación](https://docs.anaconda.com/anaconda/)
 
 
-### Requisitos
+### Instalación
 
 * Sistema operativo: Windows 8 o posterior, macOS 10.13+ de 64 bits o Linux,
   incluidos Ubuntu, RedHat, CentOS 6+ y otros.
@@ -31,9 +31,7 @@ Python/R en una sola máquina.
 
   Consultar [Uso de Anaconda en sistemas operativos más antiguos](https://docs.anaconda.com/anaconda/install/#old-os)
 
-### Instalación
-
 * [Windows](https://docs.anaconda.com/anaconda/install/windows/)
 * [MacOs](https://docs.anaconda.com/anaconda/install/mac-os/)
-* [Linux](https://docs.anaconda.com/anaconda/install/linux/) -
-  [Debian 10](https://linuxize.com/post/how-to-install-anaconda-on-debian-10/)
+* [Linux](https://docs.anaconda.com/anaconda/install/linux/)
+* [Debian 10](https://linuxize.com/post/how-to-install-anaconda-on-debian-10/)

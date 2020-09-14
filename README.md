@@ -1,8 +1,9 @@
-# Periodo académico 2020-2
+# 2020-2
 
-## Materias cursadas
-
-* Inglés 4 intersemestral
-* Introducción a los sistemas inteligentes
-* Computación Visual
-* Deporte clase
+| **Abbreviation** | **Meaning**    |
+| :---: | :-----------------------: |
+| IG4   | Inglés 4 intersemestral   |
+| ISI   | Introducción a los sistemas inteligentes  |
+| CVI   | Computación Visual    |
+| DCL   | Deporte clase |
+| DCD   | Diplomado en Ciencia de Datos |
