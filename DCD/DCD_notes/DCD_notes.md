@@ -21,7 +21,7 @@ Python/R en una sola máquina.
   [Documentación](https://docs.anaconda.com/anaconda/)
 
 
-### Instalación
+### Requisitos
 
 * Sistema operativo: Windows 8 o posterior, macOS 10.13+ de 64 bits o Linux,
   incluidos Ubuntu, RedHat, CentOS 6+ y otros.
@@ -30,6 +30,8 @@ Python/R en una sola máquina.
   [archivo](https://repo.anaconda.com/archive/).
 
   Consultar [Uso de Anaconda en sistemas operativos más antiguos](https://docs.anaconda.com/anaconda/install/#old-os)
+
+### Instalación
 
 * [Windows](https://docs.anaconda.com/anaconda/install/windows/)
 * [MacOs](https://docs.anaconda.com/anaconda/install/mac-os/)
