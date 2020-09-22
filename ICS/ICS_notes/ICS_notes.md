@@ -39,3 +39,27 @@
 ## Tareas Extra
 
 1. Complementar infomación de las diapositivas parte 1 y 2.
+
+## Clase 22 de septiembre
+### :c
+   1	2	3	4
+   3	4	2	1
+			1	2	3	4
+   m1 = 	1	0	1	1
+   c1 = 	1	1	0	1
+
+			1	2	3	4
+   m2 = 	0	0	0	1
+   c2 = 	0	1	0	0
+
+         1	2	3	4
+   m3 = 	0	1	0	0
+   c3 = 	0	0	1	1
+
+         1	2	3	4
+   m4 = 	1	0	1	0
+
+### CBC
+
+   C0 = 	1	0	1	0
+
