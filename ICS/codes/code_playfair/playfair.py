@@ -4,16 +4,17 @@ matrix = 	[['L', 'E', 'A', 'R', 'N'],
 			['P', 'Q', 'S', 'T', 'U'],
 			['V', 'W', 'X', 'Y', 'Z']]
 
-def get_list_couples(message):
+def get_couples(message, indicator = 0):
   list_couples = list()
   i = 0
   while i < len(message):
     couple = message[i:i+2]
-    if len(couple) == 1:
-      couple = couple + 'X'
-    elif couple[0] == couple[1]:
-      couple = couple[0] + 'X'
-      i = i - 1
+    if indicator == 0:
+        if len(couple) == 1:
+            couple = couple + 'X'
+        elif couple[0] == couple[1]:
+            couple = couple[0] + 'X'
+            i = i - 1
     list_couples.append(couple)
     i = i + 2
   return list_couples
@@ -21,15 +22,15 @@ def get_list_couples(message):
 def search_characters(couple):
 	list_positions = list()
 	for character in couple:
-	if ((character == 'I') | (character == 'J')):
-		list_positions.append((2, 1))
-	for row in range(len(matrix)):
-		for column in range(len(matrix[row])):
-		if matrix[row][column] == character:
-			list_positions.append((row, column))
+		if ((character == 'I') | (character == 'J')):
+			list_positions.append((2, 1))
+		for row in range(len(matrix)):
+			for column in range(len(matrix[row])):
+				if matrix[row][column] == character:
+					list_positions.append((row, column))
+					break
+			else: continue
 			break
-		else: continue
-		break
 	return list_positions
 
 def playfair(list_couples, indicator = 0):
@@ -51,3 +52,16 @@ def playfair(list_couples, indicator = 0):
 		couples_encrypted.append(new_couple)
 	return couples_encrypted
 
+def main():
+    print("\n\t1. Encriptar\n\t2. Desencriptar\n")
+    option = int(input())
+    print("\n\tIngrese el mensaje:\n")
+    message = input().replace(' ', '').upper()
+    list_couples = get_couples(message, option-1)
+    list_result = playfair(list_couples, option-1)
+    result = str()
+    for couple in list_result: result = result + couple
+    print('\n\t',result,'\n')
+
+if __name__ == "__main__":
+    main()
