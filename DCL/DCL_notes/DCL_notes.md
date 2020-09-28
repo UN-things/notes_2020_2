@@ -72,3 +72,15 @@ Tipos de músculo:
 - Cardiaco
 - Estriada
 - Lisa
+
+# Módulo de Nutrición
+
+Nutriente: Sustancia química, contenida en los alimentos:
+- Obtener energia
+
+Nutrientes energéticos:
+- glucidos, carbohidratos o hidratos de carbono.
+
+- Carbohidratos (Fibra) - 4kcal
+- Proteinas - 4kcal
+- Grasas - 9kcal
