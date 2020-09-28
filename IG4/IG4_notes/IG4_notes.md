@@ -145,3 +145,15 @@ what actually happend
 - Is it possible to be prepare?
 
   I think that steps can be prepared to follow in those situations, but it is difficult to prepare the mind.
+
+## Class 24 september 2020
+
+* Zombie Apocalypse
+  if there is a zombie apocalypse, i would be a zombie
+* Nuclear War
+  If there is a nuclear war, I would die or a third eye would pop out
+* Dinosaur disaster
+  If dinosaur disaster, I would make friends with the dinosaurs and conquer the 
+  world
+* Ice age apocalipse
+  If there is an ice age, I would look for a warm place or with things to burn
