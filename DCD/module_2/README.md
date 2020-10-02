@@ -11,6 +11,9 @@
     - **Email:** gtzambranop@unal.edu.co
 - **Fecha de inicio:** 12 de septiembre de 2020
 - **Fecha de finalización:** 29 de septiembre de 2020
+- **Presentación del curso:**
+  - [Link 1](http://34.221.75.109/#/)
+  - [Link 2](http://ospinafrancisco.com/)
 
 ## Clases
 
