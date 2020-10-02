@@ -14,6 +14,7 @@
     - **Email:** gtzambranop@unal.edu.co
 - **Fecha de inicio:** 1 de octubre de 2020
 - **Fecha de finalización:** 17 de octubre de 2020
+
 ## Evaluación
 
 |	Item	|	Porcentaje	|
