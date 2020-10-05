@@ -949,3 +949,74 @@ Un nodo es una estructura de datos con cinco componentes:
   el estado inicial al nodo, indicado por los punteros a los padres.
 - **Profundidad:** El número de pasos a los largo del camino desde el estado
   inicial.
+
+La conexión de nodos que se han generado pero no expandido, se conoce como **frontera**, cada elemento de la frontera es un nodo hoja, no se ha expandido.
+
+Las operaciones en una **Cola** son:
+- `createQueue(element)`: Crea una cola con los elementos dados.
+- `isEmpty(queue)`: Devuelve Verdadero si no hay ningún elemento en la cola
+- `first(queue)`: Devuelve el primer elemento de la cola.
+- `deleteFirst(queue)`: Devuelve `first(queue)` y lo borra de la cola.
+- `insert(element, queue)`: Inserta elemento en la cola y devuelve la cola
+  resultado
+- `insertAll(elements, queue)`: Inserta un conjunto de elemenntos en la cola y
+  devuelve la cola resultado.
+
+![Algoritmmo general - busqueda árboles](images/III02.png)
+
+## Medir el rendimiento de la resolución del problema
+
+Evaluaremos el rendimiento de un algoritmo de cuatro formas:
+- **Completitud:** ¿Está garantizado que el algoritmo encuentre una solución cuando
+  esta exista?
+- **Optimización:** ¿Encuentra la solución óptima?
+- **Complejidad en tiempo:** ¿Cuánto tarda en encontrar una solución?
+- **Complejidad en espacio:** ¿Cuánta memoria se necesita para el funcionamiento de
+  la búsqueda?
+
+La **complejidad** se expresa en terminos de 3 cantidades:
+- **b:** Factor de ramificación, es el máximo de sucesores de
+  cualquier nodo.
+- **d:**  La profundidad el nodo objetivo más superficial.
+- **m:** La longitud máxima de cualquier camino en el espacio de estados.
+
+Para valorar la eficacia de un algoritmo de búsqueda, podemos considerar el
+**costo de la búsqueda** (que depende típicamente de la complejidad en tiempo pero
+puede incluir también un término para el uso de la memoria) o podemos utilizar el
+**coste total**, que combina el costo de la búsqueda y el costo del camino
+solución encontrado.
+
+## Estrategias de búsqueda no informada
+
+El nombre de **busqueda no informada** hace referencia a que ellas no tienen
+información adicional acerca de los estados más allá de la que proporciona la
+definición del problema. Todo lo que ellas pueden hacer es generar los sucesores y
+distinguir entre un estado objetivo de uno que no lo es.
+
+### Búsqueda primero en Anchura
+
+Se expande primero el nodo raíz, a continuación se expanden todos los sucesores
+del nodo raíz, después sus sucesores, etc. En general, se expanden todos los nodos
+a una profundidad en el árbol de búsqueda antes de expandir cualquier nodo del
+próximo nivel.
+
+la `SEARCH-TREE(problem,QUEUE-FIFO())` resulta una búsqueda primero en anchura. La
+cola FIFO pone todos los nuevos sucesores generados al final de la cola, lo que
+significa que los nodos más superficiales se expanden antes que los nodos más
+profundos.
+
+El nodo objetivo más superficial no es necesariamente el óptimo. La búsqueda
+primero en anchura es óptima si el costo del camino es una función no decreciente
+de la profundidad del nodo (por ejemplo, cuando todas las acciones tienen el mismo
+coste).
+
+![Búsqueda por anchur](images/III03.png)
+
+**Importante:**
+- Son un problema más grande los requisitos de memoria para la búsqueda primero en 
+  anchura que el tiempo de ejecución.
+- Los problemas de búsqueda de complejidad exponencial no pueden resolverse por 
+  métodos sin información, salvo casos pequeños.
+
+### Búsqueda de costo uniforme
+
