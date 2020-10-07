@@ -84,3 +84,15 @@ Nutrientes energéticos:
 - Carbohidratos (Fibra) - 4kcal
 - Proteinas - 4kcal
 - Grasas - 9kcal
+
+# Clase 7 de Octubre de 2020
+
+- Caminar 12000 pasos por día.
+
+## 	Índice de masa corporal
+
+Fórmula:
+
+$$
+IMC = \frac{peso(Kg)}{Estatura(mts)^2}
+$$
