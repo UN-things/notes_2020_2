@@ -41,6 +41,8 @@
 
 ## Clases
 
-|	Clase	|	Objetivo	| Material utilizado	| Presentación |
-|	:--:	|	:--:	|	:--:	|	:--:	|
-|	01	|	Introducción a R	|	[Carpeta](basic_r_class_01/)	|	[Sesion 1](basic_r_class_01/Ciencia-datos-R-Sesion-1.pdf)	|
+|	Clase	|	Objetivo	| Material utilizado	| Presentación | Notebooks |
+|	:--:	|	:--:	|	:--:	|	:--:	| :---: |
+|	1	|	Introducción a R	|	[Carpeta](basic_r_class_01/)	|	[Sesion 1](basic_r_class_01/Ciencia-datos-R-Sesion-1.pdf)	|	|
+| 2	|	Configuración del ambiente de trabajo, <br> ¿Qué es R?, Instalación, Paquetes <br> Buenas prácticas, creación del primer <br> proyecto, Importar datos, <br> Tipos y operaciones	| [Carpeta](basic_r_class_02/)	| [p1-setup](https://felipe-calvo.github.io/r-101/p1-setup.html) <br> [p2-basics-R](https://felipe-calvo.github.io/r-101/p2-basics-R.html) | [clase 2](basic_r_class_02/class_02.ipynb)	|
+| 3 | Vecotores, Factores, Matrices, <br>  Arreglos y Tablas | [Carpeta](basic_r_class_03/) | [p2-basics-R](https://felipe-calvo.github.io/r-101/p2-basics-R.html) |[clase 3](basic_r_class_03/class_03.ipynb) |
