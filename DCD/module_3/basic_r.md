@@ -20,8 +20,15 @@
 |	Item	|	Porcentaje	|
 | :--:	|	:--:	|
 |	Quices	|	40%	|
-|	Taller	|	30%	|
+|	Taller|	30%	|
 |	Evaluación individual	| 30%	|
+
+### Taller
+
+[Enunciado](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_3/workshop.pdf)
+**Requisitos:**
+   - El taller debe ser realizado en grupos de dos personas.
+   - Debe enviarse el viernes 23 de Octubre **antes** de las 6pm al correo fcalvoc@unal.edu.co.
 
 ## Temario
 
