@@ -45,12 +45,34 @@ Para la base de datos Boston Housing, podemos consultar el contexto haciendo cli
 - [MissMech](https://www.rdocumentation.org/packages/MissMech/versions/1.0.2): Permite hacer una prueba de hipótesis.
 - [mvnmle](https://www.rdocumentation.org/packages/mvnmle/versions/0.1-11.1): Encuentra la estimación de máxima verosimilitud del vector medio y la matriz de varianza-covarianza para datos normales multivariados con valores perdidos.
 - [BaylorEdPsych](https://www.rdocumentation.org/packages/BaylorEdPsych/versions/0.5): Funciones y datos utilizados para los cursos cuantitativos de psicología educativa de la Universidad de Baylor
+- [FactoMineR](http://factominer.free.fr/): Análisis factoriales
+- [factoextra](https://www.rdocumentation.org/packages/factoextra/versions/1.0.3): Enriquecer los análisis por factores
+- [ggpubr](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf): Librería para hacer gráficos
+- [repr](https://github.com/cran/repr): Representaciones de cadenas y bytes para todo tipo de objetos R.
+
+- [magrittr](https://magrittr.tidyverse.org/): es un paquete con dos objetivos: disminuir el tiempo de desarrollo y mejorar la legibilidad y la capacidad de mantenimiento del código
+- [lubridate](https://github.com/tidyverse/lubridate): Facilita el manejo de fechas y horas.
 
 ```{r}
 # Cargamos los paquetes
 library("tidyverse")
 library("readxl")
 ```
+
+```{r}
+# install.packages("repr")
+library("repr")
+options(repr.plot.width = 14, repr.plot.height=10)
+```
+
+## Sembrar semilla aleatoria
+
+Si queremos que se generen los mismos datos aleatorios, y que nuestros 
+
+```{r}
+set.seed(10)
+```
+
 
 ```{r}
 # Leemos los datos desde un archivo de Excel
@@ -223,3 +245,180 @@ mice(datos_incompletos, printFlag = FALSE) %>%
 # Veamos la diferencia entre los promedios de los datos completos y los imputados
 colMeans(datos_completos - datos_imputados_mice)
 ```
+
+## Datos Atípicos
+
+En nuestros análisis debemos examinar la presencia de datos atípicos, en la medida que pueden afectar los resultados de las estimaciones, modelos y pruebas de hipótesis.
+
+Para detectar datos atípicos podemos seguir dos caminos:
+
+- Buscar datos atípicos para cada variable (columna). Para esto podríamos usar criterios numéricos o gráficos.
+- Buscar filas que consistentemente tengan datos atípicos en todas las celdas.
+
+Veamos dos ejemplos usando la base de datos de Boston Housing.
+
+Primero, una detección de atípicos en una variable en específico (MEDV que es una variable objetivo).
+
+```{r}
+# Estadístico de resumen para una variable
+# En este caso se resumen los datos de la variable MEDV
+summary(boston_housing_xlsx$MEDV)
+```
+
+Los datos atípicos pueden estar en el primer y tercer cuartil
+
+![boxplot](../images/R_00.png)
+
+Construimos un boxplot y extraemos los datos específicos que son presuntamente atípicos
+
+```{r}
+
+# Boxplot de una variable
+boxplot(boston_housing_xlsx$MEDV)
+
+# Valores de potenciales outliers
+boxplot.stats(boston_housing_xlsx$MEDV)$out
+```
+```{r}
+# Filas donde se ubican las observaciones atípicas
+outliers <- boxplot(boston_housing_xlsx$MEDV)$out
+```
+```{r}
+outliers_filas <- which(boston_housing_xlsx$MEDV %in% c(outliers))
+outliers_filas
+```
+Segundo, una detección de atípicos basado en un análisis multivariado por medio de componentes principales (hay otras técnicas más, por ejemplo, la distancia de Cook).
+
+Instalamos y cargamos librerías para hacer análisis de componentes principales.
+
+```{r}
+# Instalamos paquetes
+# install.packages("FactoMineR")
+# install.packages("factoextra")
+# install.packages("ggpubr")
+
+# Cargamos paquetes
+library("FactoMineR")
+library("factoextra")
+library("ggpubr")
+```
+
+Componentes principales: reducir la cantidad de variables o individuos que tengan características en comń, esto reduce la dimensionalidad de la base de datos.
+
+```{r}
+# Estandarizamos las variables
+# datos_completos imputados por MICE o por la media
+datos_completos %>%
+  # mutate_all() sobreescribe los datos dada una operación ingresada por parámentro
+  # scale
+  mutate_all(scale) -> data_estandarizada
+
+# Ajusto componentes principales usando el método PCA()
+acp = PCA(data_estandarizada,graph=F)
+```
+
+```{r fig1, fig.height = 10, fig.width = 14, fig.align = "center"}
+# Gráfico de individuos del ACP
+# Esto puede tardar un poco
+
+fviz_pca_ind(acp, repel = TRUE)
+```
+
+```{r fig2, fig.height = 10, fig.width = 14, fig.align = "center"}
+fviz_pca_var(acp, repel = TRUE)
+```
+
+Con el siguiente código calculamos la **distancia** al vecino más cercano.
+
+```{r}
+# install.packages("magrittr")
+library("magrittr")
+data_estandarizada %>% 
+  dist %>% as.matrix() %>% add(diag(Inf, ncol(.))) %>% 
+  apply(1, min) %>% enframe() %>% arrange(desc(value))
+```
+
+Por medio de diversos procedimientos estadísticos podemos detectar datos atípicos. ¿Qué hacer con ellos? Depende. Hay que sopesar el contexto de los datos, la naturaleza del problema y de cada variable, así como combinar elementos de juicio estadístico como profesionales de otras áreas.
+
+## Nombrado adecuado de las variables
+
+Recuerde el recurso de [cómo nombrar las cosas](https://felipe-calvo.github.io/r-101/resources/naming.pdf). Siguiendo ese marco de referencia, asegúrese de que las variables (columnas):
+
+- No tengan acentos
+- No tengan caracteres especiales (@, #, ?, &, *, $, entre otros)
+- No tengan espacios (reemplácelos por un guion medio o bajo)
+- De ser necesario, que sea identificable una relación de orden
+
+```{r}
+# Número de variables en la base de datos
+length(datos_completos)
+```
+
+```{r}
+# Obtiene el nombre de las variables de una base de datos
+names(datos_completos)
+```
+
+```{r}
+# Podríamos declarar un vector con los nuevos nombres que necesitemos
+# nombres_adecuados <- c(
+#   "nombre_variable_1",
+#   "nombre_variable_2",
+#   ...,
+# )
+
+# Y luego asignarlos a nuestra base de datos
+# nombres_adecuados -> names(datos_completos)
+
+# Otro ejemplo
+# Si tuviésemos variables con espacios, podríamos reemplazar todos los espacios así
+# names(datos_completos) <- str_replace_all(names(datos_completos), c(" " = "_"))
+```
+
+## Valores duplicados
+
+Podemos buscar y eliminar duplicados basados en un columna, por ejemplo, cuando esperamos tener datos únicos de un individuo y tenemos una columna para identificarlo.
+
+```{r}
+## Ejemplo: acá dejamos valores únicos en la columna MEDV
+distinct(datos_completos, MEDV, .keep_all = TRUE) -> datos_completos_MEDV_unico
+
+## Ejemplo: acá dejamos valores únicos en la columna DIS
+distinct(datos_completos, DIS, .keep_all = TRUE) -> datos_completos_DIS_unico
+```
+
+También podemos buscar y eliminar duplicados basados en toda la fila.
+
+```{r}
+distinct(datos_completos) -> datos_completos_sin_filas_duplicadas
+```
+
+## Discretización de variables
+
+En algunos problemas, conviene convertir variables que son continuas en variables agrupadas por intervalos. Este proceso se llama discretización. Veamos un ejemplo creando un rango de edad para las viviendas de la base de datos.
+
+```{r}
+# Instalamos paquete lubridate
+# install.packages("lubridate")
+
+# Cargamos paquete lubridate
+library("lubridate")
+
+# Discretizamos la edad (AGE) de los datos del censo
+# mutate() anexa/crea variables a la base de datos
+datos_completos %>% mutate(
+  # Crea una nueva variable edad_hoy y le asigna los valores de la variable
+  # AGE y le suma 50
+  edad_hoy = datos_completos$AGE+50,
+  rango_edad = cut(edad_hoy, c(0, 50, 75, 90, 105, 120, 135, Inf))
+) -> datos_completos_fechas
+
+head(datos_completos_fechas[(ncol(datos_completos_fechas)-1):ncol(datos_completos_fechas)])
+```
+
+## Eliminar filas o columnas
+```r
+# boston_housing_xlsx[filas, columnas]
+boston_housing_xlsx[-c(), ] -> datos_sin_atipicos 
+```
+
