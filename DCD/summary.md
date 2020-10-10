@@ -1,6 +1,6 @@
 # Diplomado en Ciencia de Datos
 
-[Presentación del diplomado](diplomado_en_ciencia_de_datos.pdf)
+[Presentación del diplomado](https://github.com/gtzambranop/UN_2020_2/blob/develop/DCD/diplomado_en_ciencia_de_datos.pdf)
 
 ## Descripción del Programa
 
@@ -38,7 +38,7 @@ manera presencial y virtual por medio de una plataforma de aprendizaje.
 
 ## Contenido temático
 
-| Módulo	|	Tema	|	Conferencista	|	Carpeta	|
-|	:--:	|	:--:	|	:--:	|	:--:	|
-|	2	|	Python Básico	|	Francisco Javier Ospina Salaza	|	[Módulo 2](module_2/basic_python.md)	|
-|	3	|	R Básico	|	Felipe Calvo Cepeda	| [Módulo 3](module_3/basic_r.md)	|
+| Módulo	|	Tema	|	Conferencista	|
+|	:--:	|	:--:	|	:--:	|
+|	2	|	[Python Básico](module_2/basic_python.md)	|	Francisco Javier Ospina Salaza	|
+|	3	|	[R Básico](module_3/basic_r.md)	|	Felipe Calvo Cepeda	|
