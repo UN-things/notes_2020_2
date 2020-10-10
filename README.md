@@ -2,9 +2,9 @@
 
 | **Abreviación** | **Materia**    |
 | :---: | :-----------------------: |
-| [ISI](ISI/)   | Introducción a los Sistemas <br> Inteligentes  |
-|	[ICS](ICS/)		| Introducción a la Criptografía y <br> a la Seguridad de la Información	|
-| [CVI](CVI/)   | Computación Visual    |
-| [IG4](IG4/)   | Inglés 4 semestral   |
-| [DCL](DCL/)   | Deporte clase |
-| [DCD](DCD/)   | Diplomado en Ciencia de Datos |
+| [ISI](ISI/ISI_notes/ISI_notes.md)   | Introducción a los Sistemas Inteligentes  |
+|	[ICS](ICS/ICS_notes/ICS_notes.md)		| Introducción a la Criptografía y a la Seguridad de la Información	|
+| [CVI](CVI/CVI_notes/CVI_notes.md)  | Computación Visual    |
+| [IG4](IG4/IG4_notes/IG4_notes.md)   | Inglés 4 semestral   |
+| [DCL](DCL/DCL_notes/DCL_notes.md)  | Deporte clase |
+| [DCD](DCD/summary.md)   | Diplomado en Ciencia de Datos |

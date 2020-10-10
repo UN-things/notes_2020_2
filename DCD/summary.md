@@ -40,5 +40,5 @@ manera presencial y virtual por medio de una plataforma de aprendizaje.
 
 | Módulo	|	Tema	|	Conferencista	|	Carpeta	|
 |	:--:	|	:--:	|	:--:	|	:--:	|
-|	2	|	Python Básico	|	Francisco Javier Ospina Salaza	|	[Módulo 2](module_2/)	|
-|	3	|	R Básico	|	Felipe Calvo Cepeda	| [Módulo 3](module_3/)	|
+|	2	|	Python Básico	|	Francisco Javier Ospina Salaza	|	[Módulo 2](module_2/basic_python.md)	|
+|	3	|	R Básico	|	Felipe Calvo Cepeda	| [Módulo 3](module_3/basic_r.md)	|
