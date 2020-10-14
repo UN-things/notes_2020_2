@@ -153,7 +153,70 @@ what actually happend
 * Nuclear War
   If there is a nuclear war, I would die or a third eye would pop out
 * Dinosaur disaster
-  If dinosaur disaster, I would make friends with the dinosaurs and conquer the 
+  If dinosaur disaster, I would make friends with the dinosaurs and conquer the
   world
 * Ice age apocalipse
   If there is an ice age, I would look for a warm place or with things to burn
+
+## class 06 october 2020
+
+- something you wish had done when you were younger:
+  - I would have liked to learn gymnastics
+  - I wish i had learned to swim when I was younger
+- something you wish hadn't done when you were younger:
+  - I would have liked not to be so shy
+  - I wish I hadn't dropped TK academy
+  - I wish I hadn't been so shy, I didn't have many friends when I was young
+- something you wish had said done when you were younger:
+  - I would have liked to say NO more times
+  - I wish I had said I liked Liliana
+- something you wish hadn't said done when you were younger:
+  - I would have liked not to say hurtful things to my friends when we were
+  	fighting
+
+Activity with [video](https://youtu.be/N8i6rUL4UIY), match with phrases in
+[this](../regrets_listening.pdf) docuemnt.
+
+| Number	| Biggest Regret	| Speker's age	|
+| :---:	|	:---:	|	:---:	|
+|	1		|	I wish I knew when I was younger how wonderful I was.	| 47 |
+|	2		|	Having not appreciated being young when I was younger.	| 52	|
+|	3		|	Not following my dreams on earlier life.	|	43	|
+|	4		|	Not having taking a gap year before going to college.	|	36	|
+|	5		|	That I didn’t do all the things I wanted to do (... ) much earlier.	| 75	|
+|	6		|	Not taking chances.	|	22	|
+|	7		|	I wish I have never met that meaning girl.	|	7	|
+|	8	 	|	Having had a problem with drugs and alcohol 25 years ago.	|	57	|
+|	9		|	Being frightened of so many things when I was younger.	|	63	|
+|	10	| That I didn’t get sober sooner.	|	65	|
+
+I was struck by what the 47-year-old woman said. Because sometimes it takes us a
+long time to realize the qualities we have.
+
+- Do you think kids have any regrets? if yes, what they regret about
+  - If they regret some things, I think they regret simpler things, because they
+  	are exploring and learning about the world.
+- Do kids and adults have similar regrets?:
+  - I think they are regrets related to taking risks, but in different
+  	circumstances.
+
+## class 08 october 2020
+
+[Video](https://youtu.be/psm8aYF5Gn8?list=WL)
+
+- Some of the people in the video say they have no regrets. What's your opinion
+  about that?
+	- Some bad decisions can be good in the long time
+- From the regrets in the previous activity which do you think the common ones are?
+  - Those related to daring to do something.
+- At your age, do you identify yourself with any of the regrets from the video? If
+  yes, which one.
+	- yes, with the one mentioned by the 47-year-old woman.
+- How do you like this statement?: "It's never too late, to be what we might have
+  been"? Expressyour opinion
+	- I think it's true, but sometimes we want to have it all in that moment and it
+  	takes time to achieve it.
+- Would you like to go back in time to chenge any momment or any decision of your 
+  life?
+	- Yes, I wish I could go back in time and take advantage of the time learning 
+  	new things. I would be more disciplined. I feel like I wasted time. I would have learned English, to play a musical instrument
