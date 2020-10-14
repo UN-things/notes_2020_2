@@ -9,6 +9,8 @@
 - **Libro guía:** [Inteligencia Artificial Un Enfoque Moderno 2a Edición](https://luismejias21.files.wordpress.com/2017/09/inteligencia-artificial-un-enfoque-moderno-stuart-j-russell.pdf)
 - **Apuntes tomados por:** Guiselle Tatiana Zambrano Penagos
 
+## Porcentaje de las notas
+
 - 45% - 3 módulos (proyectos)
 - 25% - Ejercicios pequeños (requieren tiempo)
 - 30% - Participación
@@ -18,43 +20,6 @@
 - Liseth Yurany Arevalo Yaruro
 - Valeria Huepa Ducuara
 - Guiselle Tatiana Zambrano Penagos
-
-## Temas del curso
-
-1.  Busqueda
-
-    - Agente inteligente.
-    - ¿Qué son las persepciones?
-    - ¿Qué son las acciones?
-    - ¿Cuándo se concidera que un agente es inteligente?
-    - ¿Cuáles son los tipos de inteligencia artificial que hay?
-    - Agentes basados en objetivos.
-    - Agentes reflejo.
-    - Agentes con estado interno.
-    - Agentes con objetivo.
-    - Agentes que aprenden. (No es el enfoque del curso).
-
-1.  Juegos (¿?)
-
-    - Algoritmos minimax
-    - La poda alfa-beta
-
-1.  Inteligencia Dura
-1.  Inteligencia Suave
-
-    - Algoritmos genéticos.
-    - Redes neuronales.
-    - Arboles de desición.
-    - Inicio al aprendizaje maquinal y mineria de datos (data science).
-
-1.  Lógica
-
-    - Inteligencia artificial basado en sistemas expertos (en la lógica
-      matemática).
-
-          * Inferencia matemática.
-          * Prolog.
-
 
 # Complementos de la clase
 
@@ -279,23 +244,6 @@
    Si el agente no posee suficiente información del resultado de sus acciones en sircunstacias y periodos de tiempo específicos, sugerirá escenarios de exploración para poder alcanzar ciertos objetivos de aprendizaje, lo que desencadenará nuevas percepciones y esto enrriquecerá su base de conocimientos, llegando así a reconocer cuando sus acciones lograrán obtener recompenzas a corto o largo plazo y cuando debe llevarlas a cabo.
 
 4. Programa Picas y Fijas
-
-   ```
-   result[4]
-
-   for ( i = 0; i < 4; i++ )
-   	result[i] = -1
-
-   function( perception ) {
-   	if ( perception == start() ) {
-   		testNumber = 0123
-   	} else if ( perception == 00 )
-   }
-
-   ```
-
-5. .
-
 
 # Introducción
 
