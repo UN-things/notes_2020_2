@@ -216,7 +216,20 @@ long time to realize the qualities we have.
   been"? Expressyour opinion
 	- I think it's true, but sometimes we want to have it all in that moment and it
   	takes time to achieve it.
-- Would you like to go back in time to chenge any momment or any decision of your 
+- Would you like to go back in time to chenge any momment or any decision of your
   life?
-	- Yes, I wish I could go back in time and take advantage of the time learning 
-  	new things. I would be more disciplined. I feel like I wasted time. I would have learned English, to play a musical instrument
+	- Yes, I wish I could go back in time and take advantage of the time learning
+  	new things. I would be more disciplined. I feel like I wasted time. I would
+    have learned English, to play a musical instrument
+
+## Class 15 october 2020
+
+- What decisions did you make..
+  - today?
+    - today I decided to go for a walk
+  - last week?
+    - Last week I decided to study with my friends simultaneously
+  - this year?
+    - This year I decided to take the semester virtually
+  - last year?
+    - Last year I decided to focus more on my professional career.
