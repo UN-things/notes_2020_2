@@ -1,24 +1,34 @@
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
 # Introducción a los Sistemas Inteligentes - ISI
+- [Introducción a los Sistemas Inteligentes - ISI](#introducción-a-los-sistemas-inteligentes---isi)
+	- [Información General](#información-general)
+		- [Notas](#notas)
+		- [Grupo de Trabajo: PTL](#grupo-de-trabajo-ptl)
+	- [Resumenes](#resumenes)
+	- [Ejercicios](#ejercicios)
+	- [Proyectos](#proyectos)
+	- [Clase](#clase)
+		- [Conceptos clave](#conceptos-clave)
+		- [Apuntes de clase](#apuntes-de-clase)
+
+## Información General
 
 - **Periodo:** 2020-2
 - **Grupo:** 2
-- **Profesor:** Jonatan Gomez Perdomo
+- **Profesor:** [Jonatan Gomez Perdomo](https://dis.unal.edu.co/~jgomezpe/)
   - **Correo:** jgomezpe@unal.edu.co
-  - **GitHub:** [jgomezpe](https://dis.unal.edu.co/~jgomezpe/)
+  - **GitHub:** [jgomezpe](https://github.com/jgomezpe)
 - **Libro guía:** [Inteligencia Artificial Un Enfoque Moderno 2a Edición](https://luismejias21.files.wordpress.com/2017/09/inteligencia-artificial-un-enfoque-moderno-stuart-j-russell.pdf)
 - **Apuntes tomados por:** Guiselle Tatiana Zambrano Penagos
 
-## Notas
+### Notas
 
 | Porcentaje | Descripción |
 | :---: | :---: |
-| 45% | 3 Proyectos) |
-| 25% | Ejercicios pequeños |
+| 45% | 3 Proyectos |
+| 25% | Ejercicios |
 | 30% | Participación |
 
-## Grupo de Trabajo: PTL
+### Grupo de Trabajo: PTL
 
 - Liseth Yurany Arevalo Yaruro
   - **Correo:** lyarevalo@unal.edu.co
@@ -28,7 +38,7 @@
   - **Github:** [vhuepad](https://github.com/vhuepad)
 - Guiselle Tatiana Zambrano Penagos
   - **Correo:** gtzambranop@unal.edu.co
-  - **Github:** gtzambranop
+  - **Github:** [gtzambranop](https://github.com/gtzambranop)
 
 ## Resumenes
 
@@ -38,15 +48,35 @@ Libro: [Inteligencia artificial un enfoque moderno](https://github.com/gtzambran
 | :---: | :---: |
 | 1 | [Introducción](summary_book/chapter_1.md) |
 | 2 | [Agentes Inteligentes](summary_book/chapter_2.md) |
-| 3 | [Resolver problemas mediante búsqueda]((summary_book/chapter_3.md)) |
+| 3 | [Resolver problemas mediante búsqueda](summary_book/chapter_3.md) |
 | 4 | Búsqueda Informada y exploración |
 | 5 | Problemas de satisfacción de restricciones |
 | 6 | Búsqueda entre adversarios |
 
 
-# Clase
+## Ejercicios
 
-## Conceptos clave
+| Descripción	|	Fecha de Asignación	| Entregable	|
+|	:---	|	:---:	|	:---:	|
+| **Ensayo:** pasado, presente y futuro de la IA	| 24/08/2020	|	[Documento](https://github.com/gtzambranop/UN_2020_2/tree/develop/ISI/documents/documents/ISI_task_1.pdf)	|
+| **Ensayo:** Agentes que aprenden	| 02/09/2020	| [Documento](https://github.com/gtzambranop/UN_2020_2/tree/develop/ISI/documents/documents/ISI_task_2.pdf)	|
+| **Programa:** Picas y fijas	|	02/09/2020 |	Sin Realizar	|
+|	**Diagrama:** Espacio de estados - Canívales y misioneros	|	09/09/2020	|	[Archivo drawio](https://drive.google.com/file/d/1Ws9Q5CuasfU1nyhgN-LvN6xmmVC2Kle4/view?usp=sharing) <br> Corregir	|
+| **Programa:** A*	|	29/09/2020	| [Programa en Python](https://github.com/gtzambranop/UN_2020_2/tree/develop/ISI/codes/a_star.py)	|
+| **Diagrama:** Problema parejas	| 	|	[Archivo drawio](https://drive.google.com/file/d/1L6dUDyh8Q3JIEKsVOD1d7T_pyu34Ajf8/view?usp=sharing) - Completar	|
+
+
+## Proyectos
+
+| Descripción	|	Fecha de Asignación	|	Entregable	|
+|	:---:	|	:---:	|	:---:	|
+| **Programa:** Sodoku	|		|	Sin Realizar	|
+|	**Programa:**	|	|	Sin Realizar	|
+
+
+## Clase
+
+### Conceptos clave
 
 - **Valor:** Atributo que no tiene significado. Cualidad de un sujeto o un
   objeto.
@@ -83,111 +113,7 @@ Libro: [Inteligencia artificial un enfoque moderno](https://github.com/gtzambran
   que **ellos** conocen. Tiene un objetivo, resolver un problema, lo cuál define la
   inteligencia del agente.
 
-## Ejercicios
+### Apuntes de clase
 
-1. Definir qué es "artificial"
-
-	**Fecha de asignación:** 24 de agosto de 2020
-
-	[Ensayo de lo natural y lo artificial](https://www.oei.es/historico/salactsi/teorema04b.htm)
-
-	_... Platón defendía que todos los artefactos (incluyendo las obras de arte)
-	son imitaciones de algo natural, de algo genuino u original. Para Platón,
-	decir que algo es "artificial" es decir que esa cosa parece ser, pero no es
-	realmente, aquello que imita. Lo artificial es meramente aparente; lo único
-	que hace es mostrar cómo es alguna otra cosa..._
-
-	_... Aristóteles planteaba la cuestión de un modo diferente. Creía que la
-	naturaleza y el arte (lo natural y lo artificial) no tienen nada en común;
-	constituyen dos esferas diferentes de la realidad. En consecuencia, las leyes
-	que gobiernan estos dos tipos de entidades difieren de forma esencial y, por
-	esta razón, el conocimiento de ambas también es distinto. La ciencia natural
-	no incluye el saber-cómo de los instrumentos, las herramientas y las máquinas,
-	y éstas últimas no ofrecen ninguna ayuda para el conocimiento de las entidades
-	naturales. Se trata de dos tipos distintos de conocimiento. Los entes
-	naturales tienen una forma primaria, mientras que los artificiales tienen una
-	forma secundaria que los agentes humanos les imponen. Según Aristóteles
-	(Charlton, 1970), lo natural "tiene en sí mismo la fuente de su propia
-	formación", mientras que en el caso de lo artificial, "la fuente es distinta y
-	externa". Los casos paradigmáticos de lo artificial ya no son (como lo eran
-	para Platón) flores o pájaros artificiales, muñecas y estatuas, sino, e.g., la
-	rueda, que no es algo dado en la naturaleza como medio de transporte. Los
-	artefactos no son imitaciones de algo dado previamente, sino auténticas
-	invenciones; representan algo nuevo, no una simple e imperfecta copia de un
-	prototipo..._
-
-2. Ensayo grupal sobre el pasado, presente y futuro de la IA.
-
-	- **Fecha de asignación:** 24 de agosto de 2020
-	- **Entregable:** [Tarea Grupal 1](https://github.com/gtzambranop/UN_2020_2/tree/develop/ISI/documents/documents/ISI_task_1.pdf)
-
-3. Ensayo sobre agentes que aprenden
-
-	- **Fecha de Asignación:** 2 de septiembre de 2020
-	- **Entregable:** [Tarea Grupal 2](https://github.com/gtzambranop/UN_2020_2/tree/develop/ISI/documents/documents/ISI_task_2.pdf)
-4. Crear el pseudocódico para hayar un número entre 0 y 100
-
-	```java
-	lower = 0
-	upper = 101
-	number
-
-	f(perception){
-	if(perception == start){
-		number =  random(lower, upper)
-	}else if( perception == isLess){
-		upper = number
-		number = random(lower, upper)
-	} else if (perception == isGreater){
-		lower = number
-		number = random(lower, upper)
-	}else {
-		returc finish()
-	}
-	return number
-	}
-	```
-	Pseudocódigo de un agente más inteligente:
-
-
-	```java
-	lower = 0
-	upper = 100
-	number
-
-	f(perception) {
-	if ( peerception == isLess ) {
-		upper = number
-	} else if ( perception == isGreater ) {
-		lower = number
-	} else if ( perception == isEqual ) {
-		return finish()
-	}
-	number = floor( ( lower + upper ) / 2 )
-	return number
-	}
-	```
-5. Programa Picas y Fijas
-
-	- **Fecha de Asignación:**
-	- **Entregable:** Sin realizar
-
-6. Canívales y Misioneros
-	- **Fecha de asignación:** 9 de Septiempre de 2020
-	- **Entregable:** [Archivo drawio](https://drive.google.com/file/d/1Ws9Q5CuasfU1nyhgN-LvN6xmmVC2Kle4/view?usp=sharing) - Corregir
-
-7. Código A*
-
-	- **Fecha de Asignación:** 29 de Septiembre de 2020
-	- **Entregable:** [Programa en Python](https://github.com/gtzambranop/UN_2020_2/tree/develop/ISI/codes/a_star.py)
-
-8. Problema de las parejas
-
-	- **Fecha de asignación:**
-	- **Entregable:** [Archivo drawio](https://drive.google.com/file/d/1L6dUDyh8Q3JIEKsVOD1d7T_pyu34Ajf8/view?usp=sharing) - Completar
-9. d
-
-## Proyectos
-
-1. Sodoku
-2. 
+| Fecha	|	Temas	|
+|	:---:	|	:---:	|
