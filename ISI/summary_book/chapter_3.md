@@ -1,5 +1,18 @@
 # Resolver problemas mediante búsqueda
 
+- [Resolver problemas mediante búsqueda](#resolver-problemas-mediante-búsqueda)
+	- [Agentes resolvente-problemas](#agentes-resolvente-problemas)
+		- [Problemas y soluciones bien definidos](#problemas-y-soluciones-bien-definidos)
+		- [Formular los problemas](#formular-los-problemas)
+	- [Ejemplos de Problemas](#ejemplos-de-problemas)
+		- [Problemas de juguete](#problemas-de-juguete)
+		- [Problemas del Mundo Real](#problemas-del-mundo-real)
+	- [Búsqueda de Soluciones](#búsqueda-de-soluciones)
+	- [Medir el rendimiento de la resolución del problema](#medir-el-rendimiento-de-la-resolución-del-problema)
+	- [Estrategias de búsqueda no informada](#estrategias-de-búsqueda-no-informada)
+		- [Búsqueda primero en Anchura](#búsqueda-primero-en-anchura)
+		- [Búsqueda de costo uniforme](#búsqueda-de-costo-uniforme)
+
 _Cómo un agente puede encontrar una secuencia de acciones que alcance sus
 objetivos, cuando ninguna acción simple lo hará._
 

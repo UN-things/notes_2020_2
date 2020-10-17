@@ -1,5 +1,23 @@
 # Agentes inteligentes
 
+- [Agentes inteligentes](#agentes-inteligentes)
+	- [Agentes y su entorno](#agentes-y-su-entorno)
+	- [Buen comportamiento: el concepto de racionalidad](#buen-comportamiento-el-concepto-de-racionalidad)
+		- [Medidas de rendimiento](#medidas-de-rendimiento)
+		- [Racionalidad](#racionalidad)
+		- [Omnisciencia, aprendizaje y autonomía](#omnisciencia-aprendizaje-y-autonomía)
+	- [Agente Racional](#agente-racional)
+	- [La naturaleza del entorno](#la-naturaleza-del-entorno)
+		- [Especificación del entorno de trabajo](#especificación-del-entorno-de-trabajo)
+			- [Propiedades de los entornos de trabajo](#propiedades-de-los-entornos-de-trabajo)
+	- [Estructuras de los agentes](#estructuras-de-los-agentes)
+		- [Programas de los agentes](#programas-de-los-agentes)
+			- [Agentes reactivos simples](#agentes-reactivos-simples)
+			- [Agentes reactivos basados en modelos](#agentes-reactivos-basados-en-modelos)
+			- [Agentes basados en objetivos](#agentes-basados-en-objetivos)
+			- [Agentes basados en utilidad](#agentes-basados-en-utilidad)
+			- [Agentes que aprenden](#agentes-que-aprenden)
+
 ## Agentes y su entorno
 
 ![Partes del agente](./../images/II00.png)
@@ -192,7 +210,7 @@ dadas las percepciones recibidas:
 - $T:$ Tiempo de vida del agente
 - Entradas de la tabla = $\sum_{t=1}^{T}{|P|}^t$
 
-#### **Agentes reactivos simples**
+#### Agentes reactivos simples
 
 Estos agentes seleccionan las acciones sobre la base de las percepciones actuales,
 ignorando el resto de las percepciones históricas.
@@ -207,7 +225,7 @@ observable. Un agente reactivo simple con capacidad para elegir acciones de mane
 aleatoria puede mejorar los resultados que proporciona un agente reactivo simple
 determinista (está sujeto a caer en bucles infinitos).
 
-#### **Agentes reactivos basados en modelos**
+#### Agentes reactivos basados en modelos
 
 El agente debe mantener algún tipo de **estado interno** que dependa de la
 historia percibida y que de ese modo refleje por lo menos alguno de los aspectos
@@ -226,7 +244,7 @@ Este conocimiento acerca de <<cómo funciona el mundo>>, se denomina modelo.
 
 ![Programa agente basado en modelos](../images/II08.png)
 
-#### **Agentes basados en objetivos**
+#### Agentes basados en objetivos
 
 Además de la descripción del estado actual, el agente necesita algún tipo de
 información sobre su **meta** que describa las situaciones que son deseables.
@@ -250,7 +268,7 @@ explícitamente y puede modificarse. El comportamiento del agente basado en
 objetivos puede cambiarse fácilmente, un agente reactivo requeriría modificaciones
 mayores.
 
-#### **Agentes basados en utilidad**
+#### Agentes basados en utilidad
 
 Las metas sólo proporcionan una cruda distinción binaria entre los estados de
 «felicidad» y «tristeza», mientras que una medida de eficiencia más general
@@ -270,7 +288,7 @@ racionales en dos tipos de casos:
 
 ![Agente basado en utilidad](../images/II0A.png)
 
-#### **Agentes que aprenden**
+#### Agentes que aprenden
 
 El aprendizaje permite que el agente opere en medios inicialmente desconocidos y
 que sea más competente que si sólo utilizase su conocimiento inicial. El

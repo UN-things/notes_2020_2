@@ -1,8 +1,19 @@
 # Introducción
 
-La IA es una de las ciencias más recientes, el nombre se acuñó en 1956.
+- [Introducción](#introducción)
+	- [¿Qué es la IA?](#qué-es-la-ia)
+		- [Comportamiento humano: el enfoque de la prueba de Turing.](#comportamiento-humano-el-enfoque-de-la-prueba-de-turing)
+		- [Pensar como humano: el enfoque del modelo cognitivo](#pensar-como-humano-el-enfoque-del-modelo-cognitivo)
+		- [Pensamiento Racional: el enfoque de las _leyes del pensamiento_](#pensamiento-racional-el-enfoque-de-las-leyes-del-pensamiento)
+		- [Actuar de forma racional: el enfoque del agente racional](#actuar-de-forma-racional-el-enfoque-del-agente-racional)
+	- [Los fundamentos de la IA](#los-fundamentos-de-la-ia)
+		- [Filosofía](#filosofía)
+		- [Matemáticas](#matemáticas)
+		- [Economía](#economía)
 
 ## ¿Qué es la IA?
+
+La IA es una de las ciencias más recientes, el nombre se acuñó en 1956.
 
 ![Definiciones de IA](../images/I00.png)
 
