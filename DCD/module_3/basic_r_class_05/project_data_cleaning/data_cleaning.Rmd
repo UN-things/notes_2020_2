@@ -1,0 +1,424 @@
+---
+title: "Documentation de ciencia de datos"
+author: "Guiselle Tatiana Zambrano Penagos"
+date: "10/10/2020"
+output: html_document
+---
+
+# R básico
+- **Conferencista:** Felipe Calvo Cepeda
+	-	**Emails:**
+		- fcalvoc@unal.edu.co
+		- fe.calvo@uniandes.edu.co
+	-	**GitHub:** [felipe-calvo](https://github.com/felipe-calvo)
+- **Monitoras:**
+  - Diana Carolina Sanchez Perez
+    - **Email:** dicsanchezpe@unal.edu.co
+  - Guiselle Tatiana Zambrano Penagos
+    - **Email:** gtzambranop@unal.edu.co
+- **Fecha de inicio:** 1 de octubre de 2020
+- **Fecha de finalización:** 17 de octubre de 2020
+- **Material utilizado en esta clase:**
+  - [p3-tidy](https://felipe-calvo.github.io/r-101/p3-tidy.html)
+
+Este documento contiene la documentación y resultados de la clase de limpieza de
+datos en R, del diplomado de ciencia de datos.
+
+# Limpieza de Datos
+
+## Base de datos Boston Housing
+
+Como hemos discutido con anterioridad, para todos los conjuntos de datos con los que trabajemos es importante tener un contexto en el cual tengamos información sobre cómo fueron recolectados, en qué año(s), qué técnicas de muestreo se usaron para obtener las observaciones y qué personas o entidades fueron los responsables.
+
+- Si los datos los recolectamos nosotros hablamos de **información primaria** y en nuestros reportes/informes debemos hacer explícito el contexto referido.
+- Si los datos los obtuvimos de otra fuenta hablamos de **información secundaria** y en los reportes derivados igualmente debemos procurar obtener y referenciar el contexto referido para los datos.
+
+Para la base de datos Boston Housing, podemos consultar el contexto haciendo clic en [este tunel secreto](https://www.kaggle.com/c/boston-housing/overview/description).
+
+**Librerías Utilizadas durante la clase:**
+
+- [tidyverse](https://www.tidyverse.org/):Conjunto de funciones para limpiar,
+  procesar, organizar y mostrar datos
+- [readxl](https://readxl.tidyverse.org/): leer archivos de excel
+- [MICE](https://cran.r-project.org/web/packages/mice/mice.pdf): Imputa los datos a través de un proceso de regresión. Trata de predecir el valor falatante, a través de un modelado. Este también es útil para variables categóricas.
+- [naniar](https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html): Visualización de datos faltantes
+- [MissMech](https://www.rdocumentation.org/packages/MissMech/versions/1.0.2): Permite hacer una prueba de hipótesis.
+- [mvnmle](https://www.rdocumentation.org/packages/mvnmle/versions/0.1-11.1): Encuentra la estimación de máxima verosimilitud del vector medio y la matriz de varianza-covarianza para datos normales multivariados con valores perdidos.
+- [BaylorEdPsych](https://www.rdocumentation.org/packages/BaylorEdPsych/versions/0.5): Funciones y datos utilizados para los cursos cuantitativos de psicología educativa de la Universidad de Baylor
+- [FactoMineR](http://factominer.free.fr/): Análisis factoriales
+- [factoextra](https://www.rdocumentation.org/packages/factoextra/versions/1.0.3): Enriquecer los análisis por factores
+- [ggpubr](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf): Librería para hacer gráficos
+- [repr](https://github.com/cran/repr): Representaciones de cadenas y bytes para todo tipo de objetos R.
+
+- [magrittr](https://magrittr.tidyverse.org/): es un paquete con dos objetivos: disminuir el tiempo de desarrollo y mejorar la legibilidad y la capacidad de mantenimiento del código
+- [lubridate](https://github.com/tidyverse/lubridate): Facilita el manejo de fechas y horas.
+
+```{r}
+# Cargamos los paquetes
+library("tidyverse")
+library("readxl")
+```
+
+```{r}
+# install.packages("repr")
+library("repr")
+options(repr.plot.width = 14, repr.plot.height=10)
+```
+
+## Sembrar semilla aleatoria
+
+Si queremos que se generen los mismos datos aleatorios, y que nuestros 
+
+```{r}
+set.seed(10)
+```
+
+
+```{r}
+# Leemos los datos desde un archivo de Excel
+read_xlsx(
+  path = "data/Boston_Housing.xlsx", 
+  sheet="Data" # Nombre de la hoja de excel
+) -> boston_housing_xlsx
+str(boston_housing_xlsx)
+```
+
+En cualquier escenario, es posible que tengamos datos faltantes. Veámos cómo abordar esta situación.
+
+## Datos faltantes
+
+Existen numerosos procesos de imputación de datos, entre otros:
+
+- **Usando la media de la variable:** Calcular el promedio de los datos que se tienen y se agrega dicho valor en los datos faltantes. Es recomendable usar la **mediana**.
+- HotDeck
+- ColdDeck
+- **[MICE](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3074241/):** Imputa los datos a través de un proceso de regresión. Trata de predecir el valor falatante, a través de un modelado. Este también es útil para variables categóricas.
+
+Vamos a retirar algunos datos de la base de forma aleatoria.
+
+La imputación es la sustitución de valores no informados en una observación por otros. 
+
+**Paper Relacionado:** [Métodos de imputación para el tratamiento de datos faltantes: aplicación mediante R/Splus](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjHo8f0m6bsAhWNiOAKHRCyDnIQFjAAegQIBBAC&url=https%3A%2F%2Fwww.upo.es%2Frevistas%2Findex.php%2FRevMetCuant%2Farticle%2Fdownload%2F2120%2F1689%2F0&usg=AOvVaw0E_Lbd7rntrqiB-mooqMCc)
+
+```{r}
+# Instalamos el paquete mice
+# install.packages("mice")
+
+# Cargamos mice
+library("mice")
+```
+
+**Buena práctica:** Evitar modificar la base de datos original
+
+```{r}
+# Guardamos la base de datos en otro objeto llamado datos_completo
+datos_completos <- boston_housing_xlsx
+datos_completos
+```
+
+**Amputar datos:** Remover datos.
+
+En el siguiente código se quitan los datos de manera aleatoria.
+
+```{r}
+# "amputamos" datos usando el método MCAR: missing completely at random
+ampute(datos_completos, prop = 0.5, mech = "MCAR", run = TRUE)$amp -> datos_incompletos
+# datos_incompletos
+```
+
+Se van a contar la cantidad de valores faltantes (`NA`) por columna.
+
+```{r}
+# Mapeamos el número de NAs por cada columna
+datos_incompletos %>% map_df(is.na) %>% colSums()
+```
+
+Podemos hacer una visualización de los datos perdidos. En la gráfica se ven las variables que tienen la mayor cantidad de datos perdidos.
+
+```{r}
+# Instalamos el paquete naniar
+# install.packages("naniar")
+
+# Cargamos el paquete naniar
+library("naniar")
+
+# Graficamos los datos incompletos
+gg_miss_upset(datos_incompletos)
+```
+
+Ahora que tenemos datos perdidos en la base de datos, algo que sucede con (mucha) frecuencia, debemos examinar el “comportamiento” de la pérdida de datos, esto es, identificar si existen patrones o situaciones que nos den indicio de por qué se perdieron los datos.
+
+Podemos tener tres patrones de pérdida de datos:
+
+- MCAR (Missing completely at random): Los datos están perdidos de forma aleatoria
+- MAR (Missing at random): Perdida aleatoria, pero no todas las columnas tienen datos perdidos.
+- NMAR (Not missing at random): Los datos no están perdidos de forma aleatoria.
+
+Idealmente esperamos que si faltan datos se deba al azar. Si encontramos patrones o ciertas regularidades en la pérdida de datos puede ser indicio de un problema en los procesos de captura, almacenamiento o distribución de los datos.
+
+Dicho esto, en R tenemos test para probar si existen dichos patrones irregulares en nuestras bases de datos. En este caso, usaremos el [test de Jamshidian & Jalal (2010)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3124223/).
+
+```{r}
+# Instalamos el paquete MissMech 
+# install.packages("MissMech")
+
+# Cargamos el paquete MissMech
+library("MissMech")
+```
+
+Hacemos una prueba de hipótesis para testear si los datos están perdidos de forma aleatoria.
+
+Obtenemos que hay 15 patrones de valores perdidos, uno por cada columna presente en la base de datos.
+
+**Hiótesis:** Datos normales y [homocedásticos](https://economipedia.com/definiciones/homocedasticidad.html), este se comprueba a través del tes de Hawkins
+
+```{r}
+# Testeamos si nuestros datos están perdidos de forma MCAR
+# Hipótesis nula: no existen diferencias en la forma en que se pierden datos entre las variables
+# Dicho de otra manera, los datos están perdidos de forma aleatoria
+# Hipótesis alterna: sí existen diferencias (hay patrones de pérdida de datos)
+TestMCARNormality(datos_incompletos)
+```
+
+Con un p-valor > 0.05 tendríamos evidencia para no rechazar (“aceptar”) la hipótesis nula de que los datos están perdidos de forma aleatoria. Esto es **deseable** si tenemos datos perdidos, y en ese caso, podríamos proceder a imputar los datos faltantes. Si el test hubiese sido significante, sería un indicio de que podemos tener problemas en la captura, almacenamiento o distribución de los datos.
+
+**Advertencia:** este test tiene sentido si por la naturaleza del problema esperamos tener todos los datos completos. Si hay columnas en donde es esperable tener datos faltantes (por ejemplo, por respuestas opcionales) deberíamos correr el test anterior solamente con las columnas (variables) de las que esperamos datos completos.
+
+**Nota:** el test TestMCARNormality del paquete **MissMech** está diseñado para encontrar patrones de pérdida de datos en matrices numéricas. Si tenemos variables categóricas en nuestra base de datos, el test arrojará un error. En ese caso, se podría usar otra estrategia por medio del [test de Little (1998)](https://www.tandfonline.com/doi/abs/10.1080/01621459.1988.10478722).
+
+```{r}
+# Instalamos paquetes 
+# install.packages("mvnmle")
+# install.packages("BaylorEdPsych")
+
+# A mediados de 2020 estos paquetes fueron desatendidos del CRAN
+# Sin embargo, podríamos instalarlos de forma autónoma (standalone)
+# [EN] Tools > Install packages > Install from: Package Archive File
+# [ES] Herramientas > Instalar paquetes > Instalar desde: Archivo de paquete
+
+# Cargamos paquetes
+library("mvnmle")
+library("BaylorEdPsych")
+```
+
+```{r}
+# Hacemos el test de Little
+# Hipótesis nula: los datos están perdidos de forma aleatoria
+# Asumiendo que siguen una distribución normal multivariada
+# Hipótesis alterna: hay patrones de pérdida de datos
+
+# LittleMCAR(datos_con_variables_categoricas) -> little_test
+LittleMCAR(datos_incompletos) -> little_test
+little_test$p.value
+```
+
+Habiendo comprobado que en nuestros datos los valores perdidos se deben al azar, podemos ahora así aplicar métodos de imputación de datos.
+
+### Imputación usando la media
+
+```{r}
+# Mapeamos los promedios de los datos 
+datos_completos %>% map(mean) -> promedios
+promedios
+```
+
+```{r}
+# Reemplazamos los NAs en cada variable por su respectivo promedio
+replace_na(datos_incompletos, promedios) -> datos_imputados_promedios
+# datos_imputados_promedios
+```
+
+```{r}
+# Veamos la diferencia entre los promedios de los datos completos y los imputados
+colMeans(datos_completos - datos_imputados_promedios)
+```
+
+### Imputación usando MICE
+
+```{r}
+# Llamamos el comando mice para imputar los datos
+mice(datos_incompletos, printFlag = FALSE) %>% 
+  mice::complete() -> datos_imputados_mice
+```
+
+```{r}
+# Veamos la diferencia entre los promedios de los datos completos y los imputados
+colMeans(datos_completos - datos_imputados_mice)
+```
+
+## Datos Atípicos
+
+En nuestros análisis debemos examinar la presencia de datos atípicos, en la medida que pueden afectar los resultados de las estimaciones, modelos y pruebas de hipótesis.
+
+Para detectar datos atípicos podemos seguir dos caminos:
+
+- Buscar datos atípicos para cada variable (columna). Para esto podríamos usar criterios numéricos o gráficos.
+- Buscar filas que consistentemente tengan datos atípicos en todas las celdas.
+
+Veamos dos ejemplos usando la base de datos de Boston Housing.
+
+Primero, una detección de atípicos en una variable en específico (MEDV que es una variable objetivo).
+
+```{r}
+# Estadístico de resumen para una variable
+# En este caso se resumen los datos de la variable MEDV
+summary(boston_housing_xlsx$MEDV)
+```
+
+Los datos atípicos pueden estar en el primer y tercer cuartil
+
+![boxplot](../images/R_00.png)
+
+Construimos un boxplot y extraemos los datos específicos que son presuntamente atípicos
+
+```{r}
+
+# Boxplot de una variable
+boxplot(boston_housing_xlsx$MEDV)
+
+# Valores de potenciales outliers
+boxplot.stats(boston_housing_xlsx$MEDV)$out
+```
+```{r}
+# Filas donde se ubican las observaciones atípicas
+outliers <- boxplot(boston_housing_xlsx$MEDV)$out
+```
+```{r}
+outliers_filas <- which(boston_housing_xlsx$MEDV %in% c(outliers))
+outliers_filas
+```
+Segundo, una detección de atípicos basado en un análisis multivariado por medio de componentes principales (hay otras técnicas más, por ejemplo, la distancia de Cook).
+
+Instalamos y cargamos librerías para hacer análisis de componentes principales.
+
+```{r}
+# Instalamos paquetes
+# install.packages("FactoMineR")
+# install.packages("factoextra")
+# install.packages("ggpubr")
+
+# Cargamos paquetes
+library("FactoMineR")
+library("factoextra")
+library("ggpubr")
+```
+
+Componentes principales: reducir la cantidad de variables o individuos que tengan características en comń, esto reduce la dimensionalidad de la base de datos.
+
+```{r}
+# Estandarizamos las variables
+# datos_completos imputados por MICE o por la media
+datos_completos %>%
+  # mutate_all() sobreescribe los datos dada una operación ingresada por parámentro
+  # scale
+  mutate_all(scale) -> data_estandarizada
+
+# Ajusto componentes principales usando el método PCA()
+acp = PCA(data_estandarizada,graph=F)
+```
+
+```{r fig1, fig.height = 10, fig.width = 14, fig.align = "center"}
+# Gráfico de individuos del ACP
+# Esto puede tardar un poco
+
+fviz_pca_ind(acp, repel = TRUE)
+```
+
+```{r fig2, fig.height = 10, fig.width = 14, fig.align = "center"}
+fviz_pca_var(acp, repel = TRUE)
+```
+
+Con el siguiente código calculamos la **distancia** al vecino más cercano.
+
+```{r}
+# install.packages("magrittr")
+library("magrittr")
+data_estandarizada %>% 
+  dist %>% as.matrix() %>% add(diag(Inf, ncol(.))) %>% 
+  apply(1, min) %>% enframe() %>% arrange(desc(value))
+```
+
+Por medio de diversos procedimientos estadísticos podemos detectar datos atípicos. ¿Qué hacer con ellos? Depende. Hay que sopesar el contexto de los datos, la naturaleza del problema y de cada variable, así como combinar elementos de juicio estadístico como profesionales de otras áreas.
+
+## Nombrado adecuado de las variables
+
+Recuerde el recurso de [cómo nombrar las cosas](https://felipe-calvo.github.io/r-101/resources/naming.pdf). Siguiendo ese marco de referencia, asegúrese de que las variables (columnas):
+
+- No tengan acentos
+- No tengan caracteres especiales (@, #, ?, &, *, $, entre otros)
+- No tengan espacios (reemplácelos por un guion medio o bajo)
+- De ser necesario, que sea identificable una relación de orden
+
+```{r}
+# Número de variables en la base de datos
+length(datos_completos)
+```
+
+```{r}
+# Obtiene el nombre de las variables de una base de datos
+names(datos_completos)
+```
+
+```{r}
+# Podríamos declarar un vector con los nuevos nombres que necesitemos
+# nombres_adecuados <- c(
+#   "nombre_variable_1",
+#   "nombre_variable_2",
+#   ...,
+# )
+
+# Y luego asignarlos a nuestra base de datos
+# nombres_adecuados -> names(datos_completos)
+
+# Otro ejemplo
+# Si tuviésemos variables con espacios, podríamos reemplazar todos los espacios así
+# names(datos_completos) <- str_replace_all(names(datos_completos), c(" " = "_"))
+```
+
+## Valores duplicados
+
+Podemos buscar y eliminar duplicados basados en un columna, por ejemplo, cuando esperamos tener datos únicos de un individuo y tenemos una columna para identificarlo.
+
+```{r}
+## Ejemplo: acá dejamos valores únicos en la columna MEDV
+distinct(datos_completos, MEDV, .keep_all = TRUE) -> datos_completos_MEDV_unico
+
+## Ejemplo: acá dejamos valores únicos en la columna DIS
+distinct(datos_completos, DIS, .keep_all = TRUE) -> datos_completos_DIS_unico
+```
+
+También podemos buscar y eliminar duplicados basados en toda la fila.
+
+```{r}
+distinct(datos_completos) -> datos_completos_sin_filas_duplicadas
+```
+
+## Discretización de variables
+
+En algunos problemas, conviene convertir variables que son continuas en variables agrupadas por intervalos. Este proceso se llama discretización. Veamos un ejemplo creando un rango de edad para las viviendas de la base de datos.
+
+```{r}
+# Instalamos paquete lubridate
+# install.packages("lubridate")
+
+# Cargamos paquete lubridate
+library("lubridate")
+
+# Discretizamos la edad (AGE) de los datos del censo
+# mutate() anexa/crea variables a la base de datos
+datos_completos %>% mutate(
+  # Crea una nueva variable edad_hoy y le asigna los valores de la variable
+  # AGE y le suma 50
+  edad_hoy = datos_completos$AGE+50,
+  rango_edad = cut(edad_hoy, c(0, 50, 75, 90, 105, 120, 135, Inf))
+) -> datos_completos_fechas
+
+head(datos_completos_fechas[(ncol(datos_completos_fechas)-1):ncol(datos_completos_fechas)])
+```
+
+## Eliminar filas o columnas
+```r
+# boston_housing_xlsx[filas, columnas]
+boston_housing_xlsx[-c(), ] -> datos_sin_atipicos 
+```
+
