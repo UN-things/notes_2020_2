@@ -13,6 +13,6 @@
 
 | Módulo	| Profesor	|	Correo	|
 | :---:	|	:---:	|	:---:	|
-| [Fisiología]	| Nidia Bayona Rodriguez	|	nbayonar@unal.edu.co	|
-|	[Nutrición]	|	Betty Yaneth Gonzalez Pulido |	beygonzalezpu@unal.edu.co	|
-| [Morfología]	|	Angela Consuelo Latorre Guapo	|	aclatorreg@unal.edu.co	|
+| [Fisiología](modules_notes/module_1.md)	| Nidia Bayona Rodriguez	|	nbayonar@unal.edu.co	|
+|	[Nutrición](modules_notes/module_2.md)	|	Betty Yaneth Gonzalez Pulido |	beygonzalezpu@unal.edu.co	|
+| [Morfología](modules_notes/module_3.md)	|	Angela Consuelo Latorre Guapo	|	aclatorreg@unal.edu.co	|
