@@ -55,7 +55,7 @@
 
 ## Clases
 
-|	Clase	|	Objetivo	| Material utilizado	| Presentación | Notebooks <br> html |
+|	Clase	|	Tema	| Material utilizado	| Presentación | Notebooks <br> html |
 |	:--:	|	:--:	|	:--:	|	:--:	| :---: |
 |	1	|	Introducción a R	|	[Carpeta](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_3/basic_r_class_01/)	<br> [Descargar](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_3/basic_r_class_01/) |	[Sesion 1](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_3/basic_r_class_01/Ciencia-datos-R-Sesion-1.pdf)	|	|
 | 2	|	Configuración del ambiente de trabajo, <br> ¿Qué es R?, Instalación, Paquetes <br> Buenas prácticas, creación del primer <br> proyecto, Importar datos, <br> Tipos y operaciones	| [Carpeta](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_3/basic_r_class_02/) <br> [Descargar](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_3/basic_r_class_02/)	| [p1-setup](https://felipe-calvo.github.io/r-101/p1-setup.html) <br> [p2-basics-R](https://felipe-calvo.github.io/r-101/p2-basics-R.html) | [Jupyter](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_3/basic_r_class_02/class_02.ipynb)	|

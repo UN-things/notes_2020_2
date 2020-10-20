@@ -42,3 +42,4 @@ manera presencial y virtual por medio de una plataforma de aprendizaje.
 |	:--:	|	:--:	|	:--:	|
 |	2	|	[Python Básico](module_2/basic_python.md)	|	Francisco Javier Ospina Salaza	|
 |	3	|	[R Básico](module_3/basic_r.md)	|	Felipe Calvo Cepeda	|
+| 4	|	[Minería de datos](module_4/data_mining.md)	|	Juliana Guerrero Velásquez	|
