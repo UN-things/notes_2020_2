@@ -30,7 +30,7 @@ def get_couples(message, indicator = 0):
 		if len(couple) == 1:
 			couple = couple + 'X'
 		# if the two letters of the pair are the same
-  		# add an 'X' in the middle
+		# add an 'X' in the middle
 		elif couple[0] == couple[1]:
 			couple = couple[0] + 'X'
 			i = i - 1
@@ -39,12 +39,12 @@ def get_couples(message, indicator = 0):
 	return list_couples
 
 def search_characters(couple):
-    '''
+	'''
 	Returns the position of the letter pair, in a coupling list
 
 	Input parameter:
 	- couple: two letter string
-    '''
+	'''
 	list_positions = list()
 	for character in couple:
 		# case in which the letter is 'I' or 'J'
@@ -60,16 +60,16 @@ def search_characters(couple):
 	return list_positions
 
 def playfair(list_couples, indicator = 0):
-    '''
+	'''
 	Function that is responsible for replacing the pairs of
- 	letters using the matrix
+	letters using the matrix
 
 	Input paramenters:
 	- list_couples: list containing all letter pairs in the message
 	- indicator: Indicates the operating mode:
 		- 0: Encrypt - default
 		- 1: Decrypt
-    '''
+	'''
 	couples_encrypted = list()
 	# reverses the replacement move if indicator == 1
 	aux = 1 if indicator == 0 else -1
@@ -90,18 +90,18 @@ def playfair(list_couples, indicator = 0):
 	return couples_encrypted
 
 def main():
-    '''
-    Receive input parameters, [encrypt/decrypt] and print the result
-    '''
-    print("\n\t1. Encriptar\n\t2. Desencriptar\n")
-    option = int(input())
-    print("\n\tIngrese el mensaje:\n")
-    message = input().replace(' ', '').upper()
-    list_couples = get_couples(message, option-1)
-    list_result = playfair(list_couples, option-1)
-    result = str()
-    for couple in list_result: result = result + couple
-    print('\n\t',result,'\n')
+	'''
+	Receive input parameters, [encrypt/decrypt] and print the result
+	'''
+	print("\n\t1. Encriptar\n\t2. Desencriptar\n")
+	option = int(input())
+	print("\n\tIngrese el mensaje:\n")
+	message = input().replace(' ', '').upper()
+	list_couples = get_couples(message, option-1)
+	list_result = playfair(list_couples, option-1)
+	result = str()
+	for couple in list_result: result = result + couple
+	print('\n\t',result,'\n')
 
 if __name__ == "__main__":
     main()

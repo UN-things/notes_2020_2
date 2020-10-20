@@ -1,12 +1,12 @@
 def vigenere(message, keyword, t, decrypt=0):
 	'''
 	Function that uses the Vigenere function to
- 	encrypt and decrypt the message.
+	encrypt and decrypt the message.
 
 	Input parameters:
 	- message: message to encrypt and decrypt
 	- keyword: word that will be used to create
- 	the message coordinates
+	the message coordinates
 	- decrypt:
 		- 0: encrypt
 		- 1: decrypt
@@ -26,10 +26,10 @@ def vigenere(message, keyword, t, decrypt=0):
 	return (' ').join(test)
 
 def main():
-    '''
+	'''
 	Function that interacts with the user to [encrypt/decrypt]
- 	a message using the Vigerene algorithm and print it
-    '''
+	a message using the Vigerene algorithm and print it
+	'''
 	t = int(input("\tIngrese t:\t"))
 	message = input("\tIngrese el mensaje:\t").replace(' ', '').upper()
 	keyword = input("\tIngrese la clave:\t").replace(' ', '').upper()

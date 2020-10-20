@@ -18,13 +18,13 @@ def get_list_couples(mess, n):
 	return list_couples
 
 def hill(list_couples, key):
-    '''
+	'''
 	Function that executes the dot product of each group of letters
- 	with the matrix key
+	with the matrix key
 	- list_couples: list of groups of n letters, the letters are
- 	represented by numbers from 0 to 25
+	represented by numbers from 0 to 25
 	- key: matrix nxn
-    '''
+	'''
 	result = list()
 	for couple in list_couples:
 		# dot product
@@ -36,18 +36,18 @@ def hill(list_couples, key):
 def main():
 	'''
 	Function that receives a message, [encrypts/decrypts]
- 	it using hill's algorithm and prints the result.
+	it using hill's algorithm and prints the result.
 	'''
-    n, m = 2, 2
-    option = int(input("1. Cifrar\n2. Descifrar\t"))
-    message = input("Ingrese el mensaje:\t").replace(' ', '').upper()
-    print("Ingrese la clave:\n")
-    key = np.array([input().strip().split()[:m] for _ in range(n)], int)
-    if option == 2:
-        key = np.array(Matrix(key).inv_mod(26))
-    list_couples = get_list_couples(message, n)
-    result = hill(list_couples, key)
-    print('\nResultado:\t',result, '\n')
+	n, m = 2, 2
+	option = int(input("1. Cifrar\n2. Descifrar\t"))
+	message = input("Ingrese el mensaje:\t").replace(' ', '').upper()
+	print("Ingrese la clave:\n")
+	key = np.array([input().strip().split()[:m] for _ in range(n)], int)
+	if option == 2:
+		key = np.array(Matrix(key).inv_mod(26))
+	list_couples = get_list_couples(message, n)
+	result = hill(list_couples, key)
+	print('\nResultado:\t',result, '\n')
 
 if __name__ == "__main__":
-    main()
+	main()
