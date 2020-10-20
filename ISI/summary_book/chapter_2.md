@@ -1,5 +1,5 @@
-# Agentes inteligentes
-
+# Índice
+- [Índice](#índice)
 - [Agentes inteligentes](#agentes-inteligentes)
 	- [Agentes y su entorno](#agentes-y-su-entorno)
 	- [Buen comportamiento: el concepto de racionalidad](#buen-comportamiento-el-concepto-de-racionalidad)
@@ -17,6 +17,8 @@
 			- [Agentes basados en objetivos](#agentes-basados-en-objetivos)
 			- [Agentes basados en utilidad](#agentes-basados-en-utilidad)
 			- [Agentes que aprenden](#agentes-que-aprenden)
+
+# Agentes inteligentes
 
 ## Agentes y su entorno
 

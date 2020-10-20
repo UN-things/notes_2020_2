@@ -1,5 +1,5 @@
-# Resolver problemas mediante búsqueda
-
+# Índice
+- [Índice](#índice)
 - [Resolver problemas mediante búsqueda](#resolver-problemas-mediante-búsqueda)
 	- [Agentes resolvente-problemas](#agentes-resolvente-problemas)
 		- [Problemas y soluciones bien definidos](#problemas-y-soluciones-bien-definidos)
@@ -12,6 +12,8 @@
 	- [Estrategias de búsqueda no informada](#estrategias-de-búsqueda-no-informada)
 		- [Búsqueda primero en Anchura](#búsqueda-primero-en-anchura)
 		- [Búsqueda de costo uniforme](#búsqueda-de-costo-uniforme)
+
+# Resolver problemas mediante búsqueda
 
 _Cómo un agente puede encontrar una secuencia de acciones que alcance sus
 objetivos, cuando ninguna acción simple lo hará._

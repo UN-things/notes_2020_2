@@ -1,5 +1,5 @@
-# Introducción
-
+# Índice
+- [Índice](#índice)
 - [Introducción](#introducción)
 	- [¿Qué es la IA?](#qué-es-la-ia)
 		- [Comportamiento humano: el enfoque de la prueba de Turing.](#comportamiento-humano-el-enfoque-de-la-prueba-de-turing)
@@ -10,6 +10,8 @@
 		- [Filosofía](#filosofía)
 		- [Matemáticas](#matemáticas)
 		- [Economía](#economía)
+
+# Introducción
 
 ## ¿Qué es la IA?
 

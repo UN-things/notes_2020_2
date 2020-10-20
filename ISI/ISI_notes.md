@@ -1,4 +1,5 @@
-# Introducción a los Sistemas Inteligentes - ISI
+# Índice
+- [Índice](#índice)
 - [Introducción a los Sistemas Inteligentes - ISI](#introducción-a-los-sistemas-inteligentes---isi)
 	- [Información General](#información-general)
 		- [Notas](#notas)
@@ -9,6 +10,8 @@
 	- [Clase](#clase)
 		- [Conceptos clave](#conceptos-clave)
 		- [Apuntes de clase](#apuntes-de-clase)
+
+# Introducción a los Sistemas Inteligentes - ISI
 
 ## Información General
 
