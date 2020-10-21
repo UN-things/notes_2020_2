@@ -35,8 +35,8 @@ library(reshape)
 
 Definimos nuestra ruta de trabajo, dónde tenemos guardados nuestros datos 
 ```{r }
-#setwd('/root/Documentos/UN/UN_2020_2/DCD/module_4/class_1/r_project')
-setwd('C:/Users/Juliana/Desktop/Diplomado/D_2020/Casos/Casos/EDA') 
+setwd('/root/Documentos/UN/UN_2020_2/DCD/module_4/class_1/r_project')
+#setwd('C:/Users/Juliana/Desktop/Diplomado/D_2020/Casos/Casos/EDA') 
 ```
 
 
@@ -116,8 +116,9 @@ accidentes$dia <- weekdays(as.Date(accidentes$DATE,'%m/%d/%Y'))
 ```{r}
 accidentes_dia <- as.data.frame(accidentes %>% count(dia))
 
-ggplot(accidentes_dia, aes(x=factor(dia,level=c('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday')),
-                           y=n,group=1)) +
+# ggplot(accidentes_dia, aes(x=factor(dia,level=c('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday')),
+ggplot(accidentes_dia, aes(x=factor(dia,level=c('lunes','martes','miércoles','jueves','viernes','sábado','domingo')),
+                           y=n,group=)) +
   geom_bar(stat="identity")+xlab("Dia")+ylab("Accidentes")
 ```
 
