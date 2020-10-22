@@ -21,6 +21,12 @@ El caso estará estructurado así
 3. Sacar conclusiones e hipótesis de análisis a partir de los hallazgos
 
 
+## Lirerías utilizadas durante la clase
+
+- [dplyr](https://github.com/tidyverse/dplyr): Una herramienta rápida y consistente para trabajar con marcos de datos como objetos, tanto en memoria como sin memoria.
+- [ggplot2](https://github.com/tidyverse/ggplot2): Es un sistema para crear gráficos de forma declarativa, basado en The Grammar of Graphics.
+- [reshape](https://github.com/cran/reshape2): Paquete de remodelación de datos.
+
 ```{r}
 library(dplyr)
 library(ggplot2)
@@ -45,23 +51,21 @@ setwd('/root/Documentos/UN/UN_2020_2/DCD/module_4/class_1/r_project')
 accidentes <- read.csv('data/accidents.csv',header=T,sep=';')
 head(accidentes)
 ```
+Se tienen las variables
 
-
-Se tienen las variables 
-
-- BOROUGH: Vecindario donde ocurrió el accidente
-- COLLISION_ID: ID del accidente
-- CONTRIBUTING FACTOR VEHICLE (1, 2, 3, 4, 5): Razones del accidente
-- CROSS STREET NAME: La calle cruzada más cercana en la que pasó el accidente
-- DATE: Fecha del accidente
-- TIME: Hora del accidente
-- LATITUDE: Latitud del accidente
-- LONGITUDE: Longitud del accidente
-- NUMBER OF (CYCLISTS, MOTORISTS, PEDESTRIANS) INJURED: Número de heridos de cada tipo
-- NUMBER OF (CYCLISTS, MOTORISTS, PEDESTRIANS) KILLED: Número de muertos de cada tipo
-- ON STREET NAME: Calle de accidente
-- VEHICLE TYPE CODE (1, 2, 3, 4, 5): Tipo de vehículo involucrado en el accidente
-- ZIP CODE: Código zip del accidente
+- **BOROUGH:** Vecindario donde ocurrió el accidente
+- **COLLISION_ID:** ID del accidente
+- **CONTRIBUTING FACTOR VEHICLE (1, 2, 3, 4, 5):** Razones del accidente
+- **CROSS STREET NAME:** La calle cruzada más cercana en la que pasó el accidente
+- **DATE:** Fecha del accidente
+- **TIME:** Hora del accidente
+- **LATITUDE:** Latitud del accidente
+- **LONGITUDE:** Longitud del accidente
+- **NUMBER OF (CYCLISTS, MOTORISTS, PEDESTRIANS) INJURED:** Número de heridos de cada tipo
+- **NUMBER OF (CYCLISTS, MOTORISTS, PEDESTRIANS) KILLED:** Número de muertos de cada tipo
+- **ON STREET NAME:** Calle de accidente
+- **VEHICLE TYPE CODE (1, 2, 3, 4, 5):** Tipo de vehículo involucrado en el accidente
+- **ZIP CODE:** Código zip del accidente
 
 
 ```{r}
@@ -259,9 +263,41 @@ head(final_dfv[order(-final_dfv$n),])
 
 **1.  ¿Qué podemos decir sobre el número de personas heridas y muertes en los accidentes? Exploremos el comportamiento del total de heridos y total de muertes en todos los accidentes. (Crear una nueva columna que sume todos los herido y otra que sume todas las muertes)**
 
+```{r}
+accidentes$heridos <- accidentes$NUMBER.OF.PEDESTRIANS.INJURED+accidentes$NUMBER.OF.CYCLIST.INJURED+accidentes$NUMBER.OF.MOTORIST.INJURED
+accidentes$muertes <- accidentes$NUMBER.OF.PEDESTRIANS.KILLED+accidentes$NUMBER.OF.CYCLIST.KILLED+accidentes$NUMBER.OF.MOTORIST.KILLED
+
+sum(accidentes$heridos)
+sum(accidentes$muertes)
+```
+
+
 **2. Exploremos las muertes y heridas por peatón, ciclista y motociclista. Existen diferencias en estos? En qué casos mueren más personas durante los accidentes? En qué casos resultan más heridos?**
 
+```{r}
+sum(accidentes$NUMBER.OF.PEDESTRIANS.INJURED)
+sum(accidentes$NUMBER.OF.CYCLIST.INJURED)
+sum(accidentes$NUMBER.OF.MOTORIST.INJURED)
+```
+```{r}
+sum(accidentes$NUMBER.OF.PEDESTRIANS.KILLED)
+sum(accidentes$NUMBER.OF.CYCLIST.KILLED)
+sum(accidentes$NUMBER.OF.MOTORIST.KILLED)
+```
+
+
 **3. ¿ Existen patrones en las muertes y heridos en accidentes por vecindario? En cuál vecindario se presentaron más muertes? En cuál menos?**
+
+```{r}
+accidentes %>% 
+  group_by(BOROUGH) %>% 
+  summarise(total_heridos = sum(heridos))
+
+
+accidentes %>% 
+  group_by(BOROUGH) %>% 
+  summarise(total_heridos = sum(muertes))
+```
 
 **4. A partir de los análisis anteriores, qué recomendaciones sobre la planeación de políticas preventivas frente a la accidentalidad se podrían hacer para reducir los accidentes y su gravedad?**
 
