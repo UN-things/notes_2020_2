@@ -13106,7 +13106,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
@@ -13125,7 +13125,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># display setting Para visualizar el máximo de columnas</span>
@@ -13381,19 +13381,19 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Se tienen las variables</p>
 <ul>
-<li>BOROUGH: Vecindario donde ocurrió el accidente</li>
-<li>COLLISION_ID: ID del accidente</li>
-<li>CONTRIBUTING FACTOR VEHICLE (1, 2, 3, 4, 5): Razones del accidente</li>
-<li>CROSS STREET NAME: La calle cruzada más cercana en la que pasó el accidente</li>
-<li>DATE: Fecha del accidente
--TIME: Hora del accidente
--LATITUDE: Latitud del accidente</li>
-<li>LONGITUDE: Longitud del accidente</li>
-<li>NUMBER OF (CYCLISTS, MOTORISTS, PEDESTRIANS) INJURED: Número de heridos de cada tipo</li>
-<li>NUMBER OF (CYCLISTS, MOTORISTS, PEDESTRIANS) KILLED: Número de muertos de cada tipo</li>
-<li>ON STREET NAME: Calle de accidente</li>
-<li>VEHICLE TYPE CODE (1, 2, 3, 4, 5): Tipo de vehículo involucrado en el accidente</li>
-<li>ZIP CODE: Código zip del accidente</li>
+<li><strong>BOROUGH:</strong> Vecindario donde ocurrió el accidente</li>
+<li><strong>COLLISION_ID:</strong> ID del accidente</li>
+<li><strong>CONTRIBUTING FACTOR VEHICLE (1, 2, 3, 4, 5):</strong> Razones del accidente</li>
+<li><strong>CROSS STREET NAME:</strong> La calle cruzada más cercana en la que pasó el accidente</li>
+<li><strong>DATE:</strong> Fecha del accidente</li>
+<li><strong>TIME:</strong> Hora del accidente</li>
+<li><strong>LATITUDE:</strong> Latitud del accidente</li>
+<li><strong>LONGITUDE:</strong> Longitud del accidente</li>
+<li><strong>NUMBER OF (CYCLISTS, MOTORISTS, PEDESTRIANS) INJURED:</strong> Número de heridos de cada tipo</li>
+<li><strong>NUMBER OF (CYCLISTS, MOTORISTS, PEDESTRIANS) KILLED:</strong> Número de muertos de cada tipo</li>
+<li><strong>ON STREET NAME:</strong> Calle de accidente</li>
+<li><strong>VEHICLE TYPE CODE (1, 2, 3, 4, 5):</strong> Tipo de vehículo involucrado en el accidente</li>
+<li><strong>ZIP CODE:</strong> Código zip del accidente</li>
 </ul>
 
 </div>
@@ -13405,6 +13405,8 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">accidentes</span><span class="o">.</span><span class="n">shape</span>
+<span class="c1"># filas = 238522</span>
+<span class="c1"># columnas = 24</span>
 </pre></div>
 
     </div>
@@ -13443,13 +13445,83 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">])</span>
+<span class="n">accidentes</span><span class="p">[[</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;TIME&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[44]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DATE</th>
+      <th>TIME</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018-09-26</td>
+      <td>2020-10-21 12:12:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018-09-25</td>
+      <td>2020-10-21 16:30:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-08-22</td>
+      <td>2020-10-21 19:30:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018-09-23</td>
+      <td>2020-10-21 13:10:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-08-20</td>
+      <td>2020-10-21 22:40:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13467,9 +13539,9 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;MES&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
-<span class="n">accidentes_mes</span> <span class="o">=</span> <span class="n">accidentes</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;MES&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
-<span class="n">accidentes_mes</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">()</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Creamos una nueva columna &#39;MES&#39; que adjunta únicamente el mes y el año</span>
+<span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;MES&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+<span class="n">accidentes</span><span class="p">[[</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;MES&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13486,9 +13558,93 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DATE</th>
+      <th>MES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018-09-26</td>
+      <td>2018-09</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018-09-25</td>
+      <td>2018-09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-08-22</td>
+      <td>2019-08</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018-09-23</td>
+      <td>2018-09</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-08-20</td>
+      <td>2019-08</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Se suman los accidentes por mes y se asigna a la variable accidentes_mes</span>
+<span class="n">accidentes_mes</span> <span class="o">=</span> <span class="n">accidentes</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;MES&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="n">accidentes_mes</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">line</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feb2c966550&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f3201f85ad0&gt;</pre>
 </div>
 
 </div>
@@ -13522,14 +13678,90 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># transformación de la hora del accidente a formato de fecha</span>
 <span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">])</span>
+<span class="n">accidentes</span><span class="p">[[</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;MES&#39;</span><span class="p">,</span> <span class="s1">&#39;TIME&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[45]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DATE</th>
+      <th>MES</th>
+      <th>TIME</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018-09-26</td>
+      <td>2018-09</td>
+      <td>2020-10-21 12:12:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018-09-25</td>
+      <td>2018-09</td>
+      <td>2020-10-21 16:30:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-08-22</td>
+      <td>2019-08</td>
+      <td>2020-10-21 19:30:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018-09-23</td>
+      <td>2018-09</td>
+      <td>2020-10-21 13:10:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-08-20</td>
+      <td>2019-08</td>
+      <td>2020-10-21 22:40:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -13544,10 +13776,11 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;HORA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Creo una columna &#39;HORA&#39; que indica la hora del accidente</span>
+<span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;HORA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
 </pre></div>
 
     </div>
@@ -13557,7 +13790,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Conteo de accidentes por hora</span>
@@ -13575,13 +13808,13 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feb2c8cb7d0&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f3202609910&gt;</pre>
 </div>
 
 </div>
@@ -13615,7 +13848,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Creamos una variable con el día de la semana de la fecha del accidente</span>
@@ -13630,7 +13863,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">accidentes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -13646,7 +13879,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[13]:</div>
 
 
 
@@ -13702,7 +13935,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
     <tr>
       <th>0</th>
       <td>2018-09-26</td>
-      <td>2020-10-20 12:12:00</td>
+      <td>2020-10-21 12:12:00</td>
       <td>BRONX</td>
       <td>10454.0</td>
       <td>40.808987</td>
@@ -13732,7 +13965,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
     <tr>
       <th>1</th>
       <td>2018-09-25</td>
-      <td>2020-10-20 16:30:00</td>
+      <td>2020-10-21 16:30:00</td>
       <td>BROOKLYN</td>
       <td>11236.0</td>
       <td>40.636005</td>
@@ -13762,7 +13995,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
     <tr>
       <th>2</th>
       <td>2019-08-22</td>
-      <td>2020-10-20 19:30:00</td>
+      <td>2020-10-21 19:30:00</td>
       <td>QUEENS</td>
       <td>11101.0</td>
       <td>40.755490</td>
@@ -13792,7 +14025,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
     <tr>
       <th>3</th>
       <td>2018-09-23</td>
-      <td>2020-10-20 13:10:00</td>
+      <td>2020-10-21 13:10:00</td>
       <td>QUEENS</td>
       <td>11367.0</td>
       <td>NaN</td>
@@ -13822,7 +14055,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
     <tr>
       <th>4</th>
       <td>2019-08-20</td>
-      <td>2020-10-20 22:40:00</td>
+      <td>2020-10-21 22:40:00</td>
       <td>BRONX</td>
       <td>10468.0</td>
       <td>40.868336</td>
@@ -13862,7 +14095,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Conteo de accidentes por dia de la semana</span>
@@ -13880,13 +14113,13 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[13]:</div>
+    <div class="prompt output_prompt">Out[14]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feb2c854a50&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f32025a56d0&gt;</pre>
 </div>
 
 </div>
@@ -13920,10 +14153,11 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">vec</span> <span class="o">=</span> <span class="n">accidentes</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># creamos un vector de número de accidentes por vecindario</span>
+<span class="n">vec</span> <span class="o">=</span> <span class="n">accidentes</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
 <span class="n">vec</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 </pre></div>
 
@@ -13937,13 +14171,13 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[14]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feb2c760f50&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f32024ad190&gt;</pre>
 </div>
 
 </div>
@@ -13977,7 +14211,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">borough_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/borough_data.csv&#39;</span><span class="p">)</span>
@@ -13990,7 +14224,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">borough_data</span>
@@ -14006,7 +14240,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[16]:</div>
+    <div class="prompt output_prompt">Out[17]:</div>
 
 
 
@@ -14086,7 +14320,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
@@ -14125,10 +14359,12 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">borough_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">borough_data</span><span class="o">.</span><span class="n">borough</span><span class="o">==</span><span class="s1">&#39;the bronx&#39;</span><span class="p">,</span><span class="s1">&#39;borough&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bronx&#39;</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Reasignamos el nombre de las filas de la columna &#39;borough&#39;</span>
+<span class="c1"># que tengan como valor &#39;the bronx&#39; y le asignamos el valor &#39;bronx&#39;</span>
+<span class="n">borough_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">borough_data</span><span class="o">.</span><span class="n">borough</span><span class="o">==</span><span class="s1">&#39;the bronx&#39;</span><span class="p">,</span><span class="s1">&#39;borough&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bronx&#39;</span>
 </pre></div>
 
     </div>
@@ -14138,11 +14374,17 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">borough_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
-<span class="n">borough_frame</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Cremos dataFrame con el vector de accidentes por vecindario (vec)</span>
+<span class="n">borough_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="c1"># el index corresponde al nombre del vecindario</span>
+<span class="c1"># la única columna que tiene, almacena la cantidad </span>
+<span class="c1"># de accidente en ese vecindarios</span>
+<span class="n">borough_frame</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="c1">#renombramos la columna</span>
+<span class="c1"># creamos una nueva columna llamada &#39;borough&#39; que almacene </span>
+<span class="c1"># el nombre del vecindario, que corresponde al índice del dataframe</span>
 <span class="n">borough_frame</span><span class="p">[</span><span class="s1">&#39;borough&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">borough_frame</span><span class="o">.</span><span class="n">index</span>
 <span class="n">borough_frame</span>
 </pre></div>
@@ -14157,7 +14399,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[19]:</div>
+    <div class="prompt output_prompt">Out[20]:</div>
 
 
 
@@ -14229,14 +14471,14 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Adicionalmente, necesitamos transformar los valores en el df a minúsculas para poder calcular los conteos de accidentes relativos al área del vecindario</p>
+<p>Adicionalmente, necesitamos transformar los valores en el borough_data a <strong>MAYUSCULAS</strong> para poder calcular los conteos de accidentes relativos al área del vecindario</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">borough_data</span><span class="o">.</span><span class="n">borough</span> <span class="o">=</span> <span class="n">borough_data</span><span class="o">.</span><span class="n">borough</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
@@ -14253,7 +14495,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[20]:</div>
+    <div class="prompt output_prompt">Out[21]:</div>
 
 
 
@@ -14325,10 +14567,13 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">borough_frame</span> <span class="o">=</span> <span class="n">borough_frame</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">borough_data</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;borough&#39;</span><span class="p">,</span><span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;borough&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Crea un dataFrame a partir de dos dataframes</span>
+<span class="c1"># borough_data = contiene el área y población por vecindario</span>
+<span class="c1"># borough_frame = contiene la cantidad de accidentes por vecindario</span>
+<span class="n">borough_frame</span> <span class="o">=</span> <span class="n">borough_frame</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">borough_data</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;borough&#39;</span><span class="p">,</span><span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;borough&#39;</span><span class="p">)</span>
 <span class="n">borough_frame</span>
 </pre></div>
 
@@ -14342,7 +14587,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[21]:</div>
+    <div class="prompt output_prompt">Out[22]:</div>
 
 
 
@@ -14420,10 +14665,11 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">borough_frame</span><span class="p">[</span><span class="s1">&#39;accidentes_por_area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">borough_frame</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">borough_frame</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Creo una nueva columna &#39;accidentes_por_area&#39; = numero de accidentes/area</span>
+<span class="n">borough_frame</span><span class="p">[</span><span class="s1">&#39;accidentes_por_area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">borough_frame</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">borough_frame</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">]</span>
 <span class="n">borough_frame</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;borough&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;accidentes_por_area&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -14437,13 +14683,13 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[22]:</div>
+    <div class="prompt output_prompt">Out[23]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feb3c962250&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f32023ba590&gt;</pre>
 </div>
 
 </div>
@@ -14478,22 +14724,98 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># creamos conteo de accidentes por hora y vecindario</span>
 <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="n">accidentes</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">,</span> <span class="s1">&#39;HORA&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()})</span>
 <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[24]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>BOROUGH</th>
+      <th>HORA</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>BRONX</td>
+      <td>0</td>
+      <td>1329</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>BRONX</td>
+      <td>1</td>
+      <td>529</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>BRONX</td>
+      <td>2</td>
+      <td>402</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BRONX</td>
+      <td>3</td>
+      <td>361</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BRONX</td>
+      <td>4</td>
+      <td>418</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
@@ -14523,13 +14845,13 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[24]:</div>
+    <div class="prompt output_prompt">Out[25]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;seaborn.axisgrid.FacetGrid at 0x7feb2c6cd790&gt;</pre>
+<pre>&lt;seaborn.axisgrid.FacetGrid at 0x7f3212692d10&gt;</pre>
 </div>
 
 </div>
@@ -14577,7 +14899,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CONTRIBUTING FACTOR VEHICLE 1&#39;</span><span class="p">,</span> <span class="s1">&#39;CONTRIBUTING FACTOR VEHICLE 2&#39;</span><span class="p">,</span> 
@@ -14592,29 +14914,85 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># creamos un nuevo df con todos los factores en una sola columna</span>
 <span class="n">frames</span><span class="o">=</span><span class="p">[</span><span class="n">accidentes</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">column</span><span class="p">:</span><span class="s1">&#39;FACTOR&#39;</span><span class="p">})</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span>
 <span class="n">factors_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
+<span class="n">factors_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># agurpamos por el índice para poder descartar factores que se repiten en el mismo accidente</span>
-<span class="n">no_rep_factors</span><span class="o">=</span><span class="n">factors_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;FACTOR&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-</pre></div>
+<div class="output_wrapper">
+<div class="output">
 
-    </div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>FACTOR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>Unspecified</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Unspecified</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>Unspecified</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Driver Inattention/Distraction</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>View Obstructed/Limited</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -14622,6 +15000,96 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># agurpamos por el índice para poder descartar factores que se repiten en el mismo accidente</span>
+<span class="n">no_rep_factors</span><span class="o">=</span><span class="n">factors_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;FACTOR&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">no_rep_factors</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>FACTOR</th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>Unspecified</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Unspecified</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>Unspecified</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Driver Inattention/Distraction</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3</td>
+      <td>Unspecified</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Conteo de accidentes por factor</span>
@@ -14640,7 +15108,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[28]:</div>
+    <div class="prompt output_prompt">Out[29]:</div>
 
 
 
@@ -14739,7 +15207,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VEHICLE TYPE CODE 1&#39;</span><span class="p">,</span> <span class="s1">&#39;VEHICLE TYPE CODE 2&#39;</span><span class="p">,</span> <span class="s1">&#39;VEHICLE TYPE CODE 3&#39;</span><span class="p">,</span>
@@ -14748,20 +15216,176 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 <span class="c1">#First, we concatenate all the corresponding columns into a big data-frame</span>
 <span class="n">frames</span><span class="o">=</span><span class="p">[</span><span class="n">accidentes</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">column</span><span class="p">:</span><span class="s1">&#39;VEHICLE&#39;</span><span class="p">})</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span>
 <span class="n">vehicle_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
-
-
-<span class="c1">#The reasoning behind doing reset_index() is that we can use a groupby on the indexes to delete repetitions as follows:</span>
-<span class="n">no_rep_vehicle</span><span class="o">=</span><span class="n">vehicle_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;VEHICLE&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">vehicle_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[30]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>VEHICLE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>Sedan</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Sedan</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>Sedan</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Bike</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>Sedan</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#The reasoning behind doing reset_index() is that we can use a groupby on the indexes to delete repetitions as follows:</span>
+<span class="n">no_rep_vehicle</span><span class="o">=</span><span class="n">vehicle_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;VEHICLE&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">no_rep_vehicle</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[31]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>VEHICLE</th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>Sedan</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Sedan</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>Sedan</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Bike</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3</td>
+      <td>Station Wagon/Sport Utility Vehicle</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#The data frame we are looking for is given by</span>
@@ -14782,7 +15406,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[30]:</div>
+    <div class="prompt output_prompt">Out[32]:</div>
 
 
 
@@ -14881,7 +15505,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">columns</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;CONTRIBUTING FACTOR VEHICLE 1&#39;</span><span class="p">,</span> <span class="s1">&#39;CONTRIBUTING FACTOR VEHICLE 2&#39;</span><span class="p">,</span> 
@@ -14889,13 +15513,102 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
           <span class="s1">&#39;CONTRIBUTING FACTOR VEHICLE 5&#39;</span><span class="p">]</span>
 
 
-<span class="c1"># Concatenate all corresponding frames.</span>
+<span class="c1"># Creamos una lista de dataframes</span>
+<span class="c1"># cada dataframe contiene la columna &#39;BOROUGH&#39; y &#39;CONTRIBUTING FACTOR VEHICLE X&#39;</span>
+<span class="c1"># pero a la columna &#39;CONTRIBUTING FACTOR VEHICLE X&#39; la renombramos como &#39;FACTOR&#39;</span>
 <span class="n">frames</span><span class="o">=</span><span class="p">[</span><span class="n">accidentes</span><span class="p">[[</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">,</span><span class="n">column</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">:</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">,</span><span class="n">column</span><span class="p">:</span><span class="s1">&#39;FACTOR&#39;</span><span class="p">})</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span>
+<span class="c1"># Concatenamos la lista de dataframes</span>
 <span class="n">factor_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">factor_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
 
-<span class="c1">#Count repetitions</span>
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[33]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>BOROUGH</th>
+      <th>FACTOR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>BRONX</td>
+      <td>Unspecified</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>BROOKLYN</td>
+      <td>Unspecified</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>QUEENS</td>
+      <td>Unspecified</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>QUEENS</td>
+      <td>Driver Inattention/Distraction</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>BRONX</td>
+      <td>View Obstructed/Limited</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#Count repetitions</span>
 <span class="n">no_rep_factor</span><span class="o">=</span><span class="n">factor_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">,</span><span class="s1">&#39;FACTOR&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-
 
 <span class="n">final_df</span><span class="o">=</span><span class="n">no_rep_factor</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">,</span><span class="s1">&#39;FACTOR&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
@@ -14912,7 +15625,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[31]:</div>
+    <div class="prompt output_prompt">Out[34]:</div>
 
 
 
@@ -15014,7 +15727,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VEHICLE TYPE CODE 1&#39;</span><span class="p">,</span> <span class="s1">&#39;VEHICLE TYPE CODE 2&#39;</span><span class="p">,</span> <span class="s1">&#39;VEHICLE TYPE CODE 3&#39;</span><span class="p">,</span>
@@ -15043,7 +15756,7 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[32]:</div>
+    <div class="prompt output_prompt">Out[35]:</div>
 
 
 
@@ -15158,6 +15871,42 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;heridos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF PEDESTRIANS INJURED&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF CYCLIST INJURED&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF MOTORIST INJURED&#39;</span><span class="p">]</span>
+<span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;muertes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF PEDESTRIANS KILLED&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF CYCLIST KILLED&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF MOTORIST KILLED&#39;</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Total heridos en accidentes&#39;</span><span class="p">,</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;heridos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Total muertes en accidentes&#39;</span><span class="p">,</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;muertes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;Total heridos en accidentes&#39;, 61081)
+(&#39;Total muertes en accidentes&#39;, 221)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15166,6 +15915,78 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># heridos por tipo</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;total peatones heridos &#39;</span><span class="p">,</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF PEDESTRIANS INJURED&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;total ciclistas heridos &#39;</span><span class="p">,</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF CYCLIST INJURED&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;total motociclistas heridos &#39;</span><span class="p">,</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF MOTORIST INJURED&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;total peatones heridos &#39;, 13005)
+(&#39;total ciclistas heridos &#39;, 5601)
+(&#39;total motociclistas heridos &#39;, 42475)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># muertes por tipo</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;total muertes peatones &#39;</span><span class="p">,</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF PEDESTRIANS KILLED&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;total muertes ciclistas &#39;</span><span class="p">,</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF CYCLIST KILLED&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;total muertes motociclistas &#39;</span><span class="p">,</span><span class="n">accidentes</span><span class="p">[</span><span class="s1">&#39;NUMBER OF MOTORIST KILLED&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;total muertes peatones &#39;, 127)
+(&#39;total muertes ciclistas &#39;, 20)
+(&#39;total muertes motociclistas &#39;, 74)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -15173,6 +15994,84 @@ Identificar patrones en la data que permita tomar decisiones informadas dirigida
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">accidentes</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">)[</span><span class="s1">&#39;heridos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[39]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>BOROUGH
+BRONX            10538
+BROOKLYN         21585
+MANHATTAN         8774
+QUEENS           17908
+STATEN ISLAND     2276
+Name: heridos, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">accidentes</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;BOROUGH&#39;</span><span class="p">)[</span><span class="s1">&#39;muertes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[40]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>BOROUGH
+BRONX            26
+BROOKLYN         75
+MANHATTAN        36
+QUEENS           73
+STATEN ISLAND    11
+Name: muertes, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
