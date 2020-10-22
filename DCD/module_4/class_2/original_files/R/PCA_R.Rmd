@@ -1,0 +1,226 @@
+---
+title: "Universidad Nacional de Colombia"
+subtitle: "Diplomado Ciencia de datos"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### **Análisis de componentes principales**
+
+Este caso práctico muestra un ejemplo de cómo hacer un análisis de componentes principales en R
+La meta del caso es conocer una de las funciones más usadas en R para hacer análisis de componentes principales. Entender las salidas que ofrece y tomar decisiones de análisis basadas en ellas.
+
+**Contexto: ** 
+El sector de los bienes raíces es uno de los más exitosos en la economía del mundo. La gran mayoría de personas en el mundo deciden rentar sus viviendas por comodidad o economía.
+
+
+**Problema de negocio:** Existen relaciones fuertes entre las variables a considerar cuando se busca un inmueble para rentarlo? Si es así cómo podría resumir esta información para lograr encontrar un lugar de renta
+
+
+Empezaremos por cargar las librerías requeridas para este caso
+
+```{r warning=FALSE}
+library(factoextra)
+library(ggcorrplot)
+```
+
+Definimos nuestra ruta de trabajo, dónde tenemos guardados nuestros datos 
+```{r }
+setwd('C:/Users/Juliana/Desktop/Diplomado/D_2020/Casos') 
+```
+
+## **Datos**
+Vamos a utilizar una tabla de datos que contiene información sobre los inmuebles en renta y sus características en el mercado de Brasil. La documentación de los mismos puede encontrarse en https://www.kaggle.com/rubenssjr/brasilian-houses-to-rent?select=houses_to_rent_v2.csv
+Así pues, para cada inmueble se tiene la siguiente información:
+
+- city: ciudad donde la propiedad esta ubicada
+- area: area de la propiedad
+- rooms: número de cuartos
+- bathroom: número de baños 
+- parking spaces: número de parqueaderos
+- floor: piso 
+- animal : acepta animales 
+- furnished: esta amoblada
+- hoa: administración
+- rent amount: renta
+- property tax: impuesto predial 
+- fire insurance: seguro de incendio
+- total: valor total 
+
+```{r}
+data <- read.csv('houses_to_rent_v2.csv',header=T)
+head(data)
+```
+
+## **Pre-procesamiento y Limpieza**
+Debemos modificar la variable **floor** ya que sería interesante incluirla como un valor numérico. Sin embargo el tipo de variable es un factor y contiene el valor '-' para referirse al ground floor.
+
+```{r}
+class(data$floor)
+levels(data$floor)[1]<-0 # modificar - por el 0 como ground floor
+data$floor <- as.numeric(as.character(data$floor))
+```
+
+Queremos hacer un análisis por componentes principales en datos sobre inmuebles rentados. Para acotar nuestro análisis filtraremos únicamente los registros de Sao Paulo. Adicionalmente, para ésta técnica únicamente requerimos de las variables numéricas, por lo cual excluimos del análisis las variables **animal** y **furnished**.
+
+```{r}
+data_acp <- data[data$city=='SÃ£o Paulo',c('area','rooms','bathroom','parking.spaces','floor','hoa','rent','property_tax',
+                                           'fire_insurance','total')]
+```
+
+
+
+## **Exploración **
+
+Empecemos haciendo una exploración de los datos 
+
+```{r}
+summary(data_acp)
+```
+
+
+Podemos revisar la correlación entre las variables numéricas 
+
+```{r}
+ggcorrplot(round(cor(data_acp),2))
+```
+
+De lo anetior ya podemos entender el funcionamiento de los datos. Aquí podemos tomar la decisión de sacar información que se vuelve redundante. En particular, la variable **total** resulta ser la suma de **hoa**, **rent**,**property_tax** y **fire_insurance**. Podemos observar la relación lineal casi perfecta entre el costo total y el seguro contra incendios, probablemente se calcula de acuerdo al canon de arrendamiento. En este punto podemos quedarnos únicamente con las variables **hoa** y **rent** las cuales contienen suficiente información para entender los costos. 
+
+```{r}
+data_acp = data_acp[,c('area','rooms','bathroom','parking.spaces','floor','hoa','rent')]
+```
+
+
+
+El análisis de componentes principales es sensible a las dimensiones. Es recomendable siempre hacer una estandarización de las variables a utilizar para que las unidades de análisis no interfieran en el análisis. La idea es llevar todas las variables a la misma escala, así esta no interfiere con los resultados del análisis. Esto lo podemos hacer transformando a las variables para que tengan media cero y varianza 1.  Hagamos la estandarización del valor de la renta:
+
+```{r}
+# calculamos la media de la variable
+media_renta <- mean(data_acp$rent)
+# Calculamos la desviación estándar
+ds_renta <- sd(data_acp$rent)
+# a cada valor restamos la media y dividimos por la desviación estándar
+data_acp$renta_std1 <- (data_acp$rent - media_renta)/(ds_renta)
+# Revisemos el resultado
+head(data_acp[,c('rent','renta_std1')])
+summary(data_acp[,c('rent','renta_std1')])
+```
+
+Existe también una función **scale** que hace éste cómputo por nosotros
+
+```{r}
+data_acp$renta_std2 <- scale(data_acp$rent)
+head(data_acp[,c('rent','renta_std1','renta_std2')])
+summary(data_acp[,c('rent','renta_std1','renta_std2')])
+
+```
+Eliminamos estas dos columnas creadas 
+```{r}
+data_acp <- data_acp[,c('area','rooms','bathroom','parking.spaces','floor','hoa','rent')]
+```
+
+
+## **Análisis de componentes principales**
+
+La gran mayoría de implementaciones en R o Python de ACP tienen la posibilidad de estandarizar las variables dentro de la función. En este caso utilizaremos la función **prcomp** del paquete **factoextra**, dónde encontramos el argumentos **scale** que debe ponerse como TRUE para estandarizar las variables del análisis
+
+```{r}
+## Ajustamos el pca, utulizamos la opcion scale=TRUE
+pca_renta <- prcomp(data_acp,scale=TRUE)
+summary(pca_renta)
+```
+
+
+
+Revisemos el objeto del ACP con la función names() para saber qué información nos da
+
+```{r}
+names(pca_renta)
+```
+
+De lo anterior podemos observar alguna de la información más relevante 
+
+- Los elementos center y scale almacenados en el objeto pca contienen la media y desviación típica de las variables previa estandarización
+- El elemento sdev contiene la desviación estándar de cada CP
+- La relación entre las variables originales y los componentes principales ($rotation) (vectores propios)
+- Los valores de cada $x en términos de los componentes principales
+
+```{r}
+pca_renta$center
+pca_renta$sdev
+
+```
+
+Y podemos describir entonces cómo está hecha la combinación lineal de cada variable original para definir los componentes principales
+
+```{r}
+pca_renta$rotation
+```
+
+Por ejemplo, la primer componente se puede definir así:
+
+$CP1= 0.26area+0.47rooms+0.50bathroom+0.47parking-0.017floor+0.13hoa+0.44rent$
+
+Estos pesos de cada variable en el primer componente nos dan una idea de qué información está recogiendo la dimensión.
+
+
+Finalmente el objeto de $x nos muestra cómo está representada cada observación en las nuevas dimensiones
+
+```{r}
+head(pca_renta$x)
+```
+
+
+Paso seguido podemos visualizar los valores propios para saber qué tan buena es la reducción en los componentes principales
+
+```{r}
+# revisamos los valores propios 
+fviz_eig(pca_renta)
+
+```
+
+También podemos hacer una visualización de las variables originales en las nuevas dimensiones. Primero revisemos las dos primeras componentes
+
+```{r}
+fviz_pca_var(pca_renta,axes = c(1, 2),
+             col.var = "contrib", # Color by contributions to the PC
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE     # Avoid text overlapping
+)
+```
+
+La cercanía al circulo unitario es un indicativo de qué tan buena es ésta representación para cada variable
+
+```{r}
+fviz_pca_var(pca_renta,axes = c(1, 3),
+             col.var = "contrib", # Color by contributions to the PC
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE     # Avoid text overlapping
+)
+```
+
+Podemos también visualizar los individuos en el mismo plano. Dado que tenemos 5887 observaciones la siguiente función puede tomar mucho tiempo para graficar los resultados. Por esta razón, sólo graficaremos las primeras 150 observaciones
+
+```{r}
+fviz_pca_ind(pca_renta, select.ind = list(name = rownames(data_acp)[1:150]),col.ind = 'steelblue',geom='point')
+```
+
+## **Ejercicios**
+
+**1. ¿Qué conclusiones podríamos sacar del biplot de la primer y segunda componente?**
+
+
+**2. Ajustemos el mismo análisis para la ciudad de Rio de Janeiro, ¿qué resultados se obtienen? ¿hay diferencias con el análisis anterior?**
+
+
+## **Conclusiones**
+
+- El análisis de componentes principales resulta ser una gran herramienta para resumir información 
+
+- Se pueden visualizar y encontrar patrones de forma multivariada
+
+- Es posible identificar también información recurrente
