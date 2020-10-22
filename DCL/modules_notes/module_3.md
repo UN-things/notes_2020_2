@@ -162,7 +162,9 @@ realizando actividades recreativas o habituales que impliqued moverse.
          	- Test de saltos sucesivos
          	- Test de lanzamientos de Balón medicinal
          	- Test de lanzamiento de una mano
-     	- **Fuerza de resistencia:** Capacidad de sostener la fuerza frente a cargas relativamentes prolongadas, sin aparición de fatiga. Evaluación (mayor cantidad de movimientos en un tiempo determinado):
+     	- **Fuerza de resistencia:** Capacidad de sostener la fuerza frente a cargas
+        relativamentes prolongadas, sin aparición de fatiga. Evaluación (mayor
+        cantidad de movimientos en un tiempo determinado):
        	- Test de flexo-extensiones de pierna
        	- Test de flexión de brazos en barras
 3. **Flexibilidad:** Capacidad de usar los músculos y articulaciones en toda la
@@ -194,8 +196,12 @@ realizando actividades recreativas o habituales que impliqued moverse.
 	- Disminución de factores de riesgo
 
 	Tipos:
-	- Resistencia Aeróbica: Se da cuando se realiza un esfuerzo de larga duración e intensidad moderada. Se realiza manteniendo un equilibrio entre el aporte de oxigeno y su consumo.
-	- Resistencia Anaeróbica: Se da en esfuerzos de mayor intensidad y menor duración. La cantidad de oxígeno que el cuerpo necesita consumir es superior a la que puede aportar.
+	- Resistencia Aeróbica: Se da cuando se realiza un esfuerzo de larga duración e
+    intensidad moderada. Se realiza manteniendo un equilibrio entre el aporte de
+    oxigeno y su consumo.
+	- Resistencia Anaeróbica: Se da en esfuerzos de mayor intensidad y menor
+    duración. La cantidad de oxígeno que el cuerpo necesita consumir es superior a
+    la que puede aportar.
 
 	Pruebas
 
@@ -208,11 +214,21 @@ realizando actividades recreativas o habituales que impliqued moverse.
 Normas qe guían el desarrollo del entrenamiento, para lograr los objetivos
 planteados y los procesos de adaptación.
 
-1. **Sobrecarga:** Es necesario someter el cuerpo a ejercicios de intensidad y duración superiores de los que soporta normalmente. Aproximadamente cada 6-8 semanas modificar la carga
-2. **Progresión:** Es necesario somenter el cuerpo a cargas cada vez mayores a lo largo del entrenamiento para lograr adaptaciones. Las cargas se deben aumentar modificando el volumen e instensidad de los ejercicios
-3. **Recuperación:** Es necesario un periodo de descanso entre estímulos para lograr el equilibrio, adaptarse y obtener máximos beneficios del entrenamiento.
-4. **Reversibilidad:** Los beneficios obtenidos en un programa de entrenamiento se perderán si el entrenamiento se reduce o suspende completamente.
-5. **Especificidad:** El entrenamiento debe estar alineado con las características del deporte o la actividad que se practica.
-6. **Individualidad:** Las cargas de entrenamiento deben adaptarse a las características específicas de cada persona.
-7. **Periodización:** Implica la planificación del programa de entrenamiento a intervalos regulares según el calendario de competencias.
-8. **Variación de la carga:** No acostumbrarse a una misma carga ni a los ejercicios.
+1. **Sobrecarga:** Es necesario someter el cuerpo a ejercicios de intensidad y
+  duración superiores de los que soporta normalmente. Aproximadamente cada 6-8
+  semanas modificar la carga
+2. **Progresión:** Es necesario somenter el cuerpo a cargas cada vez mayores a lo
+  largo del entrenamiento para lograr adaptaciones. Las cargas se deben aumentar
+  modificando el volumen e instensidad de los ejercicios
+3. **Recuperación:** Es necesario un periodo de descanso entre estímulos para
+  lograr el equilibrio, adaptarse y obtener máximos beneficios del entrenamiento.
+4. **Reversibilidad:** Los beneficios obtenidos en un programa de entrenamiento se
+  perderán si el entrenamiento se reduce o suspende completamente.
+5. **Especificidad:** El entrenamiento debe estar alineado con las características
+  del deporte o la actividad que se practica.
+6. **Individualidad:** Las cargas de entrenamiento deben adaptarse a las
+  características específicas de cada persona.
+7. **Periodización:** Implica la planificación del programa de entrenamiento a
+  intervalos regulares según el calendario de competencias.
+8. **Variación de la carga:** No acostumbrarse a una misma carga ni a los
+  ejercicios.
