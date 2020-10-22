@@ -43,7 +43,7 @@
 | [Vigènere](codes/vigenere/vigenere_statement.md)	|	29/09/2020	|	[vigenere.py](https://github.com/gtzambranop/UN_2020_2/tree/develop/ICS/codes/vigenere/vigenere.py)	|
 | [Hill](/codes/hill/hill_statement.md)	|	06/10/2020	|	[hill.py](https://github.com/gtzambranop/UN_2020_2/tree/develop/ICS/codes/hill/hill.py)	|
 | [Turing Grill](codes/grill/grill_statement.md)	|	13/10/2020	|	[grll.py](https://github.com/gtzambranop/UN_2020_2/tree/develop/ICS/codes/grill/grill.py) |
-| [DES](codes/des/des_statement.md)	| 20/10/2020	|	des	|
+| [DES](codes/des/des_statement.md)	| 20/10/2020i	|	[des](https://github.com/gtzambranop/UN_2020_2/tree/develop/ICS/codes/des/des.py)	|
 | [AES](codes/des/des_statement.md)	| 27/10/2020	| aes	|
 
 
