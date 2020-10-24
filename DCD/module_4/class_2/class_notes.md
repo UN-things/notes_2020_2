@@ -27,18 +27,3 @@ Tipos:
   modelo). [Paper-técnicas de regularización](http://e-spacio.uned.es/fez/eserv/bibliuned:masterMatavanz-Jrperea/Perea_Luque_JuanRafael_TFM.pdf)
 - **Creación de variables:** Cuando dos o más variables se pueden resumir en una
   sola, se requiere **conociemiento experto**.
-
-### Análisis de componentes principales
-
-La nueva representación se ubicará donde exista mayor variabilidad, que agrupe la 
-mayor cantidad de información
-
-- t-SNE: Captura relaciones no lineales, es una metodología más de visualización que de procesamiento. Depende de la distancia, el punto de referencia
-
-- estructuracion de los datos
-- distancias-importante
-- reducción de dimensionalidad
-
-- ACP únicamente para variables numéricas
-- estandarizar variables, media = 0 y varianza = 1
-  $$\frac{(valor - media)}{valor\_estándar}$$
