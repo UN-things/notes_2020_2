@@ -153,8 +153,13 @@ realizando actividades recreativas o habituales que impliqued moverse.
 				capaz de desplazar en un movimiento. Se evalúa de diferentes formas:
          	- **Directa:** aparatos (dinamómetros), fuerza máxima estática.
          	- **RM:** Movimiento o peso máximo que se puede movilizar, se pueden
-						obtener por medio de test. Peso máximo 10 repeticiones. Test
-						indirecto:$1 RM = \frac{Kg}{[1.0278 - (0.0278 \cdot N. Rep)]}$
+						obtener por medio de test. Peso máximo 10 repeticiones.
+              - Test directo: Se pone un peso suficiente a una persona y se
+                registra.
+              - Test	indirecto: Peso menor pero suficiente (menos de 10
+                repeticiones), luego se utiliza la fórmula:
+
+                $1 RM = \frac{Kg}{[1.0278 - (0.0278 \cdot N. Rep)]}$
      	- **Fuerza explosiva o de velocidad:** Es la magnitud de fuerza interna que
   			el sistema neuromuscular puede desarrollar por unidad de tiempo. También
 				denominada potencia. Evaluación:
@@ -232,3 +237,111 @@ planteados y los procesos de adaptación.
   intervalos regulares según el calendario de competencias.
 8. **Variación de la carga:** No acostumbrarse a una misma carga ni a los
   ejercicios.
+
+# Entrenamiento de cualidades físicas
+
+## Fuerza
+
+Parámetros:
+- **Peso o carga:** Peso adicional al peso corporal con el que se trabajará cada
+  movimiento.
+- **Repeticiones:** Número de veces seguidas que se realiza el ejercicio hasta el
+  descanso.
+- **Series:** Conjunto de repeticiones previas a cada descanso.
+- **Recuperación:** Tiempo de descanso entre serie y serie.
+- **RM - Repetición máxima:** Peso máximo que se puede mover en cada ejercicio.
+- **%RM:** Peso que se determina para hacer ejercicio.
+
+La variación de los parámetros depende del objetivo (potencia, resistencia o
+hipertrofia).
+
+Tipos de series:
+- **Superseries:** 2 ejercicios distintos sin descanso.
+- **Piramidales:**
+  - **Ascendentes:** Se aumenta el peso pero se reduce el número de repeticiones.
+  - **Descendentes:** Menos repeticiones y más peso y va aumentando las
+    repeticiones y reduciendo el peso
+- **Biseries y triseries:** Secuencias de diferentes ejercicios que trabajen el
+  mismo grupo muscular y sin descanso entre ellos.
+- **Circuito:**
+
+Entrenamiento de la fuerza
+
+| Item  | Fuerza Máxima | Fuerza Explosiva  | Fuerza de Resistencia |
+| :---: | :---: | :---: | :---: |
+| Peso  | Máximo (75% - 100 % RM) | Mínimo  (20% - 50% RM) | Medio (50% - 70% RM) |
+| Repeticiones  | Pocas (1-12)  | Pocas pero rápidas (6-10) | Muchas (15-20)  |
+| Recuperación  | Larga (2'-3') |  Larga (2' - 3') | Corta (30'' - 1'30')  |
+| Ejemplos  | 3 Ser x 5 Rep al 80% <br> 4 Ser x 3 Rep al 90%  | 4 Ser x 6 Rep al 40% <br> 3 Ser x 10 Rep al 50% | 3 Ser x 15 Rep al 50% <br> 3 Circuitos de 6 ejercicios x 20 repeticiones al 60% |
+| Características   | Se entrena a partir de 16-18 años en alto rendimiento. No se debe trabajar sin una gran base de trabajo previo. | Específica en ciertos deportes y acciones concretas del juego | La más relacionada con la salud. Es la OPCIÓN RECOMENDABLE para empezar, mantenerse o tonificar a nivel general.  |
+
+Métodos para entrenar la fuerza de resistencia, para variabilidad:
+- Autocarga
+- Sobrecarga
+- Entrenamiento con pareja
+- Entrenamiento en series
+- Intervalos
+- Circuito
+
+## Resistencia Cardiovascular
+
+Frecuencias Cardiaca Máxima
+
+| Fórmulas  | Origen  |
+| :---: | :---: |
+| $220-EDAD$  | 1971 FOXY HASKELL |
+| $208-(0.7 \cdot EDAD)$  | **2001 TANAKA** |
+| $207-(0.7\cdot EDAD)$ | 2007  GELLISH |
+
+| Intensidad de la AF | %FC Máx | Test del Habla  | Escala de Borg  |
+| :---: | :---: | :---: | :---: |
+| Leve  | 50-70%  | Permite cantar  | Menor de 10 |
+| Moderada  | 70-85%  | Permite hablar con dificultad | 11-15 |
+| Vigorosa  | 85-100% | No permite mantener una conversación  | 15-20 |
+
+La frecuencia cardiaca se toma en las arterias, usualmente en la radial (muñeca).
+
+Frecuencia Cardiaca normal en reposo para un adulto: $60-80/min$
+
+Métodos:
+
+- **Continuos:** Actividades sin pausa, tiempo largo, intensidad baja y media.
+  Recomendado.
+  - **Continuos Variables:**
+    - Varían la carga básicamente mediante el ritmo ó  intensidad de ejecución de
+      los ejercicios.
+    - Intensidad baja durante periodos largos. intercala con periodos cortos de
+      intensidad submáxima - máxima.
+  - **Continuos Invariables:**
+    - Ejecución prolongada del ejercicio con una intensidad baja a moderada,
+      situada entre el 70 y 80% de la FC máx.
+  - **Fartlek:**
+    - Juego de velocidad
+    - Combina diferentes ritmos e intensidades.
+    - Cambios de terreno
+- **Interválicos:** Alterna Fases de carga y descanso. Las fases de carga se
+  realizan al 70%-80% y las recuperaciones dependen de las intensidades de la
+  carga pero nunca son completas.
+
+## Flexibilidad
+
+- **Estiramientos Estáticos:** Movimiento lento y constante que se mantiene en la
+  posición final. durante 15 a 30 segundos (o más).
+- **Estiramientos Balísticos:** Movimientos rápidos y de rebote. Puede producir
+  microlesiones. Es usado en el calentamiento.
+- **FNP:** Conjunto de técnicas que combinan estiramiento pasivo con contracciones
+  concéntricas.
+- **Estiramientos dinámicos:** Utiliza movimientos lentos y controlados
+  específicos del deporte.
+
+# Fases del Ejercicio
+
+- **Calentamiento:** Mpv lineales y circulares.
+  - **Calentamiento general:** Ejercicios que involucran grandes grupos musculares.
+  - **Calentamiento específico:** Está en función del trabajo de la parte central.
+- **Fases Central:**
+  - Trabajo de cualidades físicas, según objetivos.
+  - Deporte: Técnica y táctica.
+- **Vuelta a la calma:** Estiramientos
+  - Acelera la recuperaciópn del trabajo realizado durante la sesión.
+  - Trote sueve, ejercicios de respiración, estiramientos.
