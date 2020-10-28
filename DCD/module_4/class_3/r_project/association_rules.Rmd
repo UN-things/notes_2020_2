@@ -1,0 +1,137 @@
+---
+title: "Reglas de Asociación"
+author: "Guiselle Tatiana Zambrano Penagos"
+date: "27/10/2020"
+output: html_document
+---
+En este caso aprenderemos a manejar una tabla de datos de tipo transaccional y ver métodos para poder analizarla. También aplicaremos los conceptos de reglas de asociación en este ejemplo.
+
+El caso estará estructurado así:
+
+1. Explorar la estructura de una base de datos transaccional
+
+2. Transformación de los datos para su análisis
+
+3. Exploración descriptiva de los datos
+
+4. Análisis de reglas de asociación
+
+```{r}
+# librerias
+library(arules)
+library(arulesViz)
+library(repr)
+```
+
+```{r}
+# definir ruta del directorio de trabajo
+# setwd('C:/Users/Juliana/Desktop/Diplomado/D_2020/Casos/Casos/AssociationRules')
+setwd('/root/Documentos/UN/UN_2020_2/DCD/module_4/class_3/r_project')
+```
+
+La tabla de datos corresponde a compras de un supermercado. Cada fila representa artículos (ítems) que fueron comprados juntos el mismo día durante la misma compra. Tenemos un total de 9835 compras diferentes de hasta 32 productos
+
+```{r}
+compras <-read.csv('data/compras_mercado.csv', stringsAsFactors = F)
+# Eliminar filas vacías
+compras <- na.omit(compras)
+head(compras)
+```
+
+```{r}
+# estructura de datos filas y columnas
+print(nrow(compras))
+print(ncol(compras))
+```
+
+A primera vista, se puede observar que las compras no contienen muchos productos, razón por la cuál hay muchas celdas vacías. Veamos para la primer columna qué tantos productos diferentes podríamos encontrar
+
+```{r}
+print(paste('Encontramos en sólo esta primer columna',length(unique(compras[,'Product.1'])),'productos dirferentes'))
+unique(compras[,'Product.1'])
+```
+
+Para analizar estos datos en R vamos a utilizar la librería **arules**  y su función apriori para generar las reglas de asociación. Para esto debemos transformar los datos, ya que la función que utilizaremos sólo recibe datos de tipo transacción. El resultado debe llevar a una fila por cada transacción y una columna que grupe todos los ítem separados por comas. 
+
+```{r}
+trans <- function(){
+  lista = list()
+  for (i in 1:nrow(compras)) {
+    lista[i][1]=as.character(compras[i,1])
+    j <- 2
+    while(j <= ncol(compras) & compras[i,j] != ""){
+        lista[[i]][j]=as.character(compras[i,j])
+        if (j < ncol(compras))
+          j = j + 1
+        else
+          break
+    } # end while
+  } # end i loop
+  return(lista)
+} # end function
+```
+
+```{r}
+resultado <- trans()
+resultado2 <- sapply(resultado, paste, collapse = ",")
+resultado2[1:20]
+```
+
+Tranformamos este resultado como un objeto de tipo transacción para poder analizarlo
+
+```{r}
+#transacciones
+trObj <- as(strsplit(resultado2, ","), "transactions")
+```
+
+## Exploración de las compras
+
+```{r}
+summary(trObj)
+```
+
+Analicemos más en detalle cuál es el comportamiento del número de ítems por compra
+
+```{r}
+hist(size(trObj),xlab='número de ítems por compra',main='Tamaño de canastas')
+```
+Analicemos cuántas de las compras contienen sólo 1 ítem y cuántas menos de 10 ítems
+
+```{r}
+# compras con solo 1 ítem
+trObj[size(trObj)==1]
+2159*100/9835
+
+# reglas con menos de 10 ítems
+trObj[size(trObj)<10]
+8939*100/9835
+```
+
+Con la función apriori podemos obtener las reglas de asociación definiendo distintos valores para los umbrales de las métricas de evaluación
+
+```{r}
+association.rules <- apriori(trObj, parameter = list(supp=0.001,conf=0.5))
+```
+
+```{r}
+inspect(association.rules[1:10])
+options(repr.plot.width = 10, repr.plot.height=8)
+plot(association.rules)
+```
+
+## Ejercicios
+1. ¿Cuáles reglas parecen interesantes de esta salida?
+
+2. ¿ Cuáles reglas podrían ser 'poco' interesantes?
+
+3. Utilizando la métrica de 'lift', ¿Cuáles serían algunas de las reglas más interesantes?
+
+4. ¿Qué pasa si utilizamos diferentes niveles de soporte y confianza? Se llega a otras reglas más interesantes?
+
+## Conclusiones
+
+- Las tablas de datos transaccionales requieren de un manejo diferente a las tablas tradicionales y requieren de transformación en la mayoría de casos para su análisis
+
+- Conocer los ítems más frecuentes permite sacar conclusiones interesantes sobre las compras
+
+- La aplicación de las reglas de asociación es bastante sencilla

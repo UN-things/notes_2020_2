@@ -1,0 +1,366 @@
+---
+author: "Guiselle Tatiana Zambrano Penagos"
+date: "27/10/2020"
+output: html_document
+---
+
+# Clusterización 
+
+En este caso práctico aplicaremos el algoritmos de clusterización para hacer agrupamiento de datos, aprenderemos cómo funcionan y cómo utilizarlos en un caso práctico
+
+El caso estará estructurado así
+
+1. Hacer un análisis exploratorio para revisar la estructura de los datos
+2. Usar lo que observamos para guiar nuestro proceso de agrupamiento
+3. Ajustar un algortimo de k-means a los datos disponibles
+4. Ajustar un agrupamiento jerárquico
+5. Hacer segmentaciones y conclusiones a partir del análisis
+
+
+**Contexto:**  Las competencias deportivas cada día recogen una gran cantidad de datos relacionados con el desempeño de sus equipos y jugadores para encontrar patrones en estos datos y tomar decisiones informadas basadas en ellos. De esta manera la competencia aumenta tanto dentro como fuera de la cancha.
+
+
+**Problema de negocio:**  Se tienen los datos de desempeño de los equipos de baloncesto del torneo NCAA March Madness que contiene las estadísticas de juego de 353 equipos de la liga. El objetivo es inspeccionar esta data utilizando técnicas de visualización y agrupación para encontrar patrones en el desempeño de los equipos y generar recomendaciones de umbrales en las estadísticas para que un equipo esté en el grupo de desempeño superior.
+
+
+```{r}
+# cargue librerias 
+library(ggplot2)
+library(ggpubr)
+library(ggcorrplot)
+library(dplyr)
+library(factoextra)
+library(dbscan)
+```
+
+```{r}
+# ruta directorio
+#setwd('C:/Users/Juliana/Desktop/Diplomado/D_2020/Casos/Casos/Clustering/R')
+setwd('/root/Documentos/UN/UN_2020_2/DCD/module_4/class_4/r_project')
+```
+
+```{r}
+## Cargue de datos
+datos <- read.csv('data/basketball_19.csv',header=T)
+## nombres de las columnas 
+names(datos)
+head(datos)
+```
+
+## Datos
+
+Estas son las variables que contiene el conjunto de datos 
+
+- **TEAM:** Equipo
+- **CONF:** La conferencia en la que el equipo participa(A10 = Atlantic 10, ACC = Atlantic Coast Conference, AE = America East, Amer = American, ASun = ASUN, B10 = Big Ten, B12 = Big 12, BE = Big East, BSky = Big Sky, BSth = Big South, BW = Big West, CAA = Colonial Athletic Association, CUSA = Conference USA, Horz = Horizon League, Ivy = Ivy League, MAAC = Metro Atlantic Athletic Conference, MAC = Mid-American Conference, MEAC = Mid-Eastern Athletic Conference, MVC = Missouri Valley Conference, MWC = Mountain West, NEC = Northeast Conference, OVC = Ohio Valley Conference, P12 = Pac-12, Pat = Patriot League, SB = Sun Belt, SC = Southern Conference, SEC = South Eastern Conference, Slnd = Southland Conference, Sum = Summit League, SWAC = Southwestern Athletic Conference, WAC = Western Athletic Conference, WCC = West Coast Conference)
+- **G:** Número de partidos jugados
+- **W:** Número de partidos ganados
+- **ADJOE:** Estimación de eficiencia ofensiva, puntos anotados por cada 100 posesiones
+- **ADJDE:** Estimación de eficiencia defensiva, puntos permitidos por cada 100 posesiones del equipo contrario
+- **BARTHAG:** Probabilidad de vencer a un equipo
+- **EFG_O:** Effective Field Goal Percentage Shot
+- **EFG_D:** Effective Field Goal Percentage Allowed
+- **TOR:** Porcentaje de rotación permitida (equipo pierde la posesión del balón contra el equipo contrario antes de que un jugador dispare a la canasta de su equipo)
+- **TORD:** Porcentaje de rotación hecha al equipo contrario (se roba la pelota al contrincante)
+- **ORB:** Porcentaje de rebote ofensivo
+- **B:** Porcentaje de rebote defensivo
+- **FTR:** Tasa de tiros libres hechos(que hace el equipo)
+- **FTRD:** Tasa de tiros libres permitidos (que hace el contrincante)
+- **2P_O:** Porcentaje de tiros de 2 puntos hechos
+- **2P_D:** Porcentaje de tiros de 2 puntos permitidos
+- **3P_O:** Porcentaje de tiros de 3 puntos hechos
+- **3P_D:** Porcentaje de tiros de 3 puntos permitidos
+- **ADJ_T:** Posesión del balón por 40 min
+- **WAB:** Triunfos por encima de la 'burbuja' (la burbuja es el límite definido para pasar al campeonato NCAA March Madness Tournament
+- **POSTSEASON:** Ronda en la que el equipo de fue eliminado (R68 = First Four, R64 = Round of 64, R32 = Round of 32, S16 = Sweet Sixteen, E8 = Elite Eight, F4 = Final Four, 2ND = Runner-up, Champion = Winner of the NCAA March Madness Tournament for that given year)
+- **SEED:**Semilla definida por el torneo
+
+## Exploración de los datos 
+
+Para empezar el análisis hay que hacer una exploración inicial de los datos, entender un poco las variables y la información que tenemos. Para empezar nuestros datos consisten en las estadísticas de 353 equipos contenidas en 24 variables
+
+
+```{r}
+## dimension de los datos
+ncol(datos)
+nrow(datos)
+```
+
+```{r}
+## resumen de los datos
+summary(datos)
+```
+
+Visualicemos el comportamiento de algunas variables
+
+```{r}
+## visualización de algunas variables
+p1 <- ggplot(datos, aes(x=G)) + geom_histogram(color="coral2", fill="coral2")
+p2 <- ggplot(datos, aes(x=W)) + geom_histogram(color="coral2", fill="coral2")
+p3 <- ggplot(datos, aes(x=ADJOE)) + geom_histogram(color="coral2", fill="coral2")
+p4 <- ggplot(datos, aes(x=ADJDE)) + geom_histogram(color="coral2", fill="coral2")
+p5 <- ggplot(datos, aes(x=BARTHAG)) + geom_histogram(color="coral2", fill="coral2")
+
+
+ggarrange(p1, p2, p3,p4, p5,ncol = 2, nrow = 3)
+```
+
+```{r}
+options(repr.plot.width = 10, repr.plot.height=8)
+
+p1 <- ggplot(datos, aes(x=EFG_O)) + geom_histogram(color="coral2", fill="coral2")
+p2 <- ggplot(datos, aes(x=EFG_D)) + geom_histogram(color="coral2", fill="coral2")
+p3 <- ggplot(datos, aes(x=TOR)) + geom_histogram(color="coral2", fill="coral2")
+p4 <- ggplot(datos, aes(x=TORD)) + geom_histogram(color="coral2", fill="coral2")
+p5 <- ggplot(datos, aes(x=ORB)) + geom_histogram(color="coral2", fill="coral2")
+p6 <- ggplot(datos, aes(x=DRB)) + geom_histogram(color="coral2", fill="coral2")
+
+ggarrange(p1, p2, p3,p4, p5,p6,
+
+          ncol = 2, nrow = 3)
+```
+
+```{r}
+options(repr.plot.width = 10, repr.plot.height=8)
+
+p1 <- ggplot(datos, aes(x=FTR)) + geom_histogram(color="coral2", fill="coral2")
+p2 <- ggplot(datos, aes(x=FTRD)) + geom_histogram(color="coral2", fill="coral2")
+p3 <- ggplot(datos, aes(x=X2P_O)) + geom_histogram(color="coral2", fill="coral2")
+p4 <- ggplot(datos, aes(x=X2P_D)) + geom_histogram(color="coral2", fill="coral2")
+p5 <- ggplot(datos, aes(x=X3P_O)) + geom_histogram(color="coral2", fill="coral2")
+p6 <- ggplot(datos, aes(x=X3P_D)) + geom_histogram(color="coral2", fill="coral2")
+
+ggarrange(p1, p2, p3,p4, p5,p6,
+          ncol = 2, nrow = 3)
+```
+
+Podríamos empezar a identificar cuál es el comportamiento de los equipos durante la temporada
+
+```{r}
+# partidos ganados vs prob de vencer equipo
+ggplot(datos, aes(x=BARTHAG, y=W)) + geom_point() +labs(x = "Probabilidad de ganar",y='Partidos ganados')
+```
+
+```{r}
+# relacion de probabilidad de ganar con otras variables 
+p1 <- ggplot(datos, aes(x=ADJOE, y=BARTHAG)) + geom_point() +labs(x = "Efic. Ofensiva",y='Prob ganar')
+p2 <- ggplot(datos, aes(x=EFG_O, y=BARTHAG)) + geom_point() +labs(x = "% Tiros efectivos",y='Prob ganar')
+p3 <- ggplot(datos, aes(x=ORB, y=BARTHAG)) + geom_point() +labs(x = "% rebote ofensivo",y='Prob ganar')
+p4 <- ggplot(datos, aes(x=TOR, y=BARTHAG)) + geom_point() +labs(x = "% rotación",y='Prob ganar')
+p5 <- ggplot(datos, aes(x=X2P_O, y=BARTHAG)) + geom_point() +labs(x = "% tiros de 2 puntos hechos",y='Prob ganar')
+p6 <- ggplot(datos, aes(x=ADJ_T, y=BARTHAG)) + geom_point() +labs(x = "Posesión del balón",y='Prob ganar')
+
+ggarrange(p1, p2, p3,p4, p5,p6,
+          ncol = 2, nrow = 3)
+```
+
+Inspeccionemos las correlaciones existentes entre las variables numéricas
+
+```{r}
+# selección variables numéricas
+km_data <- subset(datos, select = -c(TEAM,CONF,POSTSEASON,SEED) )
+# matriz de correlacion
+ggcorrplot(round(cor(km_data),2))
+```
+
+## Agrupamiento
+
+A partir del análisis exploratorio, escogemos algunas variables que parecen tener una mayor variabilidad y nos permitirán identificar tipos de equipos
+
+```{r}
+# selección variables de interés
+km <- km_data[,c('W','ADJOE','BARTHAG','EFG_O','X2P_O','WAB')]
+head(km)
+```
+Al igual que en ACP es importante estandarizar las variables que vamos a utilizar. La función scale nos permite hacerlo en una sola linea
+
+```{r}
+# estandarizar variables 
+km_scale <-scale(km)
+head(km_scale)
+```
+
+## Agrupamiento k-means
+
+En R utilizamos la función **kmeans**. Los principales argumentos que debemos dar a la función son:
+
+- x: una matriz numérica de los datos
+- centers: el número de clusters
+
+Dado que el algortimo de kmeans puede dar resultados diferentes cada vez que lo corramos, es necesario fijar una semilla con la función set.seed(). De esta manera nuestros resultados pueden ser reproducibles.
+
+```{r}
+### k-means 
+set.seed(42)
+kmeans <- kmeans(km_scale, centers = 3)
+```
+Los principales atributos generados por el algoritmo son:
+
+- **cluster:** vector de clusters asignados a las observaciones
+- **centers:** centroides
+- **totss:** Suma de cuadrados totales
+- **tot.withinss:** Total Suma de cuadrados dentro (inercia)
+
+```{r}
+# resultados
+names(kmeans)
+```
+La suma de distancias cuadradas de cada punto a su centroide en esta solución es de
+
+```{r}
+# inercia o suma de cuadrados dentro total
+kmeans$tot.withinss
+```
+Pero este número por si solo no es muy explicativo
+
+**Centroides**
+
+Tener en cuenta que las variables están estandarizadas, no necesariamente estos valores tengan un significado explícito pero sus magnitudes y sentidos si nos pueden decir mucho sobre las variables originales
+
+```{r}
+# centroides
+kmeans$centers
+```
+
+Guardamos la asignación del cluster en una nueva columna del data set
+
+```{r}
+# etiquetas de clusters
+datos$cluster <- kmeans$cluster
+```
+
+Y podemos visualizar cómo se comportan los clusters con respecto a las variables originales
+
+```{r}
+options(repr.plot.width = 10, repr.plot.height=8)
+
+## exploración de clusters
+ggplot(datos, aes(x=as.factor(cluster), y=W, fill=cluster)) + 
+  geom_boxplot(alpha=0.3) +
+  theme(legend.position="none")
+```
+
+```{r}
+# resumen variables por cluster
+
+datos %>%
+  group_by(cluster) %>% 
+  summarise_at(vars('W','ADJOE','BARTHAG','EFG_O','X2P_O','WAB'), mean)
+```
+
+```{r}
+# relacion de probabilidad de ganar con otras variables 
+p1 <- ggplot(datos, aes(x=ADJOE, y=BARTHAG)) + geom_point(aes(color = factor(cluster))) +labs(x = "Efic. Ofensiva",y='Prob ganar')
+p2 <- ggplot(datos, aes(x=EFG_O, y=BARTHAG)) + geom_point(aes(color = factor(cluster))) +labs(x = "% Tiros efectivos",y='Prob ganar')
+p3 <- ggplot(datos, aes(x=ORB, y=BARTHAG)) + geom_point(aes(color = factor(cluster))) +labs(x = "% rebote ofensivo",y='Prob ganar')
+p4 <- ggplot(datos, aes(x=TOR, y=BARTHAG)) + geom_point(aes(color = factor(cluster))) +labs(x = "% rotación",y='Prob ganar')
+p5 <- ggplot(datos, aes(x=X2P_O, y=BARTHAG)) + geom_point(aes(color = factor(cluster))) +labs(x = "% tiros de 2 puntos hechos",y='Prob ganar')
+p6 <- ggplot(datos, aes(x=ADJ_T, y=BARTHAG)) + geom_point(aes(color = factor(cluster))) +labs(x = "Posesión del balón",y='Prob ganar')
+
+ggarrange(p1, p2, p3,p4, p5,p6,
+          ncol = 2, nrow = 3)
+```
+
+## Agrupamiento Jerárquico
+
+
+En el agrupamiento jerárquico primero podemos inspeccionar cuántos clusters debería considerar el algoritmo usando el dendograma.
+
+
+Para utilizar la función **hclust** en R se requiere tener una matriz de distancia como insumo
+
+```{r}
+# matriz de distancias
+mat_dist <- dist(km_scale, method='euclidean') 
+```
+
+```{r}
+# dendograma
+# la función hclust necesita como insumo una matriz de distancias
+dend <- hclust(mat_dist,method='ward.D')
+plot(dend)
+```
+
+
+El gráfico nos muestra las ramificaciones de posibles clusters y nos puede indicar un buen número de clusters. Para continuar con la lógica del k-means anterior utilizaremos el agrupamiento de 3 clusters
+
+```{r}
+# clustering
+jer <- cutree(dend,k=3)
+```
+
+```{r}
+plot(dend)
+rect.hclust(dend , k = 3, border = 2:6)
+abline(h = 3, col = 'red')
+```
+Guardemos el cluster asignado a cada observación
+
+```{r}
+# guardar etiqueta de cluster
+datos$cluster_j <- jer
+```
+Comparemos los resultados del k-means con el jerárquico.
+
+**Nota:** Los algoritmos no necesariamente van a dar las mismas etiquetas a cada observación, esto incluso si se corre el mismo k-means varias veces los resultados pueden ser diferentes. Lo que queremos es analizar que tan similar es la asignación de clusters
+
+```{r}
+# cruce de clusters
+table(datos$cluster,datos$cluster_j)
+```
+
+```{r}
+## exploración de clusters
+ggplot(datos, aes(x=as.factor(cluster_j), y=W, fill=cluster)) + 
+  geom_boxplot(alpha=0.3) +
+  theme(legend.position="none")
+```
+
+```{r}
+# resumen variables por cluster
+
+datos %>%
+  group_by(cluster_j) %>% 
+  summarise_at(vars('W','ADJOE','BARTHAG','EFG_O','X2P_O','WAB'), mean)
+```
+```{r}
+# relacion de probabilidad de ganar con otras variables 
+p1 <- ggplot(datos, aes(x=ADJOE, y=BARTHAG)) + geom_point(aes(color = factor(cluster_j))) +labs(x = "Efic. Ofensiva",y='Prob ganar')
+p2 <- ggplot(datos, aes(x=EFG_O, y=BARTHAG)) + geom_point(aes(color = factor(cluster_j))) +labs(x = "% Tiros efectivos",y='Prob ganar')
+p3 <- ggplot(datos, aes(x=ORB, y=BARTHAG)) + geom_point(aes(color = factor(cluster_j))) +labs(x = "% rebote ofensivo",y='Prob ganar')
+p4 <- ggplot(datos, aes(x=TOR, y=BARTHAG)) + geom_point(aes(color = factor(cluster_j))) +labs(x = "% rotación",y='Prob ganar')
+p5 <- ggplot(datos, aes(x=X2P_O, y=BARTHAG)) + geom_point(aes(color = factor(cluster_j))) +labs(x = "% tiros de 2 puntos hechos",y='Prob ganar')
+p6 <- ggplot(datos, aes(x=ADJ_T, y=BARTHAG)) + geom_point(aes(color = factor(cluster_j))) +labs(x = "Posesión del balón",y='Prob ganar')
+
+ggarrange(p1, p2, p3,p4, p5,p6,
+          ncol = 2, nrow = 3)
+```
+
+## DBSCAN
+
+Ajustamos también un DBSCAN a nuestros datos
+
+```{r}
+cl<-dbscan(km_scale,eps=0.70,minPts = 10)
+datos$cluster_den <- cl$cluster
+    fviz_cluster(cl, km_scale, stand = FALSE, ellipse = TRUE, geom = "point")
+table(datos$cluster_den)
+
+# La etiqueta 0, hace referencia a los datos atípicos o ruido
+```
+
+En este caso particular DBSCAN no parece ser una buena solución. Sólo identifica 4 clusters pero la gran mayoría de puntos quedan identificados como noise points
+
+## Ejercicios
+
+**1. Analizando los clusters formados por el k-means ¿Qué nombres le podríamos asignar a cada uno de los clusters que identifiquen sus comportamientos?**
+
+**2. ¿Podríamos utilizar estos nombres para los resultados del jerárquico?**
+
+**3. En el dendograma del agrupamiento jerárquico vimos que 5 clusters podría ser una solución. Ajustemos tanto para k-means como para el jerárquico nuevos agrupamientos utilizando 5 clusters. ¿Qué podemos concluir? ¿Cuál sería la mejor solución?**
+
+## Conclusiones
+
+- Efectivamente se logran diferenciar tres grandes segmentos en los equipos caracterizados por su desempeño
+- Se pueden identificar patrones en las métricas que permitan definir umbrales mínimos para los indicadores de rendimiento
+- Se requiere de mayor información para escoger el número de clusters (más adelante lo veremos)
