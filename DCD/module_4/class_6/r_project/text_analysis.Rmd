@@ -1,0 +1,201 @@
+---
+title: "Análisis de texto"
+author: "Guiselle Tatiana Zambrano Penagos"
+date: "31/10/2020"
+output: html_document
+---
+En este caso práctico haremos una revisión general de cómo podemos analizar y procesar textos desde una perspectiva descriptiva.
+
+El caso está estructurado así:
+
+1. Carga y exploración de texto
+2. Procesos de limpieza y transformación en texto
+3. Representaciones de conteos
+
+**Contexto:** Muchas empresas y entidades estan monitoreando constantemente los comentarios que hay en redes sociales sobre sus productos y servicios para identificar rápidamente molestias e inquietudes de sus clientes. Así poder tomar decisiones y medidas eficientemente evitando que su imagen se vea damnificada
+
+**Pregunta de negocio:** En este caso analizaremos una muestra de tweets relacionados con el banco Davivienda. El objetivo es analizar cuáles pueden ser los temas tendencia en estos tweets y qué hallazgos se encuentran en ellos
+```{r}
+# ruta directorio
+#setwd('C:/Users/Juliana/Desktop/Diplomado/D_2020/Casos/Casos/TextMining') 
+setwd('/root/Documentos/UN/UN_2020_2/DCD/module_4/class_6/r_project')
+
+# cargue librerias 
+library(tokenizers)
+library(tidyverse)
+library(tm)
+library(stopwords)
+library(textstem)
+library(wordcloud)
+library(udpipe)
+library(dplyr)
+```
+
+```{r}
+## Cargue de datos
+tx <- read.csv('data/tweets.csv', header=TRUE, stringsAsFactors=FALSE, fileEncoding="latin1")
+head(tx)
+```
+## Manejo de textos
+
+**Tokenizar oraciones**
+
+```{r}
+# tokenizar oraciones
+tokenize_sentences(as.character(tx[1,1])) 
+```
+**Tokenizar palabras**
+```{r}
+# tokenizar palabras
+tokenize_words(as.character(tx[2,1]))
+```
+**Tamaño de tweets**
+```{r}
+# tamaño de los tweets
+tx$largo = nchar(as.character(tx$texto))
+mean(tx$largo)
+min(tx$largo)
+max(tx$largo)
+
+hist(tx$largo)
+```
+## Palabras o tokens mas frecuentes
+```{r}
+## tokens mas frecuentes
+palabras <- paste(tx$texto,collapse='\n')
+words <- tokenize_words(palabras,lowercase = FALSE, strip_numeric = FALSE,strip_punct = FALSE)
+asdf<-table(words)
+tab <- tibble(word = names(asdf), count = as.numeric(asdf))
+arrange(tab,desc(count))
+```
+```{r}
+# to lower 
+as.character(tx[1,1])
+tolower(as.character(tx[1,1]))
+```
+**Remover @, # con expresiones regulares**
+```{r}
+# caracteres especiales
+gsub('[@w+|#]','',as.character(tx[1,1]))
+```
+**Remover signos de puntuación**
+```{r}
+# puntuación 
+gsub('[[:punct:] ]+',' ',as.character(tx[1,1]))
+removePunctuation(as.character(tx[1,1])) # librería tm
+```
+Luego de hacer esta limpieza inicial cómo varían las palabras/tokens más frecuente
+```{r}
+# frecuencias con modificaciones 
+words <- tokenize_words(palabras,lowercase = TRUE, strip_numeric = FALSE,strip_punct = TRUE)
+asdf<-table(words)
+tab <- tibble(word = names(asdf), count = as.numeric(asdf))
+arrange(tab,desc(count))
+```
+**¿Qué tipo de palabras encontramos en la lista de las más frecuentes?**
+
+Naturalmente las palabras más comunes suelen ser "palabras vacías" que no añaden mucho significado al texto como artículos, pronombres y preposiciones. Lo más aconsejable es no considerarlas en el análisis ya que traen mucho ruido y no permiten identificar aquellas palabras que si son relevantes para el análisis
+
+**stopwords**
+```{r}
+## stopwords
+stopwords::stopwords("es")
+```
+Removamos de nuestro texto las stopwords. Una vez hecha la limpieza ya podemos entonces verificar cuáles son las palabras más frecuentes en esta muestra de tweets
+```{r}
+# con tm 
+tx$texto_l <- removeWords(as.character(tx$texto),stopwords("spanish"))
+palabras <- paste(tx$texto_l,collapse='\n')
+words <- tokenize_words(palabras,lowercase = TRUE, strip_numeric = FALSE,strip_punct = TRUE)
+asdf<-table(words)
+tab <- tibble(word = names(asdf), count = as.numeric(asdf))
+arrange(tab,desc(count))
+```
+```{r}
+# con la funcion tokenize_words
+palabras <- paste(tx$texto,collapse='\n')
+words <- tokenize_words(palabras,lowercase = TRUE, strip_numeric = FALSE,strip_punct = TRUE,stopwords = stopwords::stopwords("es"))
+asdf<-table(words)
+tab <- tibble(word = names(asdf), count = as.numeric(asdf))
+arrange(tab,desc(count))
+```
+**n-gramas**
+```{r}
+## ngrams
+# bigram
+test <- tokenize_ngrams(palabras,n=2,lowercase = TRUE,stopwords = stopwords::stopwords("es"))
+pre <- table(test)
+tab <- tibble(ngram = names(pre), count = as.numeric(pre))
+arrange(tab,desc(count))
+```
+```{r}
+# trigram
+test <- tokenize_ngrams(palabras,n=3,lowercase = TRUE,stopwords = stopwords::stopwords("es"))
+pre <- table(test)
+tab <- tibble(ngram = names(pre), count = as.numeric(pre))
+arrange(tab,desc(count))
+```
+## Llevar texto a vectores
+```{r}
+#  matriz tdm
+corp <- Corpus(VectorSource(as.character(tx$texto)))
+tdm <- as.matrix(DocumentTermMatrix(corp,control = list(removePunctuation = TRUE,stopwords = TRUE)))
+tdm[1:10,1:15]
+```
+**Wordcloud**
+```{r}
+# wordcloud
+corp <- corp %>%
+  tm_map(removeNumbers) %>%
+  tm_map(removePunctuation) %>%
+  tm_map(stripWhitespace)
+corp <- tm_map(corp, content_transformer(tolower))
+corp <- tm_map(corp, removeWords, stopwords("spanish"))
+
+
+dtm <- TermDocumentMatrix(corp) 
+matrix <- as.matrix(dtm) 
+words <- sort(rowSums(matrix),decreasing=TRUE) 
+df <- data.frame(word = names(words),freq=words)
+
+set.seed(1234) # for reproducibility 
+wordcloud(words = df$word, freq = df$freq, min.freq = 5,
+          max.words=200, random.order=FALSE, rot.per=0.35,
+          colors=brewer.pal(8, "Dark2"))
+```
+## Otras transformaciones de texto
+
+
+**Lemmatización**
+```{r}
+vector <- c("trouble", "troubling", "troubled")
+lemmatize_words(vector)
+vector <- c("corria", "corre", "corren")
+lemmatize_words(vector)
+```
+**POS**
+```{r}
+## english 
+sent <- c("Juliana is having a good day")
+df <- data.frame(sent, stringAsFactors = FALSE)
+udmodel <- udpipe_download_model(language = "english")
+udmodel <- udpipe_load_model(file = udmodel$file_model)
+
+x <- udpipe_annotate(udmodel,df$sent)
+x <- as.data.frame(x)
+x %>% select(token, upos)
+```
+```{r}
+# spanish
+sent <- c("Juliana tiene un buen día")
+df <- data.frame(sent, stringAsFactors = FALSE)
+
+
+udmodel <- udpipe_download_model(language = "spanish")
+udmodel <- udpipe_load_model(file = udmodel$file_model)
+
+
+x <- udpipe_annotate(udmodel,df$sent)
+x <- as.data.frame(x)
+x %>% select(token, upos)
+```
