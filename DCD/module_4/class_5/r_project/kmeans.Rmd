@@ -1,0 +1,331 @@
+---
+title: "Validación k-means"
+author: "Guiselle Tatiana Zambrano Penagos"
+date: "29/10/2020"
+output: html_document
+---
+```{r}
+#knitr::opts_chunk$set(echo = TRUE)
+#knitr::knit_hooks$set(webgl = hook_webgl)
+# cargue librerias 
+library(ggplot2)
+library(ggpubr)
+library(ggcorrplot)
+library(dplyr)
+library(factoextra)
+library(knitr)
+library(rgl)
+library(cluster)
+knit_hooks$set(rgl = hook_rgl)
+```
+En este caso práctico continuaremos con el caso de clustering que hicimos la clase anterior. Haremos la validación de nuestra aplicación de k-means.
+
+El caso estará estructurado así
+
+1. Resumir el caso anterior
+2. Ajustar y comparar distintos k-means
+3. Revisar criterios de validación
+4. Hacer conclusiones a partir del análisis
+
+
+**Contexto:**  Las competencias deportivas cada día recogen una gran cantidad de datos relacionados con el desempeño de sus equipos y jugadores para encontrar patrones en estos datos y tomar decisiones informadas basadas en ellos. De esta manera la competencia aumenta tanto dentro como fuera de la cancha.
+
+
+**Problema de negocio:**  Se tienen los datos de desempeño de los equipos de baloncesto del torneo NCAA March Madness que contiene las estadísticas de juego de 353 equipos de la liga. El objetivo es inspeccionar esta data utilizando técnicas de visualización y agrupación para encontrar patrones en el desempeño de los equipos y generar recomendaciones de umbrales en las estadísticas para que un equipo esté en el grupo de desempeño superior.
+
+```{r}
+# ruta directorio
+# setwd('C:/Users/Juliana/Desktop/Diplomado/D_2020/Casos/Casos/Cluster_validation') 
+setwd('/root/Documentos/UN/UN_2020_2/DCD/module_4/class_5/r_project')
+```
+
+```{r}
+## Cargue de datos
+datos <- read.csv('data/basketball_19.csv',header=T)
+head(datos)
+```
+## Datos
+
+Estas son las variables que contiene el conjunto de datos 
+
+- **TEAM:** Equipo
+- **CONF:** La conferencia en la que el equipo participa(A10 = Atlantic 10, ACC = Atlantic Coast Conference, AE = America East, Amer = American, ASun = ASUN, B10 = Big Ten, B12 = Big 12, BE = Big East, BSky = Big Sky, BSth = Big South, BW = Big West, CAA = Colonial Athletic Association, CUSA = Conference USA, Horz = Horizon League, Ivy = Ivy League, MAAC = Metro Atlantic Athletic Conference, MAC = Mid-American Conference, MEAC = Mid-Eastern Athletic Conference, MVC = Missouri Valley Conference, MWC = Mountain West, NEC = Northeast Conference, OVC = Ohio Valley Conference, P12 = Pac-12, Pat = Patriot League, SB = Sun Belt, SC = Southern Conference, SEC = South Eastern Conference, Slnd = Southland Conference, Sum = Summit League, SWAC = Southwestern Athletic Conference, WAC = Western Athletic Conference, WCC = West Coast Conference)
+- **G:** Número de partidos jugados
+- **W:** Número de partidos ganados
+- **ADJOE:** Estimación de eficiencia ofensiva, puntos anotados por cada 100 posesiones
+- **ADJDE:** Estimación de eficiencia defensiva, puntos permitidos por cada 100 posesiones del equipo contrario
+- **BARTHAG:** Probabilidad de vencer a un equipo
+- **EFG_O:** Effective Field Goal Percentage Shot
+- **EFG_D:** Effective Field Goal Percentage Allowed
+- **TOR:** Porcentaje de rotación permitida (equipo pierde la posesión del balón contra el equipo contrario antes de que un jugador dispare a la canasta de su equipo)
+- **TORD:** Porcentaje de rotación hecha al equipo contrario (se roba la pelota al contrincante)
+- **ORB:** Porcentaje de rebote ofensivo
+- **B:** Porcentaje de rebote defensivo
+- **FTR:** Tasa de tiros libres hechos(que hace el equipo)
+- **FTRD:** Tasa de tiros libres permitidos (que hace el contrincante)
+- **2P_O:** Porcentaje de tiros de 2 puntos hechos
+- **2P_D:** Porcentaje de tiros de 2 puntos permitidos
+- **3P_O:** Porcentaje de tiros de 3 puntos hechos
+- **3P_D:** Porcentaje de tiros de 3 puntos permitidos
+- **ADJ_T:** Posesión del balón por 40 min
+- **WAB:** Triunfos por encima de la 'burbuja' (la burbuja es el límite definido para pasar al campeonato NCAA March Madness Tournament
+- **POSTSEASON:** Ronda en la que el equipo de fue eliminado (R68 = First Four, R64 = Round of 64, R32 = Round of 32, S16 = Sweet Sixteen, E8 = Elite Eight, F4 = Final Four, 2ND = Runner-up, Champion = Winner of the NCAA March Madness Tournament for that given year)
+- **SEED:**Semilla definida por el torneo
+
+## Exploración de los datos 
+
+Para empezar el análisis hay que hacer una exploración inicial de los datos, entender un poco las variables y la información que tenemos. Para empezar nuestros datos consisten en las estadísticas de 353 equipos contenidas en 24 variables
+
+```{r}
+## visualización de algunas variables
+p1 <- ggplot(datos, aes(x=G)) + geom_histogram(color="coral", fill="coral")
+p2 <- ggplot(datos, aes(x=W)) + geom_histogram(color="coral", fill="coral")
+p3 <- ggplot(datos, aes(x=ADJOE)) + geom_histogram(color="coral", fill="coral")
+p4 <- ggplot(datos, aes(x=ADJDE)) + geom_histogram(color="coral", fill="coral")
+p5 <- ggplot(datos, aes(x=BARTHAG)) + geom_histogram(color="coral", fill="coral")
+
+
+ggarrange(p1, p2, p3,p4, p5,ncol = 2, nrow = 3)
+```
+Con ésta exploración inicial seleccionamos algunas variables para hacer el análisis de clusters
+```{r}
+# selección variables numéricas
+km_data <- subset(datos, select = -c(TEAM,CONF,POSTSEASON,SEED) )
+# selección variables de interés
+km <- km_data[,c('W','ADJOE','BARTHAG','EFG_O','X2P_O','WAB')]
+head(km)
+```
+## Agrupamiento
+
+Al igual que en ACP es importante estandarizar las variables que vamos a utilizar. La función scale nos permite hacerlo en una sola linea
+```{r}
+# estandarizar variables 
+km_scale <-scale(km)
+```
+En el caso anterior definimos el número de clusters como  𝑘=3  para el algortimo de kmeans. Al ajustar el agrupamiento jerárquico observabamos que otros posibles números de cluster podríamos utilizar
+
+```{r}
+# matriz de distancias
+mat_dist <- dist(km_scale, method='euclidean') # la función hclust necesita como insumo una matriz de distancias
+# dendograma
+dend <- hclust(mat_dist,method='ward.D')
+plot(dend)
+```
+Podemos entonces ajustar el kmeans con  𝑘=3 . Adicionalmente, tiene mucha lógica ajustarlo con  𝑘=4  o  𝑘=5
+
+```{r}
+### kmeans con 3, 4 y 5 clusters
+set.seed(42)
+kmeans_3k <- kmeans(km_scale, centers = 3) #k=3
+
+kmeans_4k <- kmeans(km_scale, centers = 4) # k=4
+
+kmeans_5k <- kmeans(km_scale, centers = 5) # k=5
+```
+
+## Validación
+
+Emplearemos validación interna para comparar las soluciones anteriores. Para esto podemos evaluar la cohesión de los clusters revisando la suma de cuadrados dentro (tot.withinss) y la separación revisando la suma de cuadrados entre (betweenss)
+
+```{r}
+# comparación suma de cuadrados dentro
+# inercia o suma de cuadrados dentro total --> cohesion
+kmeans_3k$tot.withinss
+kmeans_4k$tot.withinss
+```
+```{r}
+# suma de cuadrados entre clusters -->separación
+kmeans_3k$betweenss
+kmeans_4k$betweenss
+```
+Recordemos que entre menor sea la suma de cuadrados dentro será mejor la solución. Sin embargo siempre que se generen más clusters este número tiende a disminuir. Por esta razón debemos enocontrar un punto de balance entre tener un número bajo de SSW y un número adecuado de clusters
+
+Podemos también revisar los coeficientes de silhouette para ver qué tan bien asignado está cada punto a su cluster
+
+```{r}
+# Silhouette - Calidad de la asignación para cada clouster
+sil3 <- silhouette(kmeans_3k$cluster,dist(km_scale))
+plot(sil3, main ="Silhouette plot - K-means 3 clusters", col = "brown4")
+
+sil4 <- silhouette(kmeans_4k$cluster,dist(km_scale))
+plot(sil4, main ="Silhouette plot - K-means 4 clusters", col = "brown4")
+```
+Hay menor número de puntos "mal representados" en la solución de 3 clusters
+
+## Elección de k
+
+Utilizaremos la comparación de valores de suma de cuadrados dentro total con respecto a diferentes valores de  𝑘 . Este método es conocido como el método del codo. Para esto utilizaremos la función **fviz_nbclust** del paquete **factoextra** que nos permite hacer el gráfico directo del método.
+```{r}
+# elección de k 
+set.seed(123)
+# método del codo
+fviz_nbclust(km_scale, kmeans, method = "wss")
+```
+## ¿Cuál consideran sería el valor óptimo para k según el método del codo?
+
+Adicionalmente, podemos revisar el coeficiente de Silhouette
+```{r}
+# método de silhouette
+fviz_nbclust(km_scale, kmeans, method = "silhouette")
+```
+## ¿Cuál consideran sería el valor óptimo para k según el método del silhouette?
+
+No necesariamente los métodos deben coincidir ni dan una única respuesta. Depende del investigador y el contexto analizar qué solución podría ser mejor
+
+
+## Validacion estructura clusters
+
+
+Podemos guardar los clusters asignados por el algoritmo cuando se usaron  𝑘=3  y  𝑘=4  y evaluar las diferencias entre ellos en cómo están definidos en la data
+
+```{r}
+# etiquetas de clusters
+datos$cluster_3k <- kmeans_3k$cluster
+datos$cluster_4k <- kmeans_4k$cluster
+```
+Revisemos la distribución de estos clusters
+
+```{r}
+# distribución
+table(datos$cluster_3k)
+barplot(table(datos$cluster_3k),main='Solución de 3 clusters')
+```
+```{r}
+table(datos$cluster_4k)
+barplot(table(datos$cluster_4k),main='Solución de 4 clusters')
+```
+Para tener mayor información podríamos visualizar las variables originales de acuerdo a los clusters para entender mejor la estructura
+
+**Solución 3 clusters**
+```{r}
+# relación con variables
+p1 <- ggplot(datos, aes(x=ADJOE, y=BARTHAG)) + geom_point(aes(color = factor(cluster_3k))) +labs(x = "Efic. Ofensiva",y='Prob ganar')
+p2 <- ggplot(datos, aes(x=EFG_O, y=BARTHAG)) + geom_point(aes(color = factor(cluster_3k))) +labs(x = "% Tiros efectivos",y='Prob ganar')
+ggarrange(p1, p2,ncol = 2, nrow = 1)
+```
+
+```{r}
+# 3d plot
+plot3d(datos$ADJOE,datos$BARTHAG,datos$EFG_O,col=datos$cluster_3k,
+       xlab='Eficiencia Ofensiva',ylab='Probabilidad de ganar',zlab='Tiros efectivos')
+```
+**Solución 4 clusters**
+
+```{r}
+p1 <- ggplot(datos, aes(x=ADJOE, y=BARTHAG)) + geom_point(aes(color = factor(cluster_4k))) +labs(x = "Efic. Ofensiva",y='Prob ganar')
+p2 <- ggplot(datos, aes(x=EFG_O, y=BARTHAG)) + geom_point(aes(color = factor(cluster_4k))) +labs(x = "% Tiros efectivos",y='Prob ganar')
+ggarrange(p1, p2,ncol = 2, nrow = 1)
+```
+
+```{r}
+# 3d plot
+plot3d(datos$ADJOE,datos$BARTHAG,datos$EFG_O,col=datos$cluster_4k,
+       xlab='Eficiencia Ofensiva',ylab='Probabilidad de ganar',zlab='Tiros efectivos')
+```
+```{r}
+# comparación correspondencia clusters
+table(datos$cluster_3k,datos$cluster_4k)
+```
+En los anteriores gráficos se observa cómo claramente al aumentar el número de clusters, el nuevo grupo se traslapa con los anteriores. Esta situación podría llevar a una solución redundante donde dos clusters van a tener características muy similares o cercanas. Revisemos la caracterización de los clusters con las variables numéricas
+
+```{r}
+datos %>%
+  group_by(cluster_3k) %>% 
+  summarise_at(vars('W','ADJOE','BARTHAG','EFG_O','X2P_O','WAB'), mean)
+
+
+# total
+datos %>%
+  summarise_at(vars('W','ADJOE','BARTHAG','EFG_O','X2P_O','WAB'), mean)  
+
+
+datos %>%
+  group_by(cluster_4k) %>% 
+  summarise_at(vars('W','ADJOE','BARTHAG','EFG_O','X2P_O','WAB'), mean)
+```
+En la solución de 4 clusters se puede ver como el cluster de nivel medio en la solución original es ahora reemplazado por dos clusters que podríamos considerar de desempeño medio-bajo (3) y medio-alto (1)
+
+## Combinación ACP y Kmeans
+
+Ajustamos un ACP con las variables de interés
+
+```{r}
+## Ajustamos el pca, utilizamos la opcion scale=TRUE
+pca <- prcomp(km,scale=TRUE)
+summary(pca)
+```
+Revisemos cuántos componentes deberíamos utilizar
+
+```{r}
+# revisamos los valores propios 
+fviz_eig(pca)
+```
+La solución de 3 componentes guarda suficiente información. Guardemos las coordenadas de los componentes en el data frame
+```{r}
+# puntos en las nuevas dimensiones
+datos$CP1 <- pca$x[,1] 
+datos$CP2 <- pca$x[,2] 
+datos$CP3 <- pca$x[,3] 
+```
+Evaluemos cuántos clusters deberíamos tener con estas nuevas variables
+```{r}
+# método del codo
+fviz_nbclust(datos[,c('CP1','CP2','CP3')], kmeans, method = "wss")
+```
+Nuevamente, parece que k=4 podría ser un valor apropiado para el número de clusters
+
+```{r}
+# kmeans  
+acp_km <- kmeans(datos[,c('CP1','CP2','CP3')], centers = 4) # k=4  
+datos$cluster_acp <- acp_km$cluster
+```
+**Comparación de resultados**
+
+```{r}
+## comparacion
+acp_km$tot.withinss
+kmeans_4k$tot.withinss
+
+
+# separacion
+acp_km$betweenss
+kmeans_4k$betweenss
+
+#silhouette
+sil_acp <- silhouette(acp_km$cluster,dist(datos[,c('CP1','CP2','CP3')]))
+plot(sil_acp, main ="Silhouette plot - K-means 4 clusters a partir de ACP", col="brown4")
+
+sil4 <- silhouette(kmeans_4k$cluster,dist(km_scale))
+plot(sil4, main ="Silhouette plot - K-means 4 clusters", col = "brown4")
+```
+```{r}
+# tamaños
+table(datos$cluster_acp)
+barplot(table(datos$cluster_acp),main='Solución desde ACP')
+table(datos$cluster_4k,datos$cluster_acp)
+```
+**Validación de resultados**
+
+```{r}
+# relación con variables
+p1 <- ggplot(datos, aes(x=ADJOE, y=BARTHAG)) + geom_point(aes(color = factor(cluster_acp))) +labs(x = "Efic. Ofensiva",y='Prob ganar')
+p2 <- ggplot(datos, aes(x=EFG_O, y=BARTHAG)) + geom_point(aes(color = factor(cluster_acp))) +labs(x = "% Tiros efectivos",y='Prob ganar')
+ggarrange(p1, p2,ncol = 2, nrow = 1)
+```
+```{r}
+plot3d(datos$ADJOE,datos$BARTHAG,datos$EFG_O,col=datos$cluster_acp,
+       xlab='Eficiencia Ofensiva',ylab='Probabilidad de ganar',zlab='Tiros efectivos')
+```
+
+## Ejercicios
+
+1. Ajustemos un nuevo kmeans en las variables originales considerando ahora 5 clusters
+2. ¿Qué diferencias se evidencian en comparación con los dos anteriores?
+3. Analicemos la carcaterización de los 5 clusters con las variables originales, ¿qué nombre le podríamos dar a cada uno de los clusters?
+4. Después de analizar estas tres opciones, ¿cuál sería la mejor solución en este caso?
+
+## Conclusiones
+
+- Efectivamente se logran diferenciar tres grandes segmentos en los equipos: desempeño bajo, medio y alto
+- Las métricas de validación son una gran herramienta para tomar la decisión sobre el número de clusters a utilizar
+- También es necesario tener en cuenta el contexto de los datos para definir si la solución tiene sentido
