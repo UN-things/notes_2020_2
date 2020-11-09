@@ -3,9 +3,7 @@
 ## Información General
 
 -	**Conferencista:** Juliana Guerrero Velásquez
-	-	**Emails:**
-		- ljuliana.guerrero@gmail.com
-	-	**GitHub:** 
+	-	**Email:** ljuliana.guerrero@gmail.com
 - **Monitoras:**
   - Diana Carolina Sanchez Perez
     - **Email:** dicsanchezpe@unal.edu.co
