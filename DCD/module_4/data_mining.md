@@ -39,6 +39,7 @@
   dataset propio
   - Los entregables del proyecto serán el código del análisis y una
   presentación de 10 minutos con los resultados y hallazgos
+  - [Material e información](project/information.md)
 
 ## Clases
 
