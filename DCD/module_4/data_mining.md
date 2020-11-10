@@ -3,9 +3,7 @@
 ## Información General
 
 -	**Conferencista:** Juliana Guerrero Velásquez
-	-	**Emails:**
-		- ljuliana.guerrero@gmail.com
-	-	**GitHub:** 
+	-	**Email:** ljuliana.guerrero@gmail.com
 - **Monitoras:**
   - Diana Carolina Sanchez Perez
     - **Email:** dicsanchezpe@unal.edu.co
@@ -41,6 +39,7 @@
   dataset propio
   - Los entregables del proyecto serán el código del análisis y una
   presentación de 10 minutos con los resultados y hallazgos
+  - [Material e información](project/information.md)
 
 ## Clases
 

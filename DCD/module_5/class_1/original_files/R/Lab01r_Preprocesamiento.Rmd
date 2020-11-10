@@ -1,0 +1,205 @@
+---
+title: "Lab01 - Preprocesamiento de Datos"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+---
+
+Antes de empezar a entrenar un modelo es importante **conocer los datos** para alimentar el modelo con datos que aporten valor y nos ayuden a realizar una correcta Prediccion/Clasificacion/Segmentacion.  Esta actividad se conoce como **Analisis Exploratorio (EDA)**  
+Vamos a analizar dos atributos importantes a la hora de definir que variables van a alimentar el modelo:
+- Calidad de Datos
+- Correlacion entre los Datos
+
+## Configuracion
+Trate de ejecutar la siguiente celda para validar que las librerias que vamos a utilizar hoy se encentran instaladas correctamente.  Si no es asi, instale las librerias faltantes.  Luego, vuelva a intentar cargarlas hasta que la celda se ejecute sin errores.
+
+```{r}
+library(dplyr)
+library(skimr)
+library(tidyr)
+library(ggplot2)
+library(corrgram)
+library(lattice)
+library(car)
+library(esquisse)
+library(lubridate)
+```
+
+## Cargar el set de datos
+Vamos a usar un set de datos del [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php) en donde se registran los atributos de varias botellas de vino junto con su calidad.  Este dataset ha sido modificado un poco para trabajar la limpieza y calidad en este laboratorio.  La version original puede descargrse [aqui](https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv)
+
+Vamos a cargar este dataset en este laboratorio para procesarlo y dejarlo listo para los **siguientes laboratorios** de prediccion y clasificacion.  De esta forma usaremos el mismo dataset a lo largo de todo el flujo del curso como si se tratara de un proyecto real!
+
+```{r}
+wine_df <- read.csv('data/winequality-white.csv', sep = ';', header = T, fileEncoding = 'utf-8')
+```
+
+## Calidad de Datos  
+Lo primero que debemos hacer, y que parece obvio, es revisar una muestra de los datos para darnos una idea de los valores que vienen en cada columna/atributo
+
+```{r}
+head(wine_df) # Permite ver: dimensiones, tipos de dato y muestra
+```
+
+Tambien es importante conocer con anterioridad el tamaño de los datos con los que estamos tratando, esto podemos verlo en las variables de ambiente de la derecha.
+
+En este caso, la cantidad de filas (4898) es la cantidad de muestras o registros a analizar y la cantidad de columnas (12) son los atributos o variables de cada muestra.  
+
+Otra buena practica al iniciar el Analisis Exploratorio es validar los tipos de dato con los que estamos tratando.  Esto nos permitira tratar cada atributo de la manera correspondiente o realizar las transformaciones necesarias.
+
+```{r}
+glimpse(wine_df) # Permite ver: dimensiones, tipos de dato y muestra
+```
+
+En este caso, todas las variables son numericas (dbl o int), lo que las hace buenas candidatas para un modelo, por ejemplo de regresion.  Si se encontraran variables categoricas deberiamos hacer la validacion y transformacion de estos valores.  
+
+Ya con una idea mas clara de la estructura de datos con la que estamos tratando, realicemos un analisis matematico rapido sobre los datos:
+
+```{r}
+summary(wine_df)
+```
+
+Esto nos entrega un resumen de las medidas de tendencia y dispercion de los atributos **numericos** de nuestro dataset:  
+- Conteo de registros: Nos permite validar si algunos campos vienen Nulos (NA's)
+- Promedio: Nos da una idea de la dispercion de cada atributo
+- Valores Minimo y Maximo: Nos permite conocer el dominio de valores entre los que se distribuye cada atributo
+- Cuartiles: Nos da un resumen de la distribucion de los valores y posibles atipicos  
+
+Ya tenemos un poco mas clara la **estructura** de los datos, pero con solo ver una muestra de 5 registros, no podemos estar seguros de conocer todos los posibles **valores** de cada columna.  
+
+### Datos Faltantes
+En R, un dato vacio o faltante es identificado con el valor *NA* (Not a Number) y debemos identificar que valores faltantes hay en cada atributo y entender su significado.  Ya lo vimos en el conteo de valores de la celda anterior, pero tambien podemos verlo particularmente:
+
+```{r}
+colSums(is.na(wine_df))
+```
+
+Hay dos variables que llaman nuestra atencion: *citric acid* y *color*. Que podemos hacer con estos datos?
+- Si son datos invalidos podemos eliminarlos: OJO, aunque esto asegura que tendremos solo registros *limpios*, tambien perderemos registros que podrian contener otra informacion util para el modelo.
+- Si son datos invalidos tambien podemos reemplazarlos con valor valido, por ejemplo co el promedio de los valores validos de ese mismo atributo. De esta forma conservamos la cantidad de registros y no perdemos valor para ese atributo, pero OJO: el valor de reemplazo debe tener sentido para el negocio.
+- Si son datos validos para el negocio, por ejemplo, se acostumbra dejar vacio cuando es valor 0, podemos hacer este reemplazo directamente para que el modelo entienda eso.  OJO: En este caso se deben tener muy claras las reglas de negocio. **Este es el caso de "citric acid"**
+- Si son **muchos** los valores en nulo en una columna en partcular, se puede considerar no tener en cuenta ese atributo en el analisis porque no estaria aportando valor diferencial a cada muestra. **Este es el caso de "color"**  
+
+Ya vimos en la descripcion de datos que el minimo valor de *citric acid* es 0.12, cuando es posible quela acidez de un vino tinto sea 0 y no tenemos valores en 0. Coincidencia?  
+Vamos a arriesgarnos a reemplazar los valores por cero (0), para no tener que eliminar estos registros
+
+```{r}
+wine_df['citric.acid'] <- replace(wine_df['citric_acid'],
+                                  is.na(wine_df['citric_acid']),0)
+```
+El caso de *color* es distinto, son **muchos** los valores faltantes (3593 de 4898).  Veamos que valores tienen los pocos registros que si aportan informacion
+
+```{r}
+sum(is.na(wine_df['color'])) # Contar valores nulos
+table(wine_df['color'])      # COntar valores no Nulos
+```
+
+Ademas de los 3593 valores en Nulo, se tienen 428 en valor *8* y 877 en valor *13*.
+Estos valores realmente no nos dicen nada, si no conocemos el significado de cada uno.  Lo mejor en este caso es eliminar la columna ya que no aportaria nada al modelo, ni es algo que podamos explicar.
+
+```{r}
+wine_df = subset(wine_df, select = -c(color))
+```
+
+### Valores Atipicos
+Un valor atipico (en ingles *Outlier*) es un valor que esta por fuera del dominio normal de una variable.  Por ejemplo, en un set de datos de personas, el dominio de la variable *edad* podria ser entre 1 y 99 años.  Si se encuentra un valor negativo, o un valor muy alto (Por ejemplo, 200) que es imposible, o raro dentro del concepto (edad)es considerado atipico y debe ser tratado con cuidado.  
+Ya en celdas alteriores vimos una forma de detectar atipicos de forma general en el dataset con la funcion *df.describe()*, ya que nos entrega los quartiles.  Sin embargo, siempre es mas facil entender los datos graficamente:
+
+```{r}
+wine_df %>%
+  gather() %>%                       # Llave-Valor
+  ggplot(aes(value)) +               # Grafica
+  facet_wrap(~ key, scales="free") + # En panees diferentes
+  geom_histogram()                   # Tipo de grafica
+```
+
+Esto nos permite visualizar la distribucion de cada variable, valores mas comunes y de pronto algunos atipicos.  Pero la mejor forma de determinar si hay datos fuera de lo normal es con un analisis estadistico de cajas:
+
+```{r}
+boxplot(wine_df['pH'], main='pH',
+        horizontal=T, col='orange')
+```
+
+Dicen los [expertos](https://www.aprenderdevino.es/ph-y-vino/), que el pH de un vino tinto varia entre 3.3 y 3.6 g/l.  Éste conocimiento de negocio, asi como la grafica anterior nos permite dudar un poco de las muestras con valores superiores, por ejemplo a **4**.  *Este valor puede variar como consideremos conveniente.  No se recomienda cortar estrictamente en el intervalo que dicta la regla de negocio (3.3 - 3.6) pues algunos atipicos cercanos pueden ser posibles enla naturaleza*
+
+```{r}
+wine_df <- wine_df %>%
+  filter(pH < 4)
+
+boxplot(wine_df['pH'], main='pH',
+        horizontal=T, col='orange')
+```
+```{r}
+# Resumen estadistico (Otra forma)
+skim(wine_df)
+```
+
+Realizando de nuevo nuestro resumen de metricas estadisticas, vemos que ya no se tienen valores faltantes es nungun atributo. La distribucion de las columnas que hemos modificado ha cambiado un poco, pero su desviacion y distribucion en general se ajusta mas para un analisis predictivo.  
+
+El analisis predictivo en el que vamos a trabajar en los siguientes laboratorios se realizara sobre las siguientes variables objetivo:
+
+- Analisis Predictivo sobre la variable *score* (Archivo winequality-white.csv)
+- Analisis de Clasificacion sobre la variable *high_quality* (Archivo winequality-red.csv)
+
+Vamos ahora a preparar los datos y las variables orientandolos a este tipo de modelos  
+
+### Correlacion y Multicolinearidad
+Otro analisis que debemos realizar antes de empezar a crear un modelo, es elegir cuales variables incluir y cuales no dependiendo de la variable que vamos a predecir, esta se conoce como **variable objetivo**.  Es importante tener en cuenta atributos que aporten valor predictivo a la variable objetivo y eliminar de nuestro analisis aquellas que no o que, por el contrario introduscan ruido al modelo (Ya hemos hecho esto, por ejemplo con el atributo *color*).  Esto facilitara al modelo de tener que elegir y buscar tendencias sobre muchas variables que, de anteano sabemos que no estan relacionadas con nuestra variable objetivo.  Este proceso se le conoce como **feature engineering***  
+
+Ademas de eliminar las columnas con ruido o con muchos Nulos, como ya hicimos con el atributo *color*, es importante validar la **correlacion entre variables**, es decir, analizar la relacion de cambio entre cada pareja de variables, si una varibale aumenta, aumenta la otra? disminuye? En la misma proporcion?.  
+Cuando dos **variables predictivas** estan altamente correlacionadas se le llama [multicolinearidad](https://en.wikipedia.org/wiki/Multicollinearity), y sobre esto debemos tener cuidado, pues puede desestabilizar nuestro modelo.  Entre mas correlacionadas esten dos variables, no sirve de nada incluir las dos en el modelo pues menor valor le aportaran, una es redundante con la otra.
+
+Por otro lado, si una variable predictiva esta altamente correlacionada con la **variable objetivo**, en este caso es algo bueno! Significa que es una variable que i querremos incluir en el modelo la que explican en gran parte la varianza de la misma.
+
+Vamos a analizar **visualmente** la relacion de las variables entre si, asi como con la variable objetivo *score*:
+
+```{r}
+# Esta funcion puede tardar unos minutos. Se recomienda variar la
+# cantidad de columnas con las que se va realizar el analisis
+scatterplotMatrix(~fixed_acidity+volatile_acidity+citric_acid+residual_sugar|score, data = wine_df)
+#scatterplotMatrix(~fixed_acidity+volatile_acidity+citric_acid+residual_sugar
+#      +chlorides+free_sulfur_dioxide+total_sulfur_dioxide+density+pH
+#      +sulphates+alcohol|score, data = wine_df)
+```
+
+Esta funcion nos permite realizar varios analisis al tiempo:
+- Mapas de dispersion de cada pareja de variables: Que variables se encuentran correlacionadas entre si? Positivamente o Negativamente?
+- En la columna o fila de graficas de *score* (nuestra variable objetivo para prediccion) nota alguna variable predictiva altamente correlacionada que nos aporte alto valor predictivo?
+- La diagonal nos muestra la dispersion de cada variable: Nota algo raro sobre la dispersion de alguna variable en particular?
+- Los colores en la graficas muestran la variable *score* (nuestra variable objetivo para clasificacion), nota alguna variable predictiva altamente correlacionada que nos aporte alto valor predictivo?
+
+Ademas de verlo graficamente, existe un indicador llamado **indice de correlacion** que permte calcular numericamente que tan relacionadas estan las variables. Este indicador varia de -1 (Correlacion *altamente negativa*) a 1 (Correlacion *altamente positiva*)
+
+```{r}
+cov(wine_df)
+```
+Es mas preciso que revisar las graficas una a una, pero ahora son muchos numeros y decimales lo que hace dificil lectura o la toma de alguna decision...
+Que pasa si vemos estos valores como un mapa de calor?
+
+```{r}
+# Esta primera funcion es solo para asignar colores
+col.corrgram <- function(ncol){   
+  colorRampPalette(c("darkgoldenrod4", "burlywood1",
+                     "darkkhaki", "darkgreen"))(ncol)}
+
+corrgram(wine_df, order=NULL, lower.panel=panel.shade,
+         upper.panel=panel.shade, text.panel=panel.txt,
+         diag.panel=NULL)
+```
+
+Mucho mejor!  Que podemos observar ahora de los atributos?  
+Hay unos mas correlacionados que otros? Eso es bueno? o malo?  
+*Recuerde que la columna **score** sera nuestra variable objetivo, alta correlacion positiva o negativa con ellas es algo **bueno**.*  
+
+Tenga en cuenta sus descubrimientos para los proximos laboratorios.  
+Por ahora, vamos a guardar el set de datos con las transformaciones y limpieza que hemos realizado para usarlo en las siguientes clases.
+
+```{r}
+write.csv(wine_df, 'data/winequality-whiteR_clean.csv', row.names=T)
+```
+**Taller**
+
+- Repita el ejercicio para el archivo *winequality-red.csv* en la misma ruta para corregir la calidad de datos y validar su correlacion.  (En ese caso, el archivo no tiene el campo *score* sino *high_quality* que en ese caso sera nuestra variable objetivo pues es el archivo que usaremos para los laboratorios de **Clasificacion**)
+- Que otros descubrimientos encuentra en los datos? Intente trabajar con estadarizacion de datos...
