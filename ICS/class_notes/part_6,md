@@ -1,0 +1,16 @@
+# Algorítmos de llave pública o Asimétricos
+
+## Recorderis Algorítmos simétricos
+- En la criptografía de llave privada, simétricos, se usaban una única llave. Con esta se cifraba y descifraba el mensaje.
+
+Problemas:
+- Ponerse de acuerdo con la llave
+- Se debía generar una llave para cada mensaje
+- La llave debía enviarse por un canal seguro.
+
+## Características
+- Siempre hay dos llaves
+  - Pública
+  - Privada
+- Las dos llaves tienen una relación matemática muy fuerte
+- Calcular la llave privada a partir de la llave pública es **muy** dificil.

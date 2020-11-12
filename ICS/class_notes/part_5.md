@@ -29,4 +29,12 @@ $\phi(21)$ tiene 12 elementos
 
 ## Teoréma de Euler
 
-$$ if\mkern5mu a \in z_n^*, a^{\phi(n)} \equiv 1 \mkern5mu mond(n) $$
+$$ if\mkern5mu a \in z_n^*, a^{\phi(n)} \equiv 1 \mkern5mu mod(n) $$
+
+## El orden de un entero
+
+$$ord(a) = min(t:a^t \equiv 1 \mkern5mu mod(n))$$
+
+Ejemplo:
+
+$$ord(5) = min(t: 5^t \equiv 1 \mkern5mu mod(7)) = 6$$
