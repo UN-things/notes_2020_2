@@ -1,0 +1,416 @@
+---
+title: "Lab02 - Prediccion y Clasificacion"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+Configuracion de librerias y Ruta de trabajo
+```{r}
+library(dplyr)
+library(caTools)
+library(class)
+library(e1071)
+library(rpart)
+library(rpart.plot)
+library(tree)
+library(randomForest)
+#current_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
+#setwd(current_dir)
+```
+
+## Cargar el set de datos
+Vamos a continuar usando el set de datos que limpiamos y transformamos en el [laboratorio pasado](./Lab01r_Preprocesamiento.Rmd) en donde se registran los atributos de varias botellas de vino junto con su calidad.  De esta forma usaremos el mismo dataset a lo largo de todo el flujo del curso como si se tratara de un proyecto real!
+
+```{r}
+wine_df <- read.csv('data/winequality-white_clean.csv', header = T, fileEncoding = 'utf-8')
+glimpse(wine_df)
+```
+
+## 2a. Prediccion  
+Ya hemos visto los conceptos basicos de una regresion: 
+- Aprendizaje **supervisado**
+- Predecir una variable **continua**
+- Se busca encontrar los **pesos** de las variables para validar cada una de ellas como influye en nuestra variable final  
+
+Lo primero que debemos hacer es separar nuestra variable objetivo (*score*) de las variables predictivas (En este caso son todas las demas, excepto *high_quality* que sera nuestra variable objetivo en el laboratorio de clasificacion)
+
+```{r}
+x = wine_df[, !names(wine_df) %in% c("score")] 
+y = wine_df['score']
+```
+```{r}
+set.seed(42) 
+sample = sample.split(wine_df[,1], SplitRatio = .75)
+train_df = subset(wine_df, sample == TRUE)
+test_df  = subset(wine_df, sample == FALSE)
+```
+
+### OLS (Ordinary Least Squares)
+
+Llamado asi porque busca los coeficientes de la ecuacion que minimizen la suma de las distancias verticales entre los datos y el modelo.  Para aplicar este modelo se debe validar que no haya multicolinealidad entre las variables predictivas, pues no la detecta facilmente.
+![OLS](https://miro.medium.com/max/3268/1*AwC1WRm7jtldUcNMJTWmiA.png)
+
+- **Precision:** Alta, para variables no correlacionadas (Condiciones para OLS [aqui](https://statisticsbyjim.com/regression/ols-linear-regression-assumptions))
+- **Velocidad:** Rapido
+- **Explicativo:** Mucho (Peso/Importancia de cada variable)
+- **Sensible a cambios:** Poco, OLS crea una estimacion genralizada a todos los puntos, un solo valor atipico modificara los pesos de las variables pero no drasticamente, pues seguira convergiendo a los demas puntos
+- **Deteministico**: Si
+
+```{r}
+names(wine_df)
+```
+
+Empecemos con un modelo sencillo: una regresion sobre una sola variable.  Elija una de las columnas predictivas y usemosla como onica variable predictiva.  *Ej: chlorides*
+
+```{r}
+model_ols <- lm(formula=score ~ chlorides, data = wine_df)
+```
+
+En el caso de **una** variable predictiva y una variable objetivo, podemos ver graficamente el comportamiento de nuestro modelo:
+
+```{r}
+plot(wine_df$chlorides, wine_df$score, type='p', col='purple', xlab='chlorides', ylab='score')
+abline(model_ols, col = 'blue')
+```
+
+Con una sola variable es posible que el modelo no se ajuste correctamente a los datos, podemos ver que daria predicciones erradas.  Podemos incluir otras variables al modelo que nos permitan darle mas flexibilidad a l ecuacion
+
+En el parametro para *lm()* se le indica al modelo que necesitamos una funcion de la forma:
+> Y ~ X1 + X2 + X3 + X4 + ... + Xn  
+
+En donde Y es nuestra variale objetivo y cada Xi son las variables predictivas para las que se debe buscar un peso en la ecuacion.
+
+```{r}
+model_ols <- lm(formula=score ~ fixed_acidity + volatile_acidity + citric_acid + residual_sugar +
+                chlorides + free_sulfur_dioxide + total_sulfur_dioxide + density + pH+
+                sulphates + alcohol, data = wine_df)
+model_ols
+```
+```{r}
+# Entrega tambien distribucion de residuales
+summary(model_ols) 
+```
+```{r}
+# Intervalos de confianza
+confint(model_ols) 
+```
+La funcion *summary()* nos entrega un monton de informacion, vamos a analizar las que mas nos interesan:  
+
+- Modelo utilizado (OLS) y distribucion de residuales *(Un dato que no entrega el summary de Python)*
+- Degrees of Freedom (Flexibilidad del modelo: #Observacionnes - #Variables) y Df modelo (#Variables -Intercepto)
+- R-squared o R2, los datos de la parte inferior, es el cuadrado del coeficiente de correlacion de todas las variables y representa el porcentaje estimado de varianza que puede ser explicado por el modelo.  
+- Adjusted R-squared es un R2 que penaliza coeficientes muy grandes o muy bajos y variables redundantes.  
+
+- La tabla del centro nos muestra los coeficientes encontrados por el modelo para cada variable, junto con el error estandar de cada uno.  Esto significa que nuestro modelo tiene la forma:
+
+$$
+y = 153.5215 + 0.1088(fixed acidity) - 1.6731(volatile acidity) + ... + 0.2012(alcohol)
+$$
+
+- Los valores t y valores P (*Pr>|t|*), para cada variable, indican si esta afecta o no la variable objetivo.  Son valores estadisticos, por lo general se busca que P < 0.05
+- La funcion *confint()* nos entrega los intervalos de confianza de cada variable [0.025 - 0.975]
+
+Por ahora, vamos a trabajar con estos valores para mejorar nuestro modelo.  Si quieres saber en detalle el significado y el impacto de modificar cada uno de estos resultados, puedes leer mas [aqui](https://www.institutomora.edu.mx/testU/SitePages/martinpaladino/modelos_lineales_con_R.html)
+
+**Taller**  
+Juegue un poco con las variables en la funcion *lm()* para ver si logra aumentar el R2 del modelo.  Por ejemplo:
+
+- Revise las variables que, segon el  [laboratorio pasado](./Lab01r_Preprocesamiento.Rmd) estan correlacionadas entre si y aquellas que estan correlacionadas con la variabe objetivo
+- Revise las variables que, segon el modelo afectan la variable objetivo (*P valores*)  
+
+Una vez encuentre un modelo que considere adecuado, vamos a a guardarlo para futuros laboratorios:
+
+```{r}
+saveRDS(model_ols, file = "models/model_ols.rds")
+```
+
+### Modelos Polinomiales  
+A diferencia de Python, algunos modelos en R pueden ser configurados para que *busquen una formula* usando las variables que se indican por parametro como hicimos en el ejercicio anterior.  
+De igual manera, podemos dividir el dataset en entrenamiento y prueba y **diferenciar las variables predictivas (x) de la variable objetivo (y)**, para no "mostrarlas" al modelo en la fase de pruebas:
+
+```{r}
+set.seed(42) 
+sample = sample.split(wine_df[,1], SplitRatio = .75)
+train_df = subset(wine_df, sample == TRUE)
+test_df  = subset(wine_df, sample == FALSE)
+
+columnas = c('residual_sugar', 'alcohol', 'citric_acid')
+x_train = train_df[columnas]
+x_test = test_df[columnas]
+y_train = train_df['score']
+y_test = test_df['score']
+```
+```{r}
+model_poly = lm(formula=score ~ polym(residual_sugar, alcohol, citric_acid, degree=2, raw=T), 
+                data = train_df)
+summary(model_poly)
+```
+En celdas anteriores hemos dividido el conjunto de datos en dos subconjuntos: Entrenamiento y Prueba.  
+Ahora, hemos tomado solo tres de ellas (*residual_sugar, alcohol, citric_acid*), para el ejemplo y creado y entrenado un modelo polinomial usando onicamente el set de entrenamiento, y hemos calculado el $R2$ (*score*) usando el set de pruebas: **22%**, el modelo aon puede mejorar, esto lo haremos mas adelante.  
+Pero cual es este modelo/ecuacion que hemos creado, asi como lo vimos en la seccion pasada?
+
+```{r}
+model_poly
+```
+Parecen ser muchos? Porque? Como saber a que variable corresponde cada uno?  
+La funcion anterior, imprimir el contenido del modelo, nos muestra, no solo los coeficientes, sino la "combinacion" de variables (exponentes) que afecta cada uno (Por ejemplo 1.1.0 significa $residual sugar^1 * alcohol^1 * citricacid^0$, mientras que 2.0.0 significa $residual sugar^2 * alcohol^0 * citricacid^0$ y asi sucesivamente)  
+Pero no es necesario realizar este calculo cada vez que queramos predecir un dato nuevo. El modelo nos entrega predicciones de un nuevo set de datos usando la funcion *predict*
+
+```{r}
+predict(model_poly, x_test)
+```
+
+**Taller**  
+Juegue un poco con las variables a incluir o no en el modelo, asi como el grado de la regresion polinomial para ver si logra aumentar el score del modelo.
+
+Una vez encuentre un modelo que considere adecuado, vamos a a guardarlo para futuros laboratorios:
+
+```{r}
+saveRDS(model_poly, file = "models/model_poly.rds")
+```
+
+## 2b. Clasificacion  
+Ya hemos visto porque una regresion lineal es diferente a una clasificacion, tanto en el concepto como matematicamente: 
+- Predecir una variable **categorica**
+- Se busca encontrar los patrones o similitudes entre cada *clase* para poder clasificar despues un registro nuevo  
+
+Sin embargo, al igual que en la Prediccion, lo primero que debemos hacer es dividir el dataset en entrenamiento y pruebas y separar nuestra variable objetivo (*high_quality*) de las variables predictivas (En este caso son todas las demas, excepto *score* que fue nuestra variable objetivo en el laboratorio de prediccion)
+```{r}
+wine_df <- read.csv('data/winequality-red_clean.csv', header = T, fileEncoding = 'utf-8')
+glimpse(wine_df)
+```
+
+```{r}
+sample = sample.split(wine_df[,1], SplitRatio = .75)
+train_df = subset(wine_df, sample == TRUE)
+test_df  = subset(wine_df, sample == FALSE)
+
+columnas = c('pH', 'alcohol')
+x_train = train_df[columnas]
+x_test = test_df[columnas]
+y_train = train_df['high_quality']
+y_test = test_df['high_quality']
+```
+### Regresion Logistica
+
+Similar a una regresion lineal, busca definir el comportamiento de los datos a traves de una **ecuacion**, con la diferencia que en este caso estamos buscando una variable categorica (1/0 o SI/NO), por lo que no nos serviria una ecuacion que retorne un valor entre $(-\infty, \infty)$.  
+Sin embago, al ser una ecuacion, asume que los datos son linealmente separables:
+
+![](https://qph.fs.quoracdn.net/main-qimg-4ddda954955cabf0fb59364cc37232b7.webp)
+
+- **Precision:** Alta, para variables no correlacionadas y modelos linealmente separables
+- **Velocidad:** Rapido
+- **Explicativo:** Mucho (Peso/Importancia de cada variable)
+- **Sensible a cambios:** Mucho, asume que los datos son separables linealmente
+- **Deteministico**: No, probabilistico
+
+Como el hecho de que sean datos linealmente separables es **muy** importante, vamos a crear un modelo con solo **dos** variables precitivas para poder ver la separacion graficamente:
+
+```{r}
+with(wine_df, plot(pH, alcohol, col=high_quality+3))
+```
+
+En este caso, nuestra variable predictiva *high_quality*, representada por el color de los puntos, parece ser linealmente separable por la variable *alcohol*, pero no tanto por la variable *pH*.  
+
+Como afecta esto al modelo?
+
+```{r}
+model_log = glm(formula=high_quality ~ pH + alcohol, 
+                data = train_df, family=binomial(link="logit"))
+model_log
+```
+
+Nuevamente hemos entrenado el modelo con los datos de entrenamiento y calculamos el error con datos de entrenamiento, aunque no parece un score tan malo, veamos como se comporta el modelo:
+
+```{r}
+proba <- predict(model_log, x_test, type="response")
+proba
+```
+```{r}
+y_pred <- ifelse(proba > 0.5,1,0)
+head(y_pred)
+head(y_test)
+```
+En R, es mas preciso calcular el error usando los datos del test de prueba, ya que el score (R2) es calculado con el test de entrenamiento
+```{r}
+mean(y_pred != y_test)
+```
+
+**Taller**  
+Juegue un poco con las variables a incluir en el modelo para ver si logra aumentar el score del modelo y sus predicciones.  Algunas sugerencias:
+
+- Valide que variables permiten la separacion lineal de los datos  
+- Puede incluir mas de dos variables para entrenar el modelo, es lo mas recomendable, pero recuerde que no sera posible visualizar la separacion graficamente  
+- Intente con el parametro *family* de la funcion glm(), este permite generar otro tipo de lineas que pueden mejorar el modelo (Los posibles valores para el parametro y saber en detalle que tipo de modelo genera cada uno puede consultar [aqui](https://rpubs.com/JessicaP/459130).  Tenga en cuenta GLM (General Lineal Model, puede generar todo tipo de models lineales y estamos buscando un modelo de *clasificacion binaria*)
+
+Una vez encuentre un modelo que considere adecuado, vamos a a guardarlo para futuros laboratorios:
+```{r}
+saveRDS(model_log, file = "models/model_log.rds")
+```
+
+### Vecinos mas cercanos (kNN)
+
+Es un metodo de clasificacion para problemas **no lineales**, y tal vez con una metodologia/matematica mas sencilla.
+Consiste en ver los datos como puntos en un plano (de N dimensiones cuantas variables incluya el modelo) y clasificar cualquier "punto nuevo" en la misma clase a la que pertenescan los *k* puntos mas cercanos (*k* puede ser definido por nosotros mismos)
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTIr4A7USCWANPP8HDtHIOmN2HOY_CK1PhL2Q&usqp=CAU" alt="kNN" width="400"/>
+
+- **Precision:** Depende intensamente del valor de k.  muy eficiente para datasets sin ruido
+- **Velocidad:** Depende de dimensiones (*Realmente no construye ningon modelo*)
+- **Explicativo:** Mucho (Es una ecuacion sencilla)
+- **Sensible a cambios:** Mucho a atributos irrelevantes y la complejidad del modelo
+- **Deteministico**: Si
+
+```{r}
+x_train = train_df[, !names(train_df) %in% c("high_quality")]
+x_test = test_df[, !names(test_df) %in% c("high_quality")]
+y_train = train_df$high_quality
+y_test = test_df$high_quality
+```
+```{r}
+y_pred <- knn(x_train, x_test, cl=y_train, k=18)
+mean(y_pred != y_test)
+```
+En este caso, se eligio el nomero de vecinos (k) aleatoriamente, y con razon no obtuvimos un score bueno. Pero cuidado:  
+
+- Si k es muy pequeño, tendiendo a 1, el modelo va a decidir por la clase del ejemplo mas cercano. Esto hace el modelo muy sensible al ruido o a pequeños cambios.  
+- Si k es muy grande, tendiendo a N, el modelo no podra gneralizar.  Nunca analizara patrones, reglas, ni similitudes sino que decidira siempre *lo que diga la mayoria*  
+
+**Taller**  
+Juegue un poco con el valor de k (*k* en la funcion *knn*) para mejorar el score del modelo.  
+Tambien puede intentar eliminando aquellas variables que generen ruido o atipicos sobre los datos.
+
+Una vez encuentre un modelo que considere adecuado, vamos a a guardarlo para futuros laboratorios:
+```{r}
+saveRDS(y_pred, file = "models/model_knn.rds")
+```
+### Maquinas de Soporte Vectorial (SVM)
+
+Cuando hablamos de Regresion logistica, buscamos **una linea** que divida los datos de la mejor manera. Pero, que pasa cuando hay mas de una linea que cumple con esta condicion? Como elegir la mejor?  
+Las maquinas de soporte vectorial buscan, por el contrario, un *hiperplano*: un conjunto de lineas que maximicen la distancia/margen entre los puntos mas cercanos de cada clase.  A estos puntos mas cercanos se les conoce como *vectores de soporte*
+
+<img src="https://d2h0cx97tjks2p.cloudfront.net/blogs/wp-content/uploads/sites/2/2017/08/how-svm-works.png" alt="SVM" width="400"/>
+
+- **Precision:** Alta si se configura correctamente
+- **Velocidad:** Lento para una gran cantidad de datos
+- **Explicativo:** No
+- **Sensible a cambios:** Si, sobretodo a ejemplos mal etiquetados
+- **Deteministico**: Si
+
+```{r}
+x_train = train_df[, !names(train_df) %in% c("high_quality")]
+x_test = test_df[, !names(test_df) %in% c("high_quality")]
+y_train = train_df$high_quality
+y_test = train_df$high_quality
+```
+```{r}
+model_svm <- svm(x_train, y_train, kernel='radial')
+```
+```{r}
+probas <- predict(model_svm, x_test, decision.values = TRUE)
+y_pred <- ifelse(probas > 0.5,1,0)
+mean(y_pred != y_test)
+```
+Aon tenemos un error un poco alto.  Sin embargo, una de las ventajas de SVM, a pesar de ser un algoritmo lento y sensible al ruido, es su versatilidad para manejar problemas no lineales.  Esto lo logra por medio del parametro **kernell** que permite definir "la forma" del/los hiperplano/s que va a generar:
+![Kernell](https://i.imgur.com/HKTLn35.png)
+
+**Taller**  
+Juegue un poco con las columas a incluir en el modelo, asi como con el **kernel** de la funcion *svm()*.  Los posibles valores de este parametro son:
+
+- 'linear'
+- 'polynomial' (En este caso tambien se puede configurar el parametro *degree*)
+- 'radial basis' (rbf)
+- 'sigmoid'
+
+Puede que enuentre varios modelos que le parezcan convenientes.  Se sugiere guardar cada uno de la siguiente manera (cambiando el nombre del archivo):
+```{r}
+saveRDS(model_svm, file = "models/model_svm.rds")
+```
+
+### Árboles de Decision
+
+Es el tipo de algoritmo mas facil de entender, pues se basa en reglas condicionales muy similares al lenguaje humano (*Si... entonces...*).  El entrenamiento consiste en encontrar las reglas y condiciones que cubran la mayor cantidad de casos.  
+El modelo graficamente puede ser representado mediante un arbol en el que los **nodos intermedios** son decisiones basadas en alguno de los atributos predictivos, y las **hojas** son la clase objetivo.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/CART_tree_titanic_survivors.png" alt="Decision Tree" width="400"/>
+
+- **Precision:** Alta tendencia al sobreajuste (memorizar datos)
+- **Velocidad:** Rapido. La validacion de reglas son condicionales
+- **Explicativo:** Si
+- **Sensible a cambios:** Si, pequeños cambios en los datos puede resultar en arboles completamente diferentes.
+- **Deteministico**: No
+
+```{r}
+sample = sample.split(wine_df[,1], SplitRatio = .75)
+train_df = subset(wine_df, sample == TRUE)
+test_df  = subset(wine_df, sample == FALSE)
+```
+```{r}
+model_tree <- rpart(high_quality ~ ., data = train_df, method = 'class')
+```
+```{r}
+y_pred = data.frame(predict(model_tree, x_test, type="class"))
+mean(y_pred != y_test)
+```
+
+En cada uno de los nodos, el algoritmo valida que variable y que valor de esa variable produce un nivel mayor de "pureza" entre las hojas (*Entropia/gini index*).  Si este nivel no es suficiente para dar una buena decision, se hace una nueva particion en cada una de las hojas, validando nuevamente todas las variables predictivas.  
+
+Por esto mismo, los arboles de decision tienen varios parametros que configurar (Nivel minimo de entropia, profundidad maxima del arbol, minima cantidad de muestras para las hojas, etc.)  
+Otra de las ventajas de los arboles es que son **tan explicativos**, que pueden ser graficados para validar el proceso de toma de cada decision en el proceso de prediccion:
+```{r}
+rpart.plot(model_tree)
+```
+
+**Taller**  
+Juegue un poco con las columas a incluir en el modelo, asi como con los parametros de la funcion *rpart()*. Para ello es necesario llamar la funcion *rpart.control()* y configurar algunos parametros como *max_depth, min_samples_split, min_samples_leaf, max_leaf_nodes, ...*.
+Para mayor infirmacion puede consultar [aqui](https://www.rdocumentation.org/packages/rpart/versions/4.1-15/topics/rpart.control).
+
+Una vez encuentre un modelo que considere adecuado, vamos a a guardarlo para futuros laboratorios:
+```{r}
+saveRDS(model_tree, file = "models/model_tree.rds")
+```
+
+### Ensambles de Modelos
+Cuando un modelo es **no deterministico**, pero tiende al **sobreajuste**, es decir, aprende de memoria las reglas y patrones del set de entrenamiento, hasta el punto de no predecir correctamente sobre el test de entrenamiento, esto puede solucionarse haciendo un ensamble o conjunto de modelos.  Esto es, construir varios modelos "debiles" y crear uno "robusto", tomando la decision final dependiendo de:
+
+- "Democracia", el resultado es lo que diga la mayoria de modelos, realizando cada uno **bajo un set de entrenamiento diferente** (*bagging*)
+- "Aleatorio", el resultado es lo que diga la mayoria de arboles de decision, realizando cada uno con un set aleatorio de  variables (*randomForest*)
+
+<img src="https://ars.els-cdn.com/content/image/3-s2.0-B9780128177365000090-f09-17-9780128177365.jpg" alt="Rnd Forest" width="500"/>
+
+- **Precision:** Alta, varios modelos eliminan el sobreajuste
+- **Velocidad:** Lento, por velocidad se sacrifica precision
+- **Explicativo:** Si, aunque no entrega el modelo, entre importancia de variables
+- **Sensible a cambios:** No mucho, un dato atipico peude modificar un arbol, pero no todos
+- **Deteministico**: No
+```{r}
+sample = sample.split(wine_df[,1], SplitRatio = .75)
+train_df = subset(wine_df, sample == TRUE)
+train_df$high_quality <- as.factor(train_df$high_quality)
+test_df  = subset(wine_df, sample == FALSE)
+```
+```{r}
+model_forest <- randomForest(high_quality ~ ., data = train_df, 
+                             type = 'classification', ntree=20)
+y_pred = data.frame(predict(model_forest, x_test))
+mean(y_pred != y_test)
+```
+
+Note que, si la anterior celda se ejecuta varias veces, cada vez da un valor diferente.  Esto significa que el modelo es **no deterministico**.  Aunque el error cambie con solo ejecutarlo, es mejor configurar algunos parametros para indicarle al modelo por donde esta la mejor solucion.  
+El concenso realizado entre los modelos permite al algoritmo, a pesar de ser no deterministico, darse una idea de la importancia de cada variable en la toma de la decision:
+```{r}
+imp = importance(model_forest)
+imp
+```
+
+**Taller**  
+Juegue un poco con las columnas a incluir en el modelo, en este caso revise la importancia de variables.  
+Puede tambien jugar con los parametros de la funcion *randomForest()*, como *ntree* (Cantidad de modelos/arboles a generar), *maxnodes. nodesize, etc.*
+
+Una vez encuentre un modelo que considere adecuado, vamos a a guardarlo para futuros laboratorios:
+```{r}
+saveRDS(model_tree, file = "models/model_tree.rds")
+```
+
