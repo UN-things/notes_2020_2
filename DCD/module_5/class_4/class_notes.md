@@ -1,0 +1,1 @@
+- Red neuronal: conjuntos de perceptrones.
