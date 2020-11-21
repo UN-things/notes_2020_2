@@ -14265,7 +14265,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
@@ -14297,7 +14297,21 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>randomForest 4.6-14
+<pre>
+Attaching package: ‘dplyr’
+
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+randomForest 4.6-14
 
 Type rfNews() to see new features/changes/bug fixes.
 
@@ -14327,7 +14341,7 @@ The following object is masked from ‘package:dplyr’:
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">wine_df</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;data/winequality-white_clean.csv&#39;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">fileEncoding</span> <span class="o">=</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
@@ -14343,6 +14357,21 @@ The following object is masked from ‘package:dplyr’:
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>Registered S3 method overwritten by &#39;cli&#39;:
+  method     from
+  print.tree tree
+
+</pre>
+</div>
+</div>
 
 <div class="jp-OutputArea-child">
 
@@ -14388,7 +14417,7 @@ $ score                <span style="color: rgb(148,148,148)">&lt;dbl&gt;</span> 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">wine_df</span><span class="p">[,</span> <span class="o">!</span><span class="nf">names</span><span class="p">(</span><span class="n">wine_df</span><span class="p">)</span> <span class="o">%in%</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;score&quot;</span><span class="p">)]</span> 
@@ -14403,7 +14432,7 @@ $ score                <span style="color: rgb(148,148,148)">&lt;dbl&gt;</span> 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span> 
@@ -14434,7 +14463,7 @@ $ score                <span style="color: rgb(148,148,148)">&lt;dbl&gt;</span> 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">names</span><span class="p">(</span><span class="n">wine_df</span><span class="p">)</span>
@@ -14482,7 +14511,7 @@ $ score                <span style="color: rgb(148,148,148)">&lt;dbl&gt;</span> 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">model_ols</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">score</span> <span class="o">~</span> <span class="n">chlorides</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">wine_df</span><span class="p">)</span>
@@ -14502,7 +14531,7 @@ $ score                <span style="color: rgb(148,148,148)">&lt;dbl&gt;</span> 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">wine_df</span><span class="o">$</span><span class="n">chlorides</span><span class="p">,</span> <span class="n">wine_df</span><span class="o">$</span><span class="n">score</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&#39;p&#39;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&#39;purple&#39;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&#39;chlorides&#39;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&#39;score&#39;</span><span class="p">)</span>
@@ -16946,7 +16975,7 @@ height=420
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">model_ols</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">score</span> <span class="o">~</span> <span class="n">fixed_acidity</span> <span class="o">+</span> <span class="n">volatile_acidity</span> <span class="o">+</span> <span class="n">citric_acid</span> <span class="o">+</span> <span class="n">residual_sugar</span> <span class="o">+</span>
@@ -17001,7 +17030,7 @@ Coefficients:
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Entrega tambien distribucion de residuales</span>
@@ -17069,7 +17098,7 @@ F-statistic: 152.1 on 11 and 4449 DF,  p-value: &lt; 2.2e-16
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Intervalos de confianza</span>
@@ -17155,7 +17184,7 @@ Juegue un poco con las variables en la funcion <em>lm()</em> para ver si logra a
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">model_ols</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;models/model_ols.rds&quot;</span><span class="p">)</span>
@@ -17176,7 +17205,7 @@ De igual manera, podemos dividir el dataset en entrenamiento y prueba y <strong>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">42</span><span class="p">)</span> 
@@ -17199,7 +17228,7 @@ De igual manera, podemos dividir el dataset en entrenamiento y prueba y <strong>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">model_poly</span> <span class="o">=</span> <span class="nf">lm</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">score</span> <span class="o">~</span> <span class="nf">polym</span><span class="p">(</span><span class="n">residual_sugar</span><span class="p">,</span> <span class="n">alcohol</span><span class="p">,</span> <span class="n">citric_acid</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">T</span><span class="p">),</span> 
@@ -17317,7 +17346,7 @@ Pero cual es este modelo/ecuacion que hemos creado, asi como lo vimos en la secc
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">model_poly</span>
@@ -17388,7 +17417,7 @@ Pero no es necesario realizar este calculo cada vez que queramos predecir un dat
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">predict</span><span class="p">(</span><span class="n">model_poly</span><span class="p">,</span> <span class="n">x_test</span><span class="p">)</span>
@@ -17438,7 +17467,7 @@ Juegue un poco con las variables a incluir o no en el modelo, asi como el grado 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">model_poly</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;models/model_poly.rds&quot;</span><span class="p">)</span>
@@ -17463,7 +17492,7 @@ Juegue un poco con las variables a incluir o no en el modelo, asi como el grado 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">wine_df</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;data/winequality-red_clean.csv&#39;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">fileEncoding</span> <span class="o">=</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
@@ -17512,7 +17541,7 @@ $ high_quality         <span style="color: rgb(148,148,148)">&lt;int&gt;</span> 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="nf">sample.split</span><span class="p">(</span><span class="n">wine_df</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span> <span class="n">SplitRatio</span> <span class="o">=</span> <span class="n">.</span><span class="m">75</span><span class="p">)</span>
@@ -17550,7 +17579,7 @@ Sin embago, al ser una ecuacion, asume que los datos son linealmente separables:
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">with</span><span class="p">(</span><span class="n">wine_df</span><span class="p">,</span> <span class="nf">plot</span><span class="p">(</span><span class="n">pH</span><span class="p">,</span> <span class="n">alcohol</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">high_quality</span><span class="m">+3</span><span class="p">))</span>
@@ -20713,7 +20742,7 @@ height=420
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">model_log</span> <span class="o">=</span> <span class="nf">glm</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">high_quality</span> <span class="o">~</span> <span class="n">pH</span> <span class="o">+</span> <span class="n">alcohol</span><span class="p">,</span> 
@@ -20768,7 +20797,7 @@ Residual Deviance: 1332 	AIC: 1338</pre>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">proba</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">model_log</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;response&quot;</span><span class="p">)</span>
@@ -20811,7 +20840,7 @@ Residual Deviance: 1332 	AIC: 1338</pre>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">y_pred</span> <span class="o">&lt;-</span> <span class="nf">ifelse</span><span class="p">(</span><span class="n">proba</span> <span class="o">&gt;</span> <span class="m">0.5</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">)</span>
@@ -20889,7 +20918,7 @@ Residual Deviance: 1332 	AIC: 1338</pre>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">mean</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">!=</span> <span class="n">y_test</span><span class="p">)</span>
@@ -20938,7 +20967,7 @@ Juegue un poco con las variables a incluir en el modelo para ver si logra aument
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">model_log</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;models/model_log.rds&quot;</span><span class="p">)</span>
@@ -20967,7 +20996,7 @@ Consiste en ver los datos como puntos en un plano (de N dimensiones cuantas vari
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">x_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[,</span> <span class="o">!</span><span class="nf">names</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span> <span class="o">%in%</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;high_quality&quot;</span><span class="p">)]</span>
@@ -20984,7 +21013,7 @@ Consiste en ver los datos como puntos en un plano (de N dimensiones cuantas vari
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">y_pred</span> <span class="o">&lt;-</span> <span class="nf">knn</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">cl</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="m">18</span><span class="p">)</span>
@@ -21035,7 +21064,7 @@ Tambien puede intentar eliminando aquellas variables que generen ruido o atipico
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;models/model_knn.rds&quot;</span><span class="p">)</span>
@@ -21064,7 +21093,7 @@ Las maquinas de soporte vectorial buscan, por el contrario, un <em>hiperplano</e
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">x_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[,</span> <span class="o">!</span><span class="nf">names</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span> <span class="o">%in%</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;high_quality&quot;</span><span class="p">)]</span>
@@ -21081,7 +21110,7 @@ Las maquinas de soporte vectorial buscan, por el contrario, un <em>hiperplano</e
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">model_svm</span> <span class="o">&lt;-</span> <span class="nf">svm</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s">&#39;radial&#39;</span><span class="p">)</span>
@@ -21095,7 +21124,7 @@ Las maquinas de soporte vectorial buscan, por el contrario, un <em>hiperplano</e
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">probas</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">model_svm</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">decision.values</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
@@ -21162,7 +21191,7 @@ Juegue un poco con las columas a incluir en el modelo, asi como con el <strong>k
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">model_svm</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;models/model_svm.rds&quot;</span><span class="p">)</span>
@@ -21191,7 +21220,7 @@ El modelo graficamente puede ser representado mediante un arbol en el que los <s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[41]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="nf">sample.split</span><span class="p">(</span><span class="n">wine_df</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span> <span class="n">SplitRatio</span> <span class="o">=</span> <span class="n">.</span><span class="m">75</span><span class="p">)</span>
@@ -21207,7 +21236,7 @@ El modelo graficamente puede ser representado mediante un arbol en el que los <s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">model_tree</span> <span class="o">&lt;-</span> <span class="nf">rpart</span><span class="p">(</span><span class="n">high_quality</span> <span class="o">~</span> <span class="n">.</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&#39;class&#39;</span><span class="p">)</span>
@@ -21221,7 +21250,7 @@ El modelo graficamente puede ser representado mediante un arbol en el que los <s
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">predict</span><span class="p">(</span><span class="n">model_tree</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;class&quot;</span><span class="p">))</span>
@@ -21266,7 +21295,7 @@ Otra de las ventajas de los arboles es que son <strong>tan explicativos</strong>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[45]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">rpart.plot</span><span class="p">(</span><span class="n">model_tree</span><span class="p">)</span>
@@ -22115,7 +22144,7 @@ Para mayor infirmacion puede consultar <a href="https://www.rdocumentation.org/p
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">model_tree</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;models/model_tree.rds&quot;</span><span class="p">)</span>
@@ -22147,7 +22176,7 @@ Para mayor infirmacion puede consultar <a href="https://www.rdocumentation.org/p
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="nf">sample.split</span><span class="p">(</span><span class="n">wine_df</span><span class="p">[,</span><span class="m">1</span><span class="p">],</span> <span class="n">SplitRatio</span> <span class="o">=</span> <span class="n">.</span><span class="m">75</span><span class="p">)</span>
@@ -22164,7 +22193,7 @@ Para mayor infirmacion puede consultar <a href="https://www.rdocumentation.org/p
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[48]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[52]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">model_forest</span> <span class="o">&lt;-</span> <span class="nf">randomForest</span><span class="p">(</span><span class="n">high_quality</span> <span class="o">~</span> <span class="n">.</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">,</span> 
@@ -22191,7 +22220,7 @@ Para mayor infirmacion puede consultar <a href="https://www.rdocumentation.org/p
 
 
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
-0.503875968992248
+0.498708010335917
 </div>
 
 </div>
@@ -22210,7 +22239,7 @@ El concenso realizado entre los modelos permite al algoritmo, a pesar de ser no 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[49]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">imp</span> <span class="o">=</span> <span class="nf">importance</span><span class="p">(</span><span class="n">model_forest</span><span class="p">)</span>
@@ -22275,7 +22304,7 @@ Puede tambien jugar con los parametros de la funcion <em>randomForest()</em>, co
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[50]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">saveRDS</span><span class="p">(</span><span class="n">model_tree</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;models/model_tree.rds&quot;</span><span class="p">)</span>
