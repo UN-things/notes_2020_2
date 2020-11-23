@@ -26,15 +26,15 @@
 - La nota del grupo eliminará la nota del peor quiz.
 
 ## Clases
-- Introducción, Conceptos y Problemas
-- Clasificación y Predicción
-- Validación de Modelos
-- Redes Neuronales: Conceptos
-- Tipos de Redes Neuronales
-- Implementación de Redes Neuronales
-- Proyecto
 
-|	Clase	|	Tema	| Material utilizado	| Presentación |
-|	:--:	|	:--:	|	:--:	|	:--:	|
-| [1](class_1/class_notes.md) | Introducción, Conceptos y Problemas | [L01-R](class_1/jupyter/lab01r_preprocessing.html) <br> [L01-Python](class_1/jupyter/lab01py_preprocessing.html) <br> [L01-R-Solved](class_1/jupyter/lab01r_preprocessing_solved.html)  <br> [L01-Python-Solved](class_1/jupyter/lab01py_preprocessing_solved.html) <br> [Carpeta](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_1/) <br> [Descargar Carpeta](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_1/) | [Presentación](https://github.com/gtzambranop/UN_2020_2/blob/develop/DCD/module_5/class_1/original_files/presentation.pdf) |
-| 2 | Clasificación y Predicción  | [L02-R](class_2/jupyter/lab02r_prediction_classification.html)<br> [L02-Python](class_2/jupyter/lab02py_prediction_classification.html) <br> [L02-Python-Solved](class_2/jupyter/lab02py_prediction_classification_solved.html) <br> [Carpeta](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_2/) <br> [Descargar Carpeta](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_2/) | [Presentación](https://github.com/gtzambranop/UN_2020_2/blob/develop/DCD/module_5/class_2/original_files/presentation.pdf) |
+- [Presentación del curso](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/presentation.md)
+- [Quices Solucionados](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/quices_solved.md)
+
+|	Clase	|	Tema	| Material utilizado	|
+|	:--:	|	:--:	|	:--:	|
+| [1](class_1/class_notes.md) | Introducción, Conceptos y Problemas | [L01-R](class_1/jupyter/lab01r_preprocessing.html) <br> [L01-Python](class_1/jupyter/lab01py_preprocessing.html) <br> [L01-R-Solved](class_1/jupyter/lab01r_preprocessing_solved.html)  <br> [L01-Python-Solved](class_1/jupyter/lab01py_preprocessing_solved.html) <br> [Carpeta](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_1/) <br> [Descargar Carpeta](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_1/) |
+| [2](class_2/class_notes.md) | Clasificación y Predicción  | [L02-R](class_2/jupyter/lab02r_prediction_classification.html)<br> [L02-Python](class_2/jupyter/lab02py_prediction_classification.html) <br> [L02-Python-Solved](class_2/jupyter/lab02py_prediction_classification_solved.html) <br> [Carpeta](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_2/) <br> [Descargar Carpeta](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_2/) |
+| [3](class_3/class_notes.md) | Validación de modelos | [L03-R](class_3/jupyter/lab03r_model_validation.html) <br> [L03-Python](class_3/jupyter/lab03py_model_validation.html) <br> [L03-Python Solved](class_3/jupyter/lab03py_model_validation_solved.html) <br> [Carpeta](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_3/) <br> [Descargar Carpeta](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_3/)|
+| [4](class_4/class_notes.md) | Redes Neuronales - Conceptos  | [L04-R](class_4/jupyter/lab04r_intro_nuronal_networks.html) <br> [L04-Python](class_4/jupyter/lab04py_intro_nuronal_networks.html) <br> [L04-Python Solved](class_4/jupyter/lab04r_intro_nuronal_networks_solved.html) <br> [Carpeta](https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_4/) <br> [Descargar Carpeta](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/gtzambranop/UN_2020_2/tree/develop/DCD/module_5/class_4/) |
+| 5 | Redes Neuronales - Tipos | |
+| 6 | Redes Neuronales - Implementación | |

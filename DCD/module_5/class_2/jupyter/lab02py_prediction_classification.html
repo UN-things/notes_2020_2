@@ -14502,8 +14502,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">wine_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;score&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span> <span class="c1"># Variable objetivo</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">wine_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;score&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#Atributos predictivos</span>
 <span class="n">x</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -14644,7 +14644,11 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Población:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># El dataset de prueba tendrá un tamaño del 30% del dataset original</span>
+<span class="c1"># test_size=0.3</span>
+<span class="c1"># Es recomendable que el dataset de entrenamiento sea MAYOR al de prueba</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Población:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
 <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Muestra para Entrenamiento:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_train</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Muestra para Pruebas:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_test</span><span class="p">)))</span>
@@ -14820,10 +14824,13 @@ Muestra para Pruebas:1339
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_ols</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;score ~ fixed_acidity + volatile_acidity + citric_acid + residual_sugar +</span><span class="se">\</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Definición del modelo</span>
+<span class="n">model_ols</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;score ~ fixed_acidity + volatile_acidity + citric_acid + residual_sugar +</span><span class="se">\</span>
 <span class="s1">              chlorides + free_sulfur_dioxide + total_sulfur_dioxide + density + pH+</span><span class="se">\</span>
 <span class="s1">              sulphates + alcohol&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_df</span><span class="p">)</span>
+<span class="c1"># Entrenamientos del modelo</span>
 <span class="n">fit_ols</span> <span class="o">=</span> <span class="n">model_ols</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="c1"># Resultados obtenidos</span>
 <span class="n">fit_ols</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 
@@ -14857,10 +14864,10 @@ Muestra para Pruebas:1339
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   152.1</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Wed, 11 Nov 2020</td> <th>  Prob (F-statistic):</th> <td>2.30e-298</td>
+  <th>Date:</th>             <td>Thu, 19 Nov 2020</td> <th>  Prob (F-statistic):</th> <td>2.30e-298</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>18:41:25</td>     <th>  Log-Likelihood:    </th> <td> -5301.4</td> 
+  <th>Time:</th>                 <td>16:55:27</td>     <th>  Log-Likelihood:    </th> <td> -5301.4</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  4461</td>      <th>  AIC:               </th> <td>1.063e+04</td>
@@ -14945,8 +14952,8 @@ Muestra para Pruebas:1339
 <ul>
 <li>Modelo utilizado (OLS), cantidad de registros y de variables usadas (incluyendo intercepto)</li>
 <li>Df Residuals (Flexibilidad del modelo: #Observacionnes - #Variables) y Df modelo (#Variables -Intercepto) <em>(Un dato que no da el summary de R)</em></li>
-<li>R2, en la primera tabla, es el cuadrado del coeficiente de correlación de todas las variables y representa el porcentaje estimado de varianza que puede ser explicado por el modelo.  </li>
-<li>Adj. R2 es un R2 que penaliza coeficientes muy grandes o muy bajos y variables redundantes.  </li>
+<li>R2, en la primera tabla, es el cuadrado del coeficiente de correlación de todas las variables y representa el porcentaje estimado de varianza que puede ser explicado por el modelo. Sobre el set de entrenamiento.</li>
+<li>Adj. R2 es un R2 que penaliza coeficientes muy grandes o muy bajos y variables redundantes. Sobre el set de prueba.</li>
 <li>La tabla del centro nos muestra los coeficientes encontrados por el modelo para cada variable, junto con el error estándar de cada uno.  Esto significa que nuestro modelo tiene la forma:</li>
 </ul>
 $$
@@ -15018,7 +15025,8 @@ Juegue un poco con las variables en la función <em>smf.ols()</em> para ver si l
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># degree = Grado de le ecuación</span>
+<span class="n">model_poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">x_train_poly</span> <span class="o">=</span> <span class="n">model_poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
 <span class="n">x_test_poly</span> <span class="o">=</span> <span class="n">model_poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
 
@@ -16319,7 +16327,7 @@ Juegue un poco con las columas a incluir en el modelo, así como con los paráme
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[41]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_forest</span><span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -16344,7 +16352,7 @@ Juegue un poco con las columas a incluir en el modelo, así como con los paráme
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Error: 0.21904761904761905
+<pre>Error: 0.24761904761904763
 </pre>
 </div>
 </div>
@@ -16387,17 +16395,17 @@ El concenso realizado entre los modelos permite al algoritmo, a pesar de ser no 
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>fixed_acidity: 0.03
-volatile_acidity: 0.14
-citric_acid: 0.04
-residual_sugar: 0.02
-chlorides: 0.04
+<pre>fixed_acidity: 0.04
+volatile_acidity: 0.11
+citric_acid: 0.02
+residual_sugar: 0.04
+chlorides: 0.03
 free_sulfur_dioxide: 0.03
-total_sulfur_dioxide: 0.10
-density: 0.07
+total_sulfur_dioxide: 0.11
+density: 0.03
 pH: 0.03
-sulphates: 0.18
-alcohol: 0.32
+sulphates: 0.15
+alcohol: 0.40
 </pre>
 </div>
 </div>
