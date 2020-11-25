@@ -9,7 +9,7 @@
   - Guiselle Tatiana Zambrano Penagos
     - **Email:** gtzambranop@unal.edu.co
 - **Fecha de inicio:** 24 de noviembre de 2020
-- **Fecha de finalización:** 25 de noviembre de 2020
+- **Fecha de finalización:** 12 de diciembre de 2020
 
 ## Métodología de las sesiones
 
@@ -18,7 +18,7 @@
 - Break de 15 minutos en la mitad de la sesión.
 - Retroalimentación del quiz durante 5 minutos
 - Finalización de la parte teórica.
-- Trabajo grupal - [grupos conformados](../../module_5/project/groups.html)
+- Trabajo grupal - [grupos conformados](../module_5/project/groups.html)
 
 ## Clases
 
