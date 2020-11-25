@@ -44,3 +44,4 @@ manera presencial y virtual por medio de una plataforma de aprendizaje.
 |	3	|	[R Básico](module_3/basic_r.md)	|	Felipe Calvo Cepeda	|
 | 4	|	[Minería de datos](module_4/data_mining.md)	|	Juliana Guerrero Velásquez	|
 | 5	|	[Aprendizaje Automático](module_5/information.md)	|	Mónica Ramírez Bernal	|
+| 6 | [Semántica y Visualización de Datos](module_6/information.md) | Julián Mauricio Cruz |
