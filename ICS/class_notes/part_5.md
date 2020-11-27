@@ -15,7 +15,6 @@ $$
 ## Coprimos, primos relativos
 
 Números que tienen como máximo común divisor el 1.
-
 $$gcd(234, 67) = 1$$
 
 # Grupo multiplicativo de los $z_n$
