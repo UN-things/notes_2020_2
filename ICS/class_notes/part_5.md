@@ -12,7 +12,7 @@ a \equiv b (mod n)\hspace{0.3cm} if \quad
 \right.
 $$
 
-## Coprimos, primos relativos
+## Coprimos, primos relativo  s
 
 Números que tienen como máximo común divisor el 1.
 $$gcd(234, 67) = 1$$
