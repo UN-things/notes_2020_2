@@ -27,3 +27,5 @@
 | Clase | Tema  |
 | :---: | :---: |
 | [1](class_1/class_notes.md) | Significado de los números -Interpretación estadística - Semántica de datos |
+| [2](class_2/class_notes.md) | Los datos hablan <br> Comunicación de modelos |
+| [3](class_3/class_notes.md) | Data Storytelling <br> Maneras de crear historias para comunicar un modelo |
