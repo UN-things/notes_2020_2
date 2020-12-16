@@ -11,8 +11,7 @@
 
 ## Introducción
 
-metodología donde agrupamos objetos/observaciones en subgrupos. Los clusters
-deberían ser homogéneos dentro y heterogéneos entre ellos.
+Metodología donde agrupamos objetos/observaciones en subgrupos. Los clusters deberían ser homogéneos dentro y heterogéneos entre ellos.
 
 ¿Por qué?
 - muestra cuál es la estructura interna de la data para encontrar patrones
